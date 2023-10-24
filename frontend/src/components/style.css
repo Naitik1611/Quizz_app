@@ -1,2 +1,49 @@
 /* Import Bootstrap CSS */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+.login-container {
+    width: 850px;
+    margin: 40px auto;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.details-container {
+    width: 550px;
+    display: block ;
+    padding: 10px;
+    border-right: 1px solid;
+}
+
+.img-container {
+    width: max-content;
+    margin: 40px auto;
+}
+
+.login-form {
+    margin: 10px;
+}
+
+.inp-label {
+    display: block;
+    width: 350px;
+    margin: 10px auto;
+    text-align: left;
+}
+
+.inp {
+    display: block;
+    width: 350px;
+    margin: 10px auto;
+}
+
+.form-btn {
+    width: 350px;
+    margin: 20px auto 10px;
+}
+
+.toggle-login {
+    width: 350px;
+    margin: 10px auto;
+}

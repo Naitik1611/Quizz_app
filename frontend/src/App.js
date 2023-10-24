@@ -6,6 +6,9 @@ import Login from './components/Login';
 function App() {
   return (
     <div className="App">
+      <div className="App-header">
+        <h3>HEADER</h3>
+      </div>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <Login/> } />
@@ -13,6 +16,9 @@ function App() {
        
       </Routes>
     </BrowserRouter>
+    <div className="App-footer">
+      <h4>FOOTER</h4>
+    </div>
   </div>
   );
 }
