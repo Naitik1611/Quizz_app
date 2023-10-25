@@ -18,7 +18,7 @@ export default function Login() {
       }
 
       try {
-        const res = await axios.post('http://localhost:xxxx/',loginData)
+        const res = await axios.post('http://localhost:8080/api/auth',loginData)
         console.log(res.data);
       } catch (e) {
         alert(e.message)

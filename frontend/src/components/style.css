@@ -1,6 +1,147 @@
 /* Import Bootstrap CSS */
 @import "~bootstrap/dist/css/bootstrap.css";
 
+
+/* Navbar */
+.navbar-container {
+    width: 100%;
+    display: flexbox;
+    margin: 0;
+    padding: 20px;
+    height: 80px;
+    background-color: #d9d9d9;
+    position: sticky;
+    top: 0;
+}
+
+.navbar-app {
+    display: block;
+    float: left;
+    margin: auto 10px;
+}
+
+.app-logo {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #000;
+} 
+
+.navbar-right {
+    width: 30%;
+    display: flexbox;
+    float: right;
+}
+
+.nav-user {
+    display: block;
+    float: left;
+}
+
+.nav-user-profile {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #000;
+} 
+
+.nav-buttons {
+    display: block;
+    float: right;
+}
+
+.nav-btn {
+    margin: auto 10px;
+}
+
+/* Sidebar */
+.sidebar-container {
+    width: 20%;
+    display: inline-block;
+    border-right: 5px solid #d9d9d9;
+    text-align: left;
+}
+
+.sidebar-content {
+    list-style: none;
+}
+
+.sidebar-item {
+    width: 100%;
+    padding: 10px;
+}
+
+.sidebar-item:not(:last-child) {
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.side-create-btn {
+    width: 100%;
+}
+
+.sidebar-image {
+    padding: 40%;
+    margin: 20px;
+    border: 1px solid #000;
+}
+
+/* Home */
+.home-container {
+    width: 70%;
+    float: right;
+    margin: 50px;
+    display: inline-block;
+}
+
+.home-search {
+    width: 60%;
+    margin: auto;
+}
+
+.search-box {
+    width: 100%;
+}
+
+.home-categories-container, .home-recommended-container {
+    width: 80%;
+    margin: 50px auto;
+    border: 1px solid #000;
+}
+
+.home-head {
+    width: 100%;
+    display: flexbox;
+}
+
+.home-categories-label, .home-recommended-label {
+    float: left;
+    margin: 10px;
+    display: inline;
+}
+
+.home-more {
+    float: right;
+    margin: 10px;
+    display: inline;
+}
+
+.home-items {
+    width: 100%;
+    /* display: block; */
+    display:grid;
+}
+
+.category-items, .recommended-items {
+    list-style: none;
+    display: flex;
+}
+
+.item-card {
+    width: 20%;
+    padding: 20px 0;
+    margin: 20px auto;
+    border: 1px solid #000;
+}
+
+/* Login and Register*/
 .login-container {
     width: 850px;
     margin: 40px auto;
@@ -46,4 +187,14 @@
 .toggle-login {
     width: 350px;
     margin: 10px auto;
+}
+
+
+/* Footer */
+.footer-container {
+    display:grid;
+    width: 100%;
+    height: 80px;
+    background-color: #d9d9d9;
+    padding: 20px;
 }
