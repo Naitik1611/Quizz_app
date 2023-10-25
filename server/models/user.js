@@ -4,10 +4,11 @@ const Joi=require("joi");
 const pwdComplexity=require("joi-password-complexity");
 
 const userSchema=new mongoose.Schema({
-    firstName:{type:String, requires:true},
-    lastName:{type:String, requires:true},
-    email:{type:String, requires:true},
-    password:{type:String, requires:true}
+    firstName:{type:String, required:true},
+    lastName:{type:String, required:true},
+    email:{type:String, required:true},
+    password:{type:String, required:true},
+    quizzes_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Quiz' }],
 });
 
 userSchema.methods.generateAuthToken=function(){
@@ -21,7 +22,7 @@ const validate=(data)=>{
         firstName:Joi.string().required().label("First Name"),
         lastName:Joi.string().required().label("Last Name"),
         email:Joi.string().email().required().label("Email"),
-        password:pwdComplexity.required().label("Password")
+        password:pwdComplexity().required().label("Password")
     });
     return schema.validate(data);
 };
