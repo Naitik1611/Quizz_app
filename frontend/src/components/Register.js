@@ -16,14 +16,15 @@ export default function Register() {
     const handleSignup = async (e) => {
       e.preventDefault();
       const signupData = {
-        "firstName" : fname,
+        "firstName": fname,
         "lastName": lname,
-        "email" : email,
+        "email": email,
         "password": password 
       };
       
       try {
         const res = await axios.post('http://localhost:8080/api/users/',signupData)
+        navigate("/")
         console.log(res.data);
       } catch (e) {
         alert(e.message)

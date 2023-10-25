@@ -7,18 +7,19 @@ export default function Login() {
  
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = async (e) => {
       e.preventDefault();
       const loginData = {
-        username,
+        email,
         password,
       }
 
       try {
         const res = await axios.post('http://localhost:8080/api/auth',loginData)
+        navigate("/home")
         console.log(res.data);
       } catch (e) {
         alert(e.message)
@@ -35,8 +36,8 @@ export default function Login() {
     <div className="details-container">
       <form title="Login" className="login-form" onSubmit={handleLogin}>
         <h3>Login</h3>
-        <label htmlFor="username" className="inp-label">Username</label>
-        <input type="text" id="username" className="inp inp-user" placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)} required></input>
+        <label htmlFor="email" className="inp-label">Email</label>
+        <input type="email" id="email" className="inp inp-user" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required></input>
 
         <label htmlFor="password" className="inp-label">Password</label>
         <input type="password" id="password" className="inp inp-pass" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} required></input>
