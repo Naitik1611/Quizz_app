@@ -19,8 +19,13 @@ export default function Login() {
         password,
       }
 
+      const storeToken = (token) => {
+        localStorage.setItem('token', token);
+      };
+
       try {
         const res = await axios.post('http://localhost:8080/api/auth',loginData)
+        storeToken(res.data);
         navigate("/home")
         console.log(res.data);
       } catch (e) {
@@ -39,22 +44,22 @@ export default function Login() {
           <Form className="login-form" onSubmit={handleLogin}>
             <h3>Login</h3>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label htmlFor="email" className="inp-label">Email address</Form.Label>
-              <Form.Control type="email" id="email" className="inp inp-user" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required/>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label className="inp-label">Email address</Form.Label>
+              <Form.Control type="email" className="inp inp-user" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} autoComplete='email' required/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label htmlFor="password" className="inp-label">Password</Form.Label>
-              <Form.Control type="password" id="password" className="inp inp-pass" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} required />
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label className="inp-label">Password</Form.Label>
+              <Form.Control type="password" className="inp inp-pass" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} required />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="btn btn-primary form-btn">
+            <Button variant="primary" type="submit" className="btn form-btn">
               Login
             </Button>
 
             <Form.Group className='toggle-login'>
-            Dont have an account? <Button type="button" className="btn btn-primary" onClick={() => navigate("/register")}> Sign Up</Button>
+                Dont have an account?{' '}<Button variant='primary' className="btn" onClick={() => navigate("/register")}> Sign Up</Button>
             </Form.Group>
           </Form>
         </div>

@@ -1,7 +1,6 @@
 /* Import Bootstrap CSS */
 @import "~bootstrap/dist/css/bootstrap.css";
 
-
 /* Navbar */
 .navbar-container {
     width: 100%;
@@ -11,19 +10,13 @@
     background-color: #d9d9d9;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .app-logo {
-    width: 100px;
     padding: 10px;
     border: 1px solid #000;
 } 
-
-.navbar-right {
-    width: 30%;
-    display: flexbox;
-    float: right;
-}
 
 .nav-user {
     display: block;
@@ -31,15 +24,9 @@
 }
 
 .nav-user-profile {
-    width: 100px;
     padding: 10px;
     border: 1px solid #000;
 } 
-
-.nav-buttons {
-    display: block;
-    float: right;
-}
 
 .nav-btn {
     margin: auto 10px;
@@ -66,22 +53,18 @@
     border-bottom: 2px solid #d9d9d9;
 }
 
-.side-create-btn {
+.create-btn {
     width: 100%;
 }
 
-.side-btn {
-    background-color: none;
-}
-
 .sidebar-image {
-    padding: 40%;
-    margin: 20px;
+    padding: 10%;
+    margin: 10px;
     border: 1px solid #000;
 }
 
 /* Home */
-.home-container {
+.main-container {
     width: 70%;
     float: right;
     margin: 50px;
@@ -98,44 +81,15 @@
 }
 
 .home-categories-container, .home-recommended-container {
-    width: 80%;
+    width: 90%;
     margin: 50px auto;
     border: 1px solid #000;
-}
-
-.home-head {
-    width: 100%;
-    display: flexbox;
 }
 
 .home-categories-label, .home-recommended-label {
     float: left;
     margin: 10px;
     display: inline;
-}
-
-.home-more {
-    float: right;
-    margin: 10px;
-    display: inline;
-}
-
-.home-items {
-    width: 100%;
-    /* display: block; */
-    display:grid;
-}
-
-.category-items, .recommended-items {
-    list-style: none;
-    display: flex;
-}
-
-.item-card {
-    width: 20%;
-    padding: 20px 0;
-    margin: 20px auto;
-    border: 1px solid #000;
 }
 
 /* Login and Register*/
@@ -164,14 +118,12 @@
 }
 
 .inp-label {
-    display: block;
     width: 350px;
     margin: 10px auto;
     text-align: left;
 }
 
 .inp {
-    display: block;
     width: 350px;
     margin: 10px auto;
 }
@@ -203,13 +155,10 @@
     border: 1px solid #000;
 }
 
-
-.btn-cancel {
-    background-color: #f00;
-}
-
-.btn-done {
-    background-color: #00cc00;
+/* Leaderboard */
+.quiz-leaderboard {
+    width: 80%;
+    margin: 20px auto;
 }
 
 /* Footer */
