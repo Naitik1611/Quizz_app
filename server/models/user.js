@@ -8,7 +8,12 @@ const userSchema=new mongoose.Schema({
     lastName:{type:String, required:true},
     email:{type:String, required:true},
     password:{type:String, required:true},
-    quizzes_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Quiz' }],
+    scores: [
+        {
+          Quiz_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Quiz' },
+          Score: Number,
+        },
+      ],
 });
 
 userSchema.methods.generateAuthToken=function(){

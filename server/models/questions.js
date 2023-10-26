@@ -7,7 +7,8 @@ const questionSchema = new mongoose.Schema({
   Explanation: String,
   Score: Number,
   Time: Number,
-  Options: [String], // Array of options (used for MCQ)
+  Options: [String], // Array of options (used for MCQ),
+  //time_limit:number
 });
 
 module.exports = mongoose.model('Question', questionSchema);

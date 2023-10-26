@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { createQuiz } = require('../create_quiz');
+const quizControl = require('../create_quiz');
 
-// Define routes for quiz creation
-router.post('/create', createQuiz);
+router.post('/create', quizControl.createQuiz);
+router.get('/',quizControl.getAllQuizzes);
+router.get('/:id',quizControl.getQuizById);
+router.delete('/delete/:id',quizControl.deleteQuizById)
 
 module.exports = router;

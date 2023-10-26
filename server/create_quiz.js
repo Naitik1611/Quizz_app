@@ -3,10 +3,26 @@ const Question = require('./models/questions');
 const User = require('./models/user');
 const Joi = require('joi'); 
 
+async function generateRandom6DigitNumber() {
+  const min = 100000;
+  const max = 999999;
+  let isUnique = false;
+  let generatedPin;
+
+  while (!isUnique) {
+      generatedPin = Math.floor(Math.random() * (max - min + 1)) + min;
+      const existingQuiz = await Quiz.findOne({ Quiz_pin: generatedPin });
+
+      if (!existingQuiz) {
+          isUnique = true;
+      }
+  }
+
+  return generatedPin;
+}
 exports.createQuiz = async (req, res) => {
     const schema = Joi.object({
       Title: Joi.string().required(),
-      Description: Joi.string(),
       Category: Joi.string().required(),
       Timer: Joi.object({
         TimerAvailable: Joi.boolean().required(),
@@ -20,10 +36,7 @@ exports.createQuiz = async (req, res) => {
         Joi.object({
           Question_text: Joi.string().required(),
           Question_type: Joi.number().required(),
-          Correct_answer: Joi.alternatives().try(
-            Joi.string().required(),
-            Joi.boolean().required()
-          ),
+          Correct_answer: Joi.string().required(),
           Explanation: Joi.string().required(),
           Score: Joi.number().required(),
           Options: Joi.array().items(Joi.string()),
@@ -40,15 +53,15 @@ exports.createQuiz = async (req, res) => {
     if (error) {
       return res.status(400).json({ message: error.details[0].message });
     }
-    const { Title, Description, Category, Timer, Questions, Creator_id } = req.body;
+    const { Title, Category, Timer, Questions, Creator_id } = req.body;
   
     try {
       const quiz = new Quiz({
         Title,
-        Description,
         Category,
         Timer,
         Creator_id,
+        Quiz_pin:await generateRandom6DigitNumber(),
       });
   
       for (const questionData of Questions) {
@@ -68,6 +81,38 @@ exports.createQuiz = async (req, res) => {
       res.status(201).json({ message: 'Quiz created successfully', quiz });
     } catch (error) {
       console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  exports.getAllQuizzes = async (req, res) => {
+    try {
+      const quizzes = await Quiz.find();
+      res.json(quizzes);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  exports.getQuizById = async (req, res) => {
+    try {
+      const quiz = await Quiz.findById(req.params.id);
+      if (!quiz) {
+        return res.status(404).json({ message: 'Quiz not found' });
+      }
+      res.json(quiz);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
+  exports.deleteQuizById = async (req, res) => {
+    try {
+      await Quiz.findByIdAndDelete(req.params.id);
+      res.json({ message: 'Quiz deleted successfully' });
+    } catch (error) {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   };
