@@ -21,6 +21,7 @@ async function generateRandom6DigitNumber() {
   return generatedPin;
 }
 exports.createQuiz = async (req, res) => {
+    console.log('recieved request on create quiz with email and id', req.email, req.id)
     const schema = Joi.object({
       Title: Joi.string().required(),
       Category: Joi.string().required(),
@@ -86,6 +87,8 @@ exports.createQuiz = async (req, res) => {
   };
   
   exports.getAllQuizzes = async (req, res) => {
+    console.log('recieved request on get all quiz with email and id', req.email, req.id)
+
     try {
       const quizzes = await Quiz.find();
       res.json(quizzes);
@@ -96,6 +99,8 @@ exports.createQuiz = async (req, res) => {
   };
   
   exports.getQuizById = async (req, res) => {
+    console.log('recieved request on get quiz by id  with email and id', req.email, req.id)
+    
     try {
       const quiz = await Quiz.findById(req.params.id);
       if (!quiz) {
@@ -109,6 +114,7 @@ exports.createQuiz = async (req, res) => {
   };
   
   exports.deleteQuizById = async (req, res) => {
+    console.log('recieved request on delete quiz by id  with email and id', req.email, req.id)
     try {
       await Quiz.findByIdAndDelete(req.params.id);
       res.json({ message: 'Quiz deleted successfully' });

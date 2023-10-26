@@ -2,6 +2,7 @@ const router=require("express").Router();
 const { User }=require("../models/user");
 const bcrypt=require("bcrypt");
 const Joi=require("joi");
+const jwt=require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
 	try {
@@ -11,18 +12,19 @@ router.post("/", async (req, res) => {
 		const user=await User.findOne({email: req.body.email});
 		if (!user)
 			return res.status(401).send({message:"Invalid Email or Password"});
-		const validPassword=bcrypt.compare(
+		const validPassword= await bcrypt.compare(
 			req.body.password,
 			user.password
 		);
 		if (!validPassword)
 			return res.status(401).send({message:"Invalid Email or Password"});
-		const token=user.generateAuthToken();
-		res.status(200).send({data:token, message:"Logged in successfully"});
+		const token=generateAuthToken({id:user._id,email:req.body.email});
+		res.status(200).send({token:token, message:"Logged in successfully"});
 	} catch (error) {
 		res.status(500).send({message:"Internal Server Error"});
 	}
 });
+
 const validate=(data) => {
 	const schema=Joi.object({
 		email:Joi.string().email().required().label("Email"),
@@ -30,5 +32,10 @@ const validate=(data) => {
 	});
 	return schema.validate(data);
 };
+
+function generateAuthToken(userData){
+	const token=jwt.sign(userData,process.env.JWTPRIVATEKEY,{expiresIn:"1h"});
+	return token;
+}
 
 module.exports=router;
