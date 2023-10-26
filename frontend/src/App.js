@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home'
+import CreateQuiz from './components/CreateQuiz'
 
 import Footer from './components/Footer';
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<><Login/> <Footer/> </>} />
         <Route path="register" element={<> <Register/> <Footer/> </>} />
         <Route path="home" element={<> <Navbar/> <Sidebar/> <Home/> <Footer/> </>} />
+        <Route path="create-quiz" element={<> <Navbar/> <CreateQuiz/> <Footer/> </>} />
        
       </Routes>
     </BrowserRouter>

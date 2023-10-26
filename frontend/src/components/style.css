@@ -5,19 +5,12 @@
 /* Navbar */
 .navbar-container {
     width: 100%;
-    display: flexbox;
     margin: 0;
     padding: 20px;
     height: 80px;
     background-color: #d9d9d9;
     position: sticky;
     top: 0;
-}
-
-.navbar-app {
-    display: block;
-    float: left;
-    margin: auto 10px;
 }
 
 .app-logo {
@@ -75,6 +68,10 @@
 
 .side-create-btn {
     width: 100%;
+}
+
+.side-btn {
+    background-color: none;
 }
 
 .sidebar-image {
@@ -189,6 +186,31 @@
     margin: 10px auto;
 }
 
+/* Create Quiz */
+.create-container {
+    width: 90%;
+    display: grid;
+    margin: 20px auto;
+}
+
+.row {
+    border: 1px solid #000;
+    margin: 10px;
+    padding: 10px;
+}
+
+.col-1,.col-2,.col-3 {
+    border: 1px solid #000;
+}
+
+
+.btn-cancel {
+    background-color: #f00;
+}
+
+.btn-done {
+    background-color: #00cc00;
+}
 
 /* Footer */
 .footer-container {

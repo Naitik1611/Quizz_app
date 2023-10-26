@@ -1,27 +1,36 @@
 import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
+import NavBar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 export default function Navbar() {
  
     const navigate = useNavigate();
 
     return (
-  <div className="navbar-container">
-    <div className="navbar-app">
-        <span className='app-logo'>App Logo</span>
-        <span className='app-name'>AppName</span>
-    </div>
-    <div className='navbar-right'>
-      <div className='nav-user'>
-        <span className='nav-user-profile'>User Profile</span>
-        <span className='nav-username'>Username</span>
-      </div>
-      <div className='nav-buttons'>
-        <button type="button" className="btn btn-primary nav-btn" onClick={() => navigate("/")}>Logout</button>
-        <button type="button" className="btn btn-primary nav-btn" onClick={() => navigate("/")}>Contact Us</button>
-      </div>
-    </div>
-  </div>
+  <NavBar className="navbar-container">
+    <Container>
+        <NavBar.Brand href="#home" className='app-detail'>
+        <img
+              alt="Logo"
+              src="/img/logo.svg"
+              width="30"
+              height="30"
+              className="app-logo"
+            />{' '}
+          App Name</NavBar.Brand>
+        <NavBar.Toggle />
+        <NavBar.Collapse className="justify-content-end">
+          <NavBar.Text className='nav-user'>
+          <img alt="User" src="/img/logo.svg" width="30" height="30" className="nav-user-profile"
+            />{' '}User Name
+          </NavBar.Text>
+          <Button type="button" className="btn btn-primary nav-btn" onClick={() => navigate("/")}>Logout</Button>
+          <Button type="button" className="btn btn-primary nav-btn" onClick={() => navigate("/")}>Contact Us</Button>
+        </NavBar.Collapse>
+      </Container>
+  </NavBar>
     )
 }
