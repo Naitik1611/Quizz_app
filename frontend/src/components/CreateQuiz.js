@@ -90,13 +90,26 @@ export default function CreateQuiz() {
             console.log(quizData);
             localStorage.setItem("quizTimeMin", quizTimeMin);   
 
+        if (quizCategory==="") {
+            alert("Please Select a Category")
         } else {
-            const quizData = {
-                quizName,
-                quizCategory,
-                quizTime
+            if(quizTime===true) {
+                const quizData = {
+                    quizName,
+                    quizCategory,
+                    quizTime,
+                    quizTimeMin
+                }
+                console.log(quizData);
+
+            } else {
+                const quizData = {
+                    quizName,
+                    quizCategory,
+                    quizTime
+                }
+                console.log(quizData);
             }
-            console.log(quizData);
         }
 
         let questionArray = JSON.parse(localStorage.getItem("questionArray"));
@@ -122,6 +135,7 @@ export default function CreateQuiz() {
         //   navigate("/home")
     }
       };
+    }
 
       const addQuestion = () => {
 
@@ -140,9 +154,9 @@ export default function CreateQuiz() {
                 <div className="col-3">
                     <div className='row quiz-detail'>Quiz Details</div>
                     <div className='row'>
-                        <Form.Group className="mb-3">
-                            <Form.Label htmlFor='quizImage' className='quiz-label'>Image</Form.Label>
-                            <Form.Control type='file' id='quizImage' className='inp-file'/>
+                        <Form.Group className="mb-3" controlId='quizImage'>
+                            <Form.Label className='quiz-label'>Image</Form.Label>
+                            <Form.Control type='file' className='inp-file'/>
                         </Form.Group>
                     </div>
                     <div className='row'>
@@ -154,7 +168,15 @@ export default function CreateQuiz() {
                     <div className='row'>
                         <Form.Group className="mb-3">
                             <Form.Label htmlFor='quizCategory' className='quiz-label'>Quiz Category</Form.Label>
-                            <Form.Control type='text' id='quizCategory' className='quiz-category-inp' value={quizCategory} onChange={(e) => setQuizCategory(e.target.value)} required/>
+                            <Form.Select type='text' id='quizCategory' className='quiz-category-inp' value={quizCategory} onChange={(e) => setQuizCategory(e.target.value)} required>
+                                <option>Select</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="General Knowledge">General Knowledge</option>
+                                <option value="Geography">Geography</option>
+                                <option value="History">History</option>
+                                <option value="Math">Math</option>
+                                <option value="Science">Science</option>     
+                            </Form.Select>
                         </Form.Group>
                     </div>
                     <div className='row'>
@@ -167,9 +189,18 @@ export default function CreateQuiz() {
                         </Form.Group>
                     </div>
                     <div className='row'>
-                        <Form.Group className="mb-3">
-                            <Form.Label htmlFor='quizTimeMin' className='quiz-label'>Set Test Time in Minutes</Form.Label>
-                            <Form.Control type='number' className='quiz-time' id='quizTimeMin' min="1" onChange={(e) => setQuizTimeMin(e.target.value)}/>
+                        <Form.Group className="mb-3" controlId='quizTime'>
+                            <Form.Label className='quiz-label'>Set overall Test Timer</Form.Label>
+                            <Form.Select className='quiz-time-inp' onChange={(e) => setQuizTime(e.target.value)} required>
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </div>
+                    <div className='row'>
+                        <Form.Group className="mb-3" controlId='quizTimeMin'>
+                            <Form.Label className='quiz-label'>Set Test Time in Minutes</Form.Label>
+                            <Form.Control type='number' className='quiz-time' min="1" onChange={(e) => setQuizTimeMin(e.target.value)}/>
                         </Form.Group>
                     </div>                    
                 </div>
@@ -177,14 +208,14 @@ export default function CreateQuiz() {
                 <div className='col-9'>
                     <div className='row'>
                         <div className="col-2">
-                            <Button type="button" className="btn btn-cancel" onClick={() => navigate("/home")}>Cancel</Button>
+                            <Button variant="danger" className="btn" onClick={() => navigate("/home")}>Cancel</Button>
                         </div>
                         <div className='col-6'></div>
                         <div className='col-2'>
                             <Button type="button" className="btn btn-primary btn-add-ques" onClick={addQuestion}>Add Question</Button>
                         </div>
                         <div className='col-2'>
-                            <Button type="submit" className="btn btn-done">Done</Button>
+                            <Button type="submit" variant="success" className="btn">Done</Button>
                         </div>
                         <div id='ques-container'>
 
@@ -197,10 +228,10 @@ export default function CreateQuiz() {
                                    
                                 </div>
                                 <div className='col-1'>
-                                    <Button type='button' className='btn btn-primary'>Edit</Button>
+                                    <Button variant="primary" className='btn btn-edit'>Edit</Button>
                                 </div>
                                 <div className='col-1'>
-                                    <Button type='button' className='btn btn-cancel'>Delete</Button>
+                                    <Button variant="danger" className='btn'>Delete</Button>
                                 </div>
                             </div>
 
