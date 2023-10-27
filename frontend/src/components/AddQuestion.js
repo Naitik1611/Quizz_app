@@ -21,25 +21,26 @@ const [mcq, setMcq] = useState(true);
 const [tf, setTf] = useState(false);
 const [fib, setFib] = useState(false);
 
-const [questionType, setQuestionType] = useState('Multiple Choice');
+const [questionType, setQuestionType] = useState(1);
 
 const changeQuestionFormat = (e) => {
 setQuestionType(e);
 
+console.log(e)
     switch (e) {
-        case "Multiple Choice":
+        case "1":
         setMcq(true);
         setTf(false);
         setFib(false);
         break;
 
-      case "True/False":
+      case "2":
         setMcq(false);
         setTf(true);
         setFib(false);
         break;
 
-      case "Fill-in-the-Blank":
+      case "3":
         setMcq(false);
         setTf(false);
         setFib(true);
@@ -68,9 +69,9 @@ return (
             <label htmlFor="questionType" className="">Select Question Type</label>
                 <br />
                 <select className="form-select input-box" id="questionType" aria-label="Default select example" value={questionType} onChange={(e) => changeQuestionFormat(e.target.value)}>
-                    <option value="Multiple Choice" >Multiple Choice</option>
-                    <option value="True/False">True/False</option>
-                    <option value="Fill-in-the-Blank">Fill-in-the-Blank</option>
+                    <option value="1" >Multiple Choice</option>
+                    <option value="2">True/False</option>
+                    <option value="3">Fill-in-the-Blank</option>
                 </select>
             </div>
         </div>

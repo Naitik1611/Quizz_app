@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
 import { useNavigate, useLocation } from "react-router-dom";
-// import axios from 'axios'
+import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -44,18 +44,18 @@ export default function CreateQuiz() {
                             Q1
                           </div>
                           <div class="col-11">
-                            ${question.question}
+                            ${question.Question_text}
                           </div>
                         </div>   
                         <div class="row">
                           <div class="col-6">
-                            Question Type: ${question.questionType}
+                            Question Type: ${question.Question_type}
                           </div>
                           <div class="col-3">
-                            Time: ${question.timer}
+                            Time: ${question.Time}
                           </div>
                           <div class="col-3">
-                            Point: ${question.point}
+                            Point: ${question.Score}
                           </div>
                         </div> 
                       </div>
@@ -99,18 +99,28 @@ export default function CreateQuiz() {
             console.log(quizData);
         }
 
-        // navigate("/home")
-  
-        // try {
-        //   const res = await axios.post('http://localhost:8080/api/auth',quizData)
-        //   navigate("/home")
-        //   console.log(res.data);
-        // } catch (e) {
-        //   alert(e.message)
-        // }
+        let questionArray = JSON.parse(localStorage.getItem("questionArray"));
 
-       
-  
+        if(questionArray.length>0){
+            const quizDetails = {
+                "Title": quizName,
+                "Category": quizCategory,
+                "Questions": questionArray,
+                "Timer": {
+                  "TimerAvailable": quizTime
+                }
+              }
+        
+
+        try {
+           // const res = await axios.post('http://localhost:8080/quiz/create',quizDetails);
+           // console.log(res.data);
+
+        } catch (e) {
+            alert(e.message)
+        }
+        //   navigate("/home")
+    }
       };
 
       const addQuestion = () => {

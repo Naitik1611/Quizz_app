@@ -6,7 +6,7 @@ export default function TrueFalse() {
  
    const navigate = useNavigate();
 
-const questionType = "True/False";
+const questionType = 2;
 const [point, setPoint] = useState(1);
 const [question, setQuestion] = useState('');
 const [answer, setAnswer] = useState('');
@@ -17,13 +17,14 @@ const saveQuestion = (e) => {
     console.log("Save")
 
 const questionDetails = {
-    questionType,
-    timer : document.getElementById('timer').value,
-    point,
-    question,
-    answer,
-    explanation
+    "Question_type": questionType,
+    "Time" : document.getElementById('timer').value,
+    "Score" : point,
+    "Question_text" : question,
+    "Correct_answer" : answer,
+    "Explanation": explanation
 }
+
 
 console.log(questionDetails);
 
@@ -45,10 +46,10 @@ return (
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer" required>
         <option value="None">None</option>
-        <option value="15 sec">15 sec</option>
-        <option value="30 sec">30 sec</option>
-        <option value="1 min">1 min</option>
-        <option value="2 min">2 min</option>
+        <option value="15">15 sec</option>
+        <option value="30">30 sec</option>
+        <option value="60">1 min</option>
+        <option value="120">2 min</option>
     </select>
 </div>
 <div className="col">

@@ -45,37 +45,37 @@ export default function Register() {
           <Form className="login-form" onSubmit={handleSignup}>
             <h3>Sign Up/Register</h3>
 
-            <Form.Group className="mb-3" >
-              <Form.Label htmlFor="fname" className="inp-label">First Name</Form.Label>
-              <Form.Control type="text" id="fname" className="inp inp-user" placeholder='Enter First Name' onChange={(e) => setfname(e.target.value)} required />
+            <Form.Group className="mb-3" controlId="fname">
+              <Form.Label className="inp-label">First Name</Form.Label>
+              <Form.Control type="text" className="inp inp-user" placeholder='Enter First Name' onChange={(e) => setfname(e.target.value)} required />
             </Form.Group>
 
-            <Form.Group className="mb-3" >
-              <Form.Label htmlFor="lname" className="inp-label">Last Name</Form.Label>
-              <Form.Control type="text" id="lname" className="inp inp-user" placeholder='Enter Last Name' onChange={(e) => setlname(e.target.value)} required />
+            <Form.Group className="mb-3" controlId="lname">
+              <Form.Label className="inp-label">Last Name</Form.Label>
+              <Form.Control type="text" className="inp inp-user" placeholder='Enter Last Name' onChange={(e) => setlname(e.target.value)} required />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label htmlFor="email" className="inp-label">Email address</Form.Label>
-              <Form.Control type="email" id="email" className="inp inp-user" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required />
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label className="inp-label">Email address</Form.Label>
+              <Form.Control type="email" className="inp inp-user" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} autoComplete='off' required />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label htmlFor="password" className="inp-label">Password</Form.Label>
-              <Form.Control type="password" id="password" className="inp inp-pass" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} required />
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label className="inp-label">Password</Form.Label>
+              <Form.Control type="password" className="inp inp-pass" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} required />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label htmlFor="cnf-password" className="inp-label">Password</Form.Label>
-              <Form.Control type="password" id="cnf-password" className="inp inp-pass" placeholder='Confirm Password' onChange={(e) => setCnfPassword(e.target.value)} required />
+            <Form.Group className="mb-3" controlId="cnf-password">
+              <Form.Label className="inp-label">Password</Form.Label>
+              <Form.Control type="password" className="inp inp-pass" placeholder='Confirm Password' onChange={(e) => setCnfPassword(e.target.value)} required />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="btn btn-primary form-btn">
+            <Button variant="primary" type="submit" className="btn form-btn">
               Sign Up
             </Button>
 
             <Form.Group className='toggle-login'>
-            Dont have an account? <Button type="button" className="btn btn-primary" onClick={() => navigate("/")}> Login</Button>
+              Dont have an account?{" "}<Button variant='primary' className="btn" onClick={() => navigate("/")}> Login</Button>
             </Form.Group>
           </Form>
         </div>
@@ -85,39 +85,5 @@ export default function Register() {
         </div>
       </div>
 
-
-  // <div className='login-container'>
-  //   <div className="details-container">
-      
-  //   <form title="Sign Up" className="login-form" onSubmit={handleSignup}>
-  //       <h3>Sign Up</h3>
-  //       <label htmlFor="fname" className="inp-label">First Name</label>
-  //       <input type="text" id="fname" className="inp inp-user" placeholder='Enter First Name' onChange={(e) => setfname(e.target.value)} required></input>
-        
-  //       <label htmlFor="lname" className="inp-label">Last name</label>
-  //       <input type="text" id="lname" className="inp inp-pass" placeholder='Enter Last Name' onChange={(e) => setlname(e.target.value)} required></input>
-
-  //       <label htmlFor="email" className="inp-label">Email</label>
-  //       <input type="email" id="email" className="inp inp-pass" placeholder='Enter Email Id' onChange={(e) => setEmail(e.target.value)} required></input>
-
-  //       <label htmlFor="password" className="inp-label">Password</label>
-  //       <input type="password" id="password" className="inp inp-pass" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} required></input>
-
-  //       <label htmlFor="cnfPassword" className="inp-label">Confirm Password</label>
-  //       <input type="password" id="cnf-password" className="inp inp-pass" placeholder='Confirm Password' onChange={(e) => setCnfPassword(e.target.value)} required></input>
-
-  //       <button type="submit" className="btn btn-primary form-btn">Create Account</button>
-  //     </form>
-  //      <span className='toggle-login'>
-  //     Already have an account? <button type="button" className="btn btn-primary" onClick={() => navigate("/")}>Login</button>
-      
-  //     </span>
-  //   </div>
-
-  //   <div className="img-container">
-  //     Random Stuff
-  //   </div>
-
-  // </div>
     )
 }

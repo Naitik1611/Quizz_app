@@ -8,7 +8,7 @@ export default function Mcq() {
 
    
 const [option, setOption] = useState(2);
-const questionType = "Multiple Choice";
+const questionType = 1;
 const [point, setPoint] = useState(1);
 const [question, setQuestion] = useState('');
 const [explanation, setExplanation] = useState('');
@@ -35,13 +35,13 @@ const removeOption = () => {
     }
 
     const questionDetails = {
-        questionType,
-        timer : document.getElementById('timer').value,
-        point,
-        question,
-        answerOptions : answerOptionsArray,
-        answer : answerOptionsArray[document.querySelector('input[type="radio"]:checked').value],
-        explanation
+        "Question_type": questionType,
+        "Time" : document.getElementById('timer').value,
+        "Score" : point,
+        "Question_text" : question,
+        "Options" : answerOptionsArray,
+        "Correct_answer" : answerOptionsArray[document.querySelector('input[type="radio"]:checked').value],
+        "Explanation": explanation
     }
 
     console.log(questionDetails);
@@ -65,10 +65,10 @@ const removeOption = () => {
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer" required>
         <option value="None" selected>None</option>
-        <option value="15 sec">15 sec</option>
-        <option value="30 sec">30 sec</option>
-        <option value="1 min">1 min</option>
-        <option value="2 min">2 min</option>
+        <option value="15">15 sec</option>
+        <option value="30">30 sec</option>
+        <option value="60">1 min</option>
+        <option value="120">2 min</option>
     </select>
 </div>
 <div className="col">

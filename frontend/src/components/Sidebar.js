@@ -2,6 +2,7 @@ import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export default function Sidebar() {
  
@@ -26,24 +27,27 @@ export default function Sidebar() {
             <Button type="button" className="btn btn-primary side-create-btn" onClick={createQuiz}>Create Quiz</Button>
         </li>
         <li className="sidebar-item">
-            <button type="button" className="btn side-btn" onClick={() => navigate("/home")}>Dashboard</button>
+            <Button variant="none" className="btn" onClick={() => navigate("/home")}>Dashboard</Button>
         </li>
         <li className="sidebar-item">
-            <button type="button" className="btn side-btn" onClick={() => navigate("/")}>Quiz Category</button>
+            <Button variant="none" className="btn" onClick={() => navigate("/quiz-category")}>Quiz Category</Button>
         </li>
         <li className="sidebar-item">
-        <   button type="button" className="btn side-btn" onClick={() => navigate("/")}>My Quiz</button>
+            <Button variant="none" className="btn" onClick={() => navigate("/my-quiz")}>My Quiz</Button>
         </li>
         <li className="sidebar-item">
-            <button type="button" className="btn side-btn" onClick={() => navigate("/")}>Quiz History</button>
+            <Button variant="none" className="btn" onClick={() => navigate("/quiz-history")}>Quiz History</Button>
         </li>
         <li className="sidebar-item">
-            <button type="button" className="btn side-btn" onClick={() => navigate("/")}>Edit Profile</button>
+            <Button variant="none" className="btn" onClick={() => navigate("/")}>Edit Profile</Button>
         </li>
+        <Card className='sidebar-image'>
+            <Card.Img variant="top" src="holder.js/100px160" />
+            <Card.Body>
+                <Card.Title>Sidebar</Card.Title>
+            </Card.Body>
+        </Card>
     </ul>
-    <div className='sidebar-image'>
-
-    </div>
   </div>
     )
 }
