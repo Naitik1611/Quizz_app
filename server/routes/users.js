@@ -1,5 +1,6 @@
 const router=require("express").Router();
 const {User,validate}=require("../models/user");
+const userController = require('../user_update'); 
 const bcrypt=require("bcrypt");
 
 router.post("/",async(req,res)=>{
@@ -21,5 +22,8 @@ router.post("/",async(req,res)=>{
         res.status(500).send({ message: "Internal Server Error" });
     }
 })
+
+router.put('/update/:userId', userController.updateUserData);
+
 
 module.exports=router;

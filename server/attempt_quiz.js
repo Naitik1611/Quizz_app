@@ -28,9 +28,9 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
       const userAnswer = new Answer({
         Quiz_id: quizId,
         User_id: userId,
-        Answers: answers.map((userAnswer, index) => ({
+        QuestionAnswers: answers.map((userAnswer, index) => ({
           Question_id: questions[index]._id,
-          UserAnswer: userAnswer,
+          Answer: userAnswer.Answer,
           Score: score[index],
         })),
       });

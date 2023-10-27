@@ -6,7 +6,9 @@ const connection=require("./db");
 const userRoutes=require("./routes/users");
 const authRoutes=require("./routes/auth");
 const createQuizRoutes=require('./routes/create_quiz');
-const attemptQuizRoute=require('./routes/attempt_quiz')
+const attemptQuizRoute=require('./routes/attempt_quiz');
+const leaderboardRoute=require('./routes/leaderboard');
+const filterRoute=require('./routes/filter');
 
 
 try {
@@ -19,6 +21,8 @@ try {
     app.use("/api/auth", authRoutes);
     app.use('/quiz', createQuizRoutes);
     app.use('/attempt_quiz', attemptQuizRoute);
+    app.use('/leaderboard', leaderboardRoute);
+    app.use('/filter', filterRoute);
   
     const port = process.env.PORT || 8080;
     app.listen(port, () => console.log(`Listening on port ${port}`));
