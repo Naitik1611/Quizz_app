@@ -14,6 +14,7 @@ import Leaderboard from './components/Leaderboard'
 
 import Footer from './components/Footer';
 import AddQuestion from './components/AddQuestion';
+import StartQuiz from './components/StartQuiz';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="add-question" element={<> <Navbar/> <AddQuestion/> <Footer/> </>} />
           <Route path="my-quiz" element={<> <Navbar/> <Sidebar/> <MyQuiz/> <Footer/> </>} />
           <Route path="quiz-category" element={<> <Navbar/> <Sidebar/> <QuizCategory/> <Footer/> </>} />
+          <Route path="start-quiz" element={<> <Navbar/> <StartQuiz/> <Footer/> </>} />
           <Route path="quiz-history" element={<> <Navbar/> <Sidebar/> <QuizHistory/> <Footer/> </>} />
           <Route path="leaderboard" element={<> <Navbar/> <Leaderboard/> <Footer/> </>} />
         

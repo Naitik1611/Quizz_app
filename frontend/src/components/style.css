@@ -173,14 +173,14 @@
 
 /* Add Question */
 
-.question-container{
+.question-container, .start-quiz-container{
 
     padding: 20px;
     text-align: left;
     background-color:#f8f7f7;
     }
     
-    .question-box{
+    .question-box {
         width: 50%;
         background-color: white;
         margin: auto;
@@ -207,3 +207,11 @@
         min-width: 100px;
     }
     
+    .quiz-box{
+        width: 60%;
+        background-color: white;
+        margin: auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }

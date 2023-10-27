@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css'
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -10,11 +11,41 @@ import Card from 'react-bootstrap/Card';
 
 export default function QuizCategory() {
     
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [filterModal, setFilterModal] = useState(false);
     const [startModal, setStartModal] = useState(false);
 
     const [filterCategory, setfilterCategory] = useState('');
+
+    const [quizArray, setquizArray] = useState([]);
+
+    var num = 1
+    useEffect((async) => {
+        if (num===1) {
+           getQuiz();
+            }
+            num++;
+}, []);
+
+const getQuiz = async (e) => {
+    try {
+        const res = await axios.get('http://localhost:8080/quiz/');
+        setquizArray(res.data);
+        
+     } catch (e) {
+         alert(e.message)
+     }
+};
+
+const startQuiz= async (id) => {
+    try {    
+       const res = await axios.get('http://localhost:8080/quiz/'+id);
+       const quiz = res.data;
+       navigate("/start-quiz", {state : {quiz}});
+     } catch (e) {
+         alert(e.message)
+     }
+  }
 
     const filterQuiz = async (e) => {
         e.preventDefault();
@@ -65,20 +96,21 @@ export default function QuizCategory() {
             
             <div>
                 <Row xs={1} md={2} className="g-4">
-                    {Array.from({ length: 4 }).map((_, idx) => (
-                        <Col key={idx}>
+                        {quizArray.map((data) => (
+
+                        <Col key={data._id}>
                         <Card className='quiz-card'>
-                            <Card.Header className='card-header'>Quiz Title</Card.Header>
+                            <Card.Header className='card-header'>{data.Title}</Card.Header>
                             <Card.Body className='card-body'>
                                 <Row>
                                     <Col md={4}>
                                         <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
                                     </Col>
                                     <Col md={{span: 7, offset:1}}>
-                                        <Card.Text className='quiz-details'>Category: </Card.Text>
-                                        <Card.Text className='quiz-details'>Questions: </Card.Text>
-                                        <Card.Text className='quiz-details'>Duration: </Card.Text>
-                                        <Card.Text className='quiz-details'>Date: </Card.Text>
+                                        <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
+                                        <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
+                                        <Card.Text className='quiz-details'>Duration: No limit</Card.Text>
+                                        <Card.Text className='quiz-details'>Date: {data.Created_at}</Card.Text>
                                         <Button variant="info" className='btn btn-leaderboard' >
                                             Leaderboard
                                         </Button>{" "}
@@ -90,7 +122,7 @@ export default function QuizCategory() {
                                             <Modal.Header closeButton>
                                             <Modal.Title>Start Quiz</Modal.Title>
                                             </Modal.Header>
-                                            <Form >
+                                            <Form>
                                                 <Modal.Body>
                                                         <Form.Group className="mb-3">
                                                             Proceed to Start Quiz?
@@ -100,7 +132,7 @@ export default function QuizCategory() {
                                                     <Button variant="danger" className='btn' onClick={() => setStartModal(false)}>
                                                         Cancel
                                                     </Button>
-                                                    <Button variant="success" className='btn' type='submit'>
+                                                    <Button variant="success" className='btn' type='button' onClick={() => startQuiz(data._id)}>
                                                         Start Quiz
                                                     </Button>
                                                 </Modal.Footer>
