@@ -1,42 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import './style.css'
+import React, { useState, useEffect } from "react";
+import "./style.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 export default function StartQuiz() {
- 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const quiz = location.state.quiz;
-    const questions = location.state.questions;
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const quiz = location.state.quiz;
+  const questions = location.state.questions;
 
-    var num = 1
-    useEffect((async) => {
-        if (num===1) {
-          playQuiz();
-            }
-            num++;
-}, []);
+  const [index, setIndex] = useState(0);
 
-const playQuiz = () => {
-    var i = 0;
-  
-    while(i === 0){
-      console.log(questions.questions[i].Question_text);
-
-      if(i===0){
-        document.getElementById("question").innerHTML = quizBox;
-      }
-      i++;
+  var num = 1;
+  useEffect((async) => {
+    if (num === 1) {
+      // playQuiz();
     }
-  
-}
+    num++;
+  }, []);
 
-const quizBox = () => (
-    <div className="quiz-box">
-     {quiz.Title}
-      <div className="row">
+  const playQuiz = () => {
+    console.log(index);
+    if (index < questions.questions.length) {
+      console.log(questions.questions[index])
+      return quizBox(questions.questions[index]);
+    } else {
+      return result();
+    }
+  };
+
+  const changeQuestion = () => {
+    if (index < questions.questions.length) {
+      setIndex(index + 1);
+      playQuiz();
+    }
+  };
+
+  const result = () => {
+    return <div className="quiz-box">Result</div>;
+  };
+
+  const quizBox = (question) => {
+    return (
+      <div className="quiz-box">
+        {quiz.Title}
+        <div className="row">
         <div className="col">
           Progress bar
         </div>
@@ -49,28 +57,31 @@ const quizBox = () => (
         <div className="col">
           Timer
         </div>
-      </div>
+      
   
       <hr />
 
       <div className="card">
-      {questions.questions[0].Question_text}
+      {question.Question_text}
       </div>
 
-      {Array.from({ length: questions.questions[0].Options.length }, (_, i) => <span key={i}>
+      {Array.from({ length: question.Options.length }, (_, i) => <span key={i}>
 
       <div className="card">
-      {questions.questions[0].Options[i]}
+      {question.Options[i]}
       </div>
             </span>)}
     </div>
-  );
-  
-
-    return (
-      <div className="start-quiz-container">
-        <div id="question"></div>
-           
+        <button type="button" className="btn btn-primary" onClick={() => changeQuestion()}> Next</button>
       </div>
-    )
+    );
+  };
+
+  /*
+
+const quizBox = () => (
+    <div className="quiz-box">
+     {quiz.Title}
+      */
+  return <div className="start-quiz-container">{playQuiz()}</div>;
 }
