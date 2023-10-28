@@ -5,7 +5,6 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-
 export default function CreateQuiz() {
  
     const navigate = useNavigate();
@@ -27,14 +26,12 @@ export default function CreateQuiz() {
         if (num===1) {
             console.log(localStorage.getItem("questionCount"));
             console.log(localStorage.getItem("questionArray"));
-
             let questionCount = localStorage.getItem("questionCount") ;
             
             if(questionCount>0){
                 let questionArray = JSON.parse(localStorage.getItem("questionArray"));
                
-                questionArray.forEach((question => {
-                   
+                questionArray.forEach((question => {    
                         const ul = document.getElementById('list');
                         const li = document.createElement('li');
                         li.innerHTML = `
@@ -61,15 +58,11 @@ export default function CreateQuiz() {
                       </div>
                             `;
                         ul.appendChild(li);
-
                 }));
-            
             }
             num++;
-
         }
     }, []);
-
 
 /*
     localStorage.removeItem("quizName");
@@ -79,7 +72,6 @@ export default function CreateQuiz() {
 */
     const createQuiz = async (e) => {
         e.preventDefault();
-
         if(quizTime===true) {
             const quizData = {
                 quizName,
@@ -88,57 +80,54 @@ export default function CreateQuiz() {
                 quizTimeMin
             }
             console.log(quizData);
-            localStorage.setItem("quizTimeMin", quizTimeMin);   
+            localStorage.setItem("quizTimeMin", quizTimeMin); 
 
-        if (quizCategory==="") {
-            alert("Please Select a Category")
-        } else {
-            if(quizTime===true) {
-                const quizData = {
-                    quizName,
-                    quizCategory,
-                    quizTime,
-                    quizTimeMin
-                }
-                console.log(quizData);
-
+            if (quizCategory==="") {
+                alert("Please Select a Category")
             } else {
-                const quizData = {
-                    quizName,
-                    quizCategory,
-                    quizTime
-                }
-                console.log(quizData);
-            }
-        }
-
-        let questionArray = JSON.parse(localStorage.getItem("questionArray"));
-
-        if(questionArray.length>0){
-            const quizDetails = {
-                "Title": quizName,
-                "Category": quizCategory,
-                "Questions": questionArray,
-                "Timer": {
-                  "TimerAvailable": quizTime
-                }
-              }
-        
-
-        try {
-           /* const res = await axios.post('http://localhost:8080/quiz/create',quizDetails,{
-                    headers: {
-                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                if(quizTime===true) {
+                    const quizData = {
+                        quizName,
+                        quizCategory,
+                        quizTime,
+                        quizTimeMin
                     }
-                }); */
-           // console.log(res.data);
+                    console.log(quizData);
+                } else {
+                    const quizData = {
+                        quizName,
+                        quizCategory,
+                        quizTime
+                    }
+                    console.log(quizData);
+                }
+            }
 
-        } catch (e) {
-            alert(e.message)
-        }
-        //   navigate("/home")
-    }
-      };
+            let questionArray = JSON.parse(localStorage.getItem("questionArray"));
+
+            if(questionArray.length>0){
+                const quizDetails = {
+                    "Title": quizName,
+                    "Category": quizCategory,
+                    "Questions": questionArray,
+                    "Timer": {
+                    "TimerAvailable": quizTime
+                    }
+                }
+
+                try {
+                    const res = await axios.post('http://localhost:8080/quiz/create',quizDetails,{
+                            headers: {
+                                'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                            }
+                        }); 
+                console.log(res.data);
+                } catch (e) {
+                    alert(e.message)
+                }
+                navigate("/home")
+            }
+        };
     }
 
       const addQuestion = () => {
@@ -149,7 +138,6 @@ export default function CreateQuiz() {
 
         navigate("/add-question")
       }
-
 
     return (
     <div className="create-container">
@@ -182,16 +170,7 @@ export default function CreateQuiz() {
                                 <option value="Science">Science</option>     
                             </Form.Select>
                         </Form.Group>
-                    </div>
-                    <div className='row'>
-                        <Form.Group className="mb-3">
-                            <Form.Label htmlFor='quizTime' className='quiz-label'>Set overall Test Timer</Form.Label>
-                            <Form.Select id='quizTime' className='quiz-time-inp'value={quizTime}  onChange={(e) => setQuizTime(e.target.value)} required>
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </div>
+                    </div>                    
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTime'>
                             <Form.Label className='quiz-label'>Set overall Test Timer</Form.Label>
@@ -228,7 +207,7 @@ export default function CreateQuiz() {
 
                     <div className='row'>
                             <div className='row'>
-                            <div className='col-10'>
+                                <div className='col-10'>
                                    
                                 </div>
                                 <div className='col-1'>
@@ -238,12 +217,10 @@ export default function CreateQuiz() {
                                     <Button variant="danger" className='btn'>Delete</Button>
                                 </div>
                             </div>
-
                          
                                 <ul id="list">
                                 </ul>
                             
-                       
                     </div>
                 </div>
             </div>  

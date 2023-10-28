@@ -44,7 +44,6 @@ export default function QuizCategory() {
                 });
                 setquizArray(res.data);
             }
-            
         } catch (e) {
             alert(e.message)
         }

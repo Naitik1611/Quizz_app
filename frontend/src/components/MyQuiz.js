@@ -17,7 +17,7 @@ export default function MyQuiz() {
 
     const [filterCategory, setfilterCategory] = useState('');
 
-    const [quizArray, setquizArray] = useState([]);
+    const [quizArray, setQuizArray] = useState([]);
 
     var num = 1
     useEffect((async) => {
@@ -35,24 +35,22 @@ export default function MyQuiz() {
     }
 
     const getQuiz = async (e) => {
-        
         try {
             if(!filterCategory) {
-                const res = await axios.get('http://localhost:8080/quiz/',{
+                const res = await axios.get('http://localhost:8080/user/myQuizzes',{
                     headers: {
                         'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
                     }
                 });
-                setquizArray(res.data);
+                setQuizArray(res.data);
             } else {
-                const res = await axios.get('http://localhost:8080/filter/'+filterCategory,{
+                const res = await axios.get('http://localhost:8080/user/myQuizzes',{
                     headers: {
                         'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
                     }
                 });
-                setquizArray(res.data);
+                setQuizArray(res.data.filter((quiz) => quiz.Category === filterCategory));
             }
-            
         } catch (e) {
             alert(e.message)
         }
