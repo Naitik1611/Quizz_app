@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const quizController = require('../attempt_quiz');
+const token=require('../token_authentication');
 
-router.post('/:id', async (req, res) => {
+router.post('/:id',token, async (req, res) => {
   const quizId = req.params.id;
   const { userId, answers } = req.body;
 

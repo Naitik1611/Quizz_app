@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const filterbyCategory = require('../filter'); 
+const token=require('../token_authentication');
 
-router.get('/:category', filterbyCategory.filterQuizzesByCategory);
+router.get('/cateogory/:category',token, filterbyCategory.filterQuizzesByCategory);
+router.get('/pin/:pin',token,filterbyCategory.filterQuizByPin);
+router.get('/history',token,filterbyCategory.quizHistory);
 
 module.exports = router;

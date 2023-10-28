@@ -1,6 +1,6 @@
 const Quiz = require('./models/quiz');
 const Question = require('./models/questions');
-const User = require('./models/user');
+const {User} = require('./models/user');
 const Joi = require('joi'); 
 
 async function generateRandom6DigitNumber() {
@@ -60,7 +60,7 @@ exports.createQuiz = async (req, res) => {
         Title,
         Category,
         Timer,
-        Creator_id,
+        Creator_id: req._id,
         Quiz_pin:await generateRandom6DigitNumber(),
       });
   
@@ -74,9 +74,10 @@ exports.createQuiz = async (req, res) => {
   
       await quiz.save();
   
-    //   const user = await User.findById(Creator_id);
-    //   user.quizzes_id.push(quiz._id);
-    //   await user.save();
+    const user = await User.findById(req._id);
+    console.log(req._id)
+    user.quizzes_id.push(quiz._id);
+    await user.save();
   
       res.status(201).json({ message: 'Quiz created successfully', quiz });
     } catch (error) {

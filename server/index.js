@@ -9,6 +9,7 @@ const createQuizRoutes=require('./routes/create_quiz');
 const attemptQuizRoute=require('./routes/attempt_quiz');
 const leaderboardRoute=require('./routes/leaderboard');
 const filterRoute=require('./routes/filter');
+const userControlRoute=require('./routes/user_control');
 
 
 try {
@@ -23,7 +24,8 @@ try {
     app.use('/attempt_quiz', attemptQuizRoute);
     app.use('/leaderboard', leaderboardRoute);
     app.use('/filter', filterRoute);
-  
+    app.use('/user', userControlRoute);
+    
     const port = process.env.PORT || 8080;
     app.listen(port, () => console.log(`Listening on port ${port}`));
   } catch (error) {
