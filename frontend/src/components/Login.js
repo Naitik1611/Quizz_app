@@ -20,7 +20,7 @@ export default function Login() {
       }
 
       const storeToken = (token) => {
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token.data);
       };
 
       try {

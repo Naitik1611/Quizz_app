@@ -7,17 +7,31 @@ export default function StartQuiz() {
  
     const navigate = useNavigate();
     const location = useLocation();
-  const quiz = location.state.quiz;
-  console.log(quiz.Questions);
-/*
+    const quiz = location.state.quiz;
+    const questions = location.state.questions;
+  
+
     var num = 1
     useEffect((async) => {
         if (num===1) {
-          
+          playQuiz();
             }
             num++;
 }, []);
-*/
+
+const playQuiz = () => {
+    var i = 0;
+  
+    while(i === 0){
+      console.log(questions.questions[i].Question_text);
+
+      if(i===0){
+        document.getElementById("question").innerHTML = quizBox;
+      }
+      i++;
+    }
+  
+}
 
 const quizBox = () => (
     <div className="quiz-box">
@@ -40,15 +54,23 @@ const quizBox = () => (
       <hr />
 
       <div className="card">
-      {quiz.Questions[0]}
+      {questions.questions[0].Question_text}
       </div>
+
+      {Array.from({ length: questions.questions[0].Options.length }, (_, i) => <span key={i}>
+
+      <div className="card">
+      {questions.questions[0].Options[i]}
+      </div>
+            </span>)}
     </div>
   );
   
 
     return (
       <div className="start-quiz-container">
-           {quizBox()}
+        <div id="question"></div>
+           
       </div>
     )
 }

@@ -30,10 +30,18 @@ export default function QuizCategory() {
     const getQuiz = async (e) => {
         try {
             if(!filterCategory) {
-                const res = await axios.get('http://localhost:8080/quiz/');
+                const res = await axios.get('http://localhost:8080/quiz/',{
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
                 setquizArray(res.data);
             } else {
-                const res = await axios.get('http://localhost:8080/filter/'+filterCategory);
+                const res = await axios.get('http://localhost:8080/filter/'+filterCategory, {
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
                 setquizArray(res.data);
             }
             
@@ -44,9 +52,22 @@ export default function QuizCategory() {
 
     const startQuiz = async (id) => {
         try {    
-            const res = await axios.get('http://localhost:8080/quiz/'+id);
+            const res = await axios.get('http://localhost:8080/quiz/byId/'+id, {
+                headers: {
+                    'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                }
+            });
             const quiz = res.data;
-            navigate("/start-quiz", {state : {quiz}});
+
+            const questionRes = await axios.get('http://localhost:8080/attempt_quiz/'+id, {
+                headers: {
+                    'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                }
+            });
+            const questions = questionRes.data;
+            console.log(questions)
+
+            navigate("/start-quiz", {state : {quiz, questions}});
         } catch (e) {
             alert(e.message)
         }

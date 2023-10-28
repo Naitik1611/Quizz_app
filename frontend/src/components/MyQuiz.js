@@ -38,10 +38,18 @@ export default function MyQuiz() {
         
         try {
             if(!filterCategory) {
-                const res = await axios.get('http://localhost:8080/quiz/');
+                const res = await axios.get('http://localhost:8080/quiz/',{
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
                 setquizArray(res.data);
             } else {
-                const res = await axios.get('http://localhost:8080/filter/'+filterCategory);
+                const res = await axios.get('http://localhost:8080/filter/'+filterCategory,{
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
                 setquizArray(res.data);
             }
             
@@ -96,7 +104,7 @@ export default function MyQuiz() {
                     {quizArray.map((data) => (
                         <Col key={data._id}>
                         <Card className='quiz-card'>
-                            <Card.Header className='card-header'>{data.quizName}</Card.Header>
+                            <Card.Header className='card-header'>{data.Title}</Card.Header>
                             <Card.Body className='card-body'>
                                 <Row>
                                     <Col md={4}>

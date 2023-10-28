@@ -126,7 +126,11 @@ export default function CreateQuiz() {
         
 
         try {
-           // const res = await axios.post('http://localhost:8080/quiz/create',quizDetails);
+           /* const res = await axios.post('http://localhost:8080/quiz/create',quizDetails,{
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                }); */
            // console.log(res.data);
 
         } catch (e) {

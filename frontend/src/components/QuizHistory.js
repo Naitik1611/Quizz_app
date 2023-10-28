@@ -37,10 +37,23 @@ export default function QuizHistory() {
         
         try {
             if(!filterCategory) {
-                const res = await axios.get('http://localhost:8080/quiz/');
+                const res = await axios.get('http://localhost:8080/quiz/', {
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
                 setquizArray(res.data);
+
+                /*
+                    filter
+                    setQuizArray(filter)
+                */
             } else {
-                const res = await axios.get('http://localhost:8080/filter/'+filterCategory);
+                const res = await axios.get('http://localhost:8080/filter/category/'+filterCategory, {
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
                 setquizArray(res.data);
             }
             

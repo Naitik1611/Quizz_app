@@ -23,7 +23,11 @@ export default function EditProfile() {
           console.log(editData);
           
           try {
-            const res = await axios.put('http://localhost:8080/api/users/update/'+id,editData)
+            const res = await axios.put('http://localhost:8080/api/users/update/'+id,editData, {
+              headers: {
+                  'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+              }
+          })
             navigate("/home")
             console.log(res.data);
           } catch (e) {
