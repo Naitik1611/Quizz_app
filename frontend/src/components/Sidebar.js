@@ -39,7 +39,7 @@ export default function Sidebar() {
             <Button variant="none" className="btn" onClick={() => navigate("/quiz-history")}>Quiz History</Button>
         </li>
         <li className="sidebar-item">
-            <Button variant="none" className="btn" onClick={() => navigate("/")}>Edit Profile</Button>
+            <Button variant="none" className="btn" onClick={() => navigate("/edit-profile")}>Edit Profile</Button>
         </li>
         <Card className='sidebar-image'>
             <Card.Img variant="top" src="holder.js/100px160" />

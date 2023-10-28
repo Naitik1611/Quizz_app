@@ -25,31 +25,36 @@ export default function QuizCategory() {
            getQuiz();
             }
             num++;
-}, []);
+    }, []);
 
-const getQuiz = async (e) => {
-    try {
-        const res = await axios.get('http://localhost:8080/quiz/');
-        setquizArray(res.data);
-        
-     } catch (e) {
-         alert(e.message)
-     }
-};
+    const getQuiz = async (e) => {
+        try {
+            if(!filterCategory) {
+                const res = await axios.get('http://localhost:8080/quiz/');
+                setquizArray(res.data);
+            } else {
+                const res = await axios.get('http://localhost:8080/filter/'+filterCategory);
+                setquizArray(res.data);
+            }
+            
+        } catch (e) {
+            alert(e.message)
+        }
+    };
 
-const startQuiz= async (id) => {
-    try {    
-       const res = await axios.get('http://localhost:8080/quiz/'+id);
-       const quiz = res.data;
-       navigate("/start-quiz", {state : {quiz}});
-     } catch (e) {
-         alert(e.message)
-     }
-  }
+    const startQuiz = async (id) => {
+        try {    
+            const res = await axios.get('http://localhost:8080/quiz/'+id);
+            const quiz = res.data;
+            navigate("/start-quiz", {state : {quiz}});
+        } catch (e) {
+            alert(e.message)
+        }
+    }
 
     const filterQuiz = async (e) => {
         e.preventDefault();
-        console.log(filterCategory);
+        getQuiz()
         setFilterModal(false);
     }
 
@@ -72,6 +77,7 @@ const startQuiz= async (id) => {
                                         <Form.Label htmlFor='quizCategory' className='quiz-label'>Quiz Category</Form.Label>
                                         <Form.Select id='quizCategory' className='quiz-category-inp' onChange={(e) => setfilterCategory(e.target.value)} required>
                                             <option>Select</option>
+                                            <option value=''>All Quizzes</option>
                                             <option value="Computer Science">Computer Science</option>
                                             <option value="General Knowledge">General Knowledge</option>
                                             <option value="Geography">Geography</option>
@@ -96,8 +102,7 @@ const startQuiz= async (id) => {
             
             <div>
                 <Row xs={1} md={2} className="g-4">
-                        {quizArray.map((data) => (
-
+                    {quizArray.map((data) => (
                         <Col key={data._id}>
                         <Card className='quiz-card'>
                             <Card.Header className='card-header'>{data.Title}</Card.Header>

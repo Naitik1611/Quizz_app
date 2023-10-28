@@ -11,6 +11,7 @@ import MyQuiz from './components/MyQuiz'
 import QuizCategory from './components/QuizCategory'
 import QuizHistory from './components/QuizHistory'
 import Leaderboard from './components/Leaderboard'
+import EditProfile from './components/EditProfile'
 
 import Footer from './components/Footer';
 import AddQuestion from './components/AddQuestion';
@@ -32,7 +33,8 @@ function App() {
           <Route path="start-quiz" element={<> <Navbar/> <StartQuiz/> <Footer/> </>} />
           <Route path="quiz-history" element={<> <Navbar/> <Sidebar/> <QuizHistory/> <Footer/> </>} />
           <Route path="leaderboard" element={<> <Navbar/> <Leaderboard/> <Footer/> </>} />
-        
+          <Route path="edit-profile" element={<> <Navbar/> <Sidebar/> <EditProfile/> <Footer/> </>} />
+
         </Routes>
       </BrowserRouter>
 
