@@ -5,6 +5,5 @@ const token=require('../token_authentication');
 
 router.get('/cateogory/:category',token, filterbyCategory.filterQuizzesByCategory);
 router.get('/pin/:pin',token,filterbyCategory.filterQuizByPin);
-router.get('/history',token,filterbyCategory.quizHistory);
 
 module.exports = router;
