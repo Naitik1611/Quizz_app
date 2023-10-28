@@ -15,4 +15,6 @@ router.post('/:id',token, async (req, res) => {
   }
 });
 
+router.get('/:id',token,quizController.displayQuestions);
+
 module.exports = router;

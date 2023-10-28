@@ -56,3 +56,25 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   };
+
+  exports.displayQuestions=async(req,res)=>{
+    try{
+      const quizId=req.params.id;
+      //console.log(quizId);
+      const quiz = await Quiz.findById(quizId).populate('Questions');
+      console.log(quiz);
+      if (!quiz) {
+        return res.status(404).json({ message: 'Quiz not found' });
+      }
+      const questions = quiz.Questions;
+      //console.log(questions);
+      const questionData = questions.map((question) => ({
+        Question_text: question.Question_text,
+        Options: question.Options,
+      }));
+      res.status(200).json({ questions: questionData });
+    }catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};

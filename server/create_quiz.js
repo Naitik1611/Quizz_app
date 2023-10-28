@@ -108,6 +108,17 @@ exports.createQuiz = async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   };
+
+  exports.getQuizByPin = async (req, res) => {
+    try {
+      const { pin } = req.params; 
+      const quiz = await Quiz.find({ Quiz_pin: pin }); 
+      res.status(200).json({ quiz });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
   
   exports.deleteQuizById = async (req, res) => {
     try {

@@ -4,6 +4,5 @@ const filterbyCategory = require('../filter');
 const token=require('../token_authentication');
 
 router.get('/cateogory/:category',token, filterbyCategory.filterQuizzesByCategory);
-router.get('/pin/:pin',token,filterbyCategory.filterQuizByPin);
 
 module.exports = router;
