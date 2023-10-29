@@ -15,7 +15,8 @@ import EditProfile from './components/EditProfile'
 
 import Footer from './components/Footer';
 import AddQuestion from './components/AddQuestion';
-import StartQuiz from './components/StartQuiz';
+import StartQuizWithTimeLimit from './components/StartQuizWithTimeLimit';
+import StartQuizWithNoLimit from './components/StartQuizWithNoLimit';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
           <Route path="add-question" element={<> <Navbar/> <AddQuestion/> <Footer/> </>} />
           <Route path="my-quiz" element={<> <Navbar/> <Sidebar/> <MyQuiz/> <Footer/> </>} />
           <Route path="quiz-category" element={<> <Navbar/> <Sidebar/> <QuizCategory/> <Footer/> </>} />
-          <Route path="start-quiz" element={<> <Navbar/> <StartQuiz/> <Footer/> </>} />
+          <Route path="start-quiz-time-limit" element={<> <Navbar/> <StartQuizWithTimeLimit/> <Footer/> </>} />
+          <Route path="start-quiz-no-limit" element={<> <Navbar/> <StartQuizWithNoLimit/> <Footer/> </>} />
           <Route path="quiz-history" element={<> <Navbar/> <Sidebar/> <QuizHistory/> <Footer/> </>} />
           <Route path="leaderboard" element={<> <Navbar/> <Leaderboard/> <Footer/> </>} />
           <Route path="edit-profile" element={<> <Navbar/> <Sidebar/> <EditProfile/> <Footer/> </>} />

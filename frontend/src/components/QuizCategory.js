@@ -66,7 +66,14 @@ export default function QuizCategory() {
             const questions = questionRes.data;
             console.log(questions)
 
-            navigate("/start-quiz", {state : {quiz, questions}});
+            if(quiz.Timer.TimerAvailable === true){
+                navigate("/start-quiz-time-limit", {state : {quiz, questions}});
+            }else{
+                navigate("/start-quiz-no-limit", {state : {quiz, questions}});
+            }
+
+
+           
         } catch (e) {
             alert(e.message)
         }
