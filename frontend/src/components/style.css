@@ -1,13 +1,14 @@
 /* Import Bootstrap CSS */
 @import "~bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Lexend:wght@400&display=swap');
 
 /* Navbar */
 .navbar-container {
     width: 100%;
     margin: 0;
     padding: 20px;
-    height: 80px;
-    background-color: #d9d9d9;
+    height: 60px;
+    background-color: white;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -93,24 +94,46 @@
 }
 
 /* Login and Register*/
+
+.login-bg{
+   /* background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);*/
+   background-color: #F24C62;
+    height: 80vh;
+}
+
 .login-container {
     width: 850px;
-    margin: 40px auto;
+    margin: auto;
     display: flex;
-    border: 1px solid black;
-    border-radius: 15px;
+
+    background-color: white;
+}
+
+.login-inner-container{
+    padding: 60px;
 }
 
 .details-container {
-    width: 550px;
+    width: 400px;
     display: block ;
-    padding: 10px;
-    border-right: 1px solid;
+    padding: 40px;
+    
 }
 
 .img-container {
     width: max-content;
-    margin: 40px auto;
+    margin: 20px;
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.phrase{
+    margin-top: 30px;
+    font-family:'Kalam', cursive;
+    font-size:x-large;
 }
 
 .login-form {
@@ -119,22 +142,23 @@
 
 .inp-label {
     width: 350px;
-    margin: 10px auto;
+    margin: 10px auto 7px;
     text-align: left;
 }
 
 .inp {
-    width: 350px;
-    margin: 10px auto;
+    width: 100%;
+    margin: auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .form-btn {
     width: 350px;
-    margin: 20px auto 10px;
+    margin: 40px auto 10px;
 }
 
 .toggle-login {
-    width: 350px;
+    
     margin: 10px auto;
 }
 
@@ -166,7 +190,7 @@
     display:grid;
     width: 100%;
     height: 80px;
-    background-color: #d9d9d9;
+    background-color: white;
     padding: 20px;
 }
 
@@ -215,3 +239,11 @@
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
+
+    .btn-primary {
+        background: #F24C62;
+        border-radius: 5px;
+        width: 150px;
+        border: none;
+      }
+      

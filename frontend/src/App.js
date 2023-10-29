@@ -18,6 +18,7 @@ import AddQuestion from './components/AddQuestion';
 import StartQuizWithTimeLimit from './components/StartQuizWithTimeLimit';
 import StartQuizWithNoLimit from './components/StartQuizWithNoLimit';
 import Result from './components/Result';
+import NavbarLogin from './components/NavbarLogin';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<><Login/> <Footer/> </>} />
+          <Route path="/" element={<><NavbarLogin/><Login/> <Footer/> </>} />
           <Route path="register" element={<> <Register/> <Footer/> </>} />
           <Route path="home" element={<> <Navbar/> <Sidebar/> <Home/> <Footer/> </>} />
           <Route path="create-quiz" element={<> <Navbar/> <CreateQuiz/> <Footer/> </>} />
