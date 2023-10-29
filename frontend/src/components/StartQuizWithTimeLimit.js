@@ -6,17 +6,19 @@ import axios from "axios";
 export default function StartQuizWithTimeLimit() {
   const navigate = useNavigate();
   const location = useLocation();
+  const id = location.state.id;
   const quiz = location.state.quiz;
   const questions = location.state.questions;
 
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
   const [fib, setFib] = useState('');
 
   const [timeLeft, setTimeLeft] = useState(15);
 
   useEffect(() => {
-    if (typeof timeLeft === 'number') {
+    
       const countdown = setInterval(() => {
         if (timeLeft > 0) {
           setTimeLeft(prevTime => prevTime - 1);
@@ -28,10 +30,6 @@ export default function StartQuizWithTimeLimit() {
       }, 1000);
   
       return () => clearInterval(countdown); // Cleanup the interval on unmount or re-render
-    }
-    else{
-      document.getElementById("countdown").innerHTML= "Timer: None"
-    }
   }, [timeLeft]);
 
   const playQuiz = () => {
@@ -45,10 +43,11 @@ export default function StartQuizWithTimeLimit() {
 
       questions.questions.forEach((item, index) => {
         if (!item.hasOwnProperty('Answer')) {
-          item['Answer'] = null; // Add 'Answer' property with value null
+          item['Answer'] = "NA"; // Add 'Answer' property with value null
         }
       });
-      return result();
+      
+      navigate("/result", {state : {id, quiz, questions, correctAnswers, score}});
     }
   };
 
@@ -69,6 +68,7 @@ export default function StartQuizWithTimeLimit() {
 
     if(ans.toLowerCase() ===  questions.questions[index].Correct_answer.toLowerCase()){
       changeColor(element, "green");
+      setCorrectAnswers(correctAnswers+1);
       setScore(score + questions.questions[index].Score);
     }
     else{
@@ -82,7 +82,7 @@ export default function StartQuizWithTimeLimit() {
       element.style.color = "black";
       setFib('');
       changeQuestion();
-    }, 2000);
+    }, 1000);
 
   }else{
     changeQuestion();
@@ -94,15 +94,27 @@ export default function StartQuizWithTimeLimit() {
     element.style.color = "white";
   }
 
-  const result = () => {
-    return <div className="quiz-box">Result</div>;
-  };
-
   const QuizBox = ( question ) => {
     
     return (
       <div className="quiz-box">
+
+      <div className="row">
+        <div className="col">
         {quiz.Title}
+        </div>
+        <div className="col">
+        <div id="countdown">
+        Timer: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
+
+        </div>
+        </div>
+        <div className="col">
+        <button type="button" className="btn btn-primary" onClick={() => setIndex(questions.questions.length)}> End Quiz</button>
+        </div>
+      </div>
+
+
         <div className="row">
         <div className="col">
           Completed
@@ -116,13 +128,6 @@ export default function StartQuizWithTimeLimit() {
         <div className="col">
           Points: {question.Score}
         </div>
-        <div className="col">
-      
-        <div id="countdown">
-        Timer: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
-
-        </div>
-        </div>
 
         </div>
 
@@ -131,8 +136,7 @@ export default function StartQuizWithTimeLimit() {
 
       <div className="card">
       {question.Question_text}
-      Time Left: 
-      <div id="qt"></div>
+      
       </div>
 
       { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>

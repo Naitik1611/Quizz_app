@@ -6,35 +6,41 @@ import axios from "axios";
 export default function StartQuiz() {
   const navigate = useNavigate();
   const location = useLocation();
+  const id = location.state.id;
   const quiz = location.state.quiz;
   const questions = location.state.questions;
 
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
   const [fib, setFib] = useState('');
 
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState("None");
 
   const changeQuestion = () => {
     if (index < questions.questions.length) {
       console.log(questions)
       setIndex(index + 1);
+      setTimeLeft(15);
       playQuiz();
     }
   };
 
   useEffect(() => {
+    if (typeof timeLeft === 'number') {
     const countdown = setInterval(() => {
       if (timeLeft > 0) {
         setTimeLeft(prevTime => prevTime - 1);
       } else {
         clearInterval(countdown);
         changeQuestion();
-        setTimeLeft(5); // Reset the timer to 5 seconds for the next question
       }
     }, 1000);
 
     return () => clearInterval(countdown);
+  }else{
+    document.getElementById("countdown").innerHTML= ""
+  }
   }, [timeLeft]);
 
 
@@ -43,17 +49,17 @@ export default function StartQuiz() {
     console.log(index);
     
     if (index < questions.questions.length) {
-      console.log((index+1)/questions.questions.length*100);
-      return QuizBox(questions.questions[index]);
+        return QuizBox(questions.questions[index]);
     } else {
-      console.log("Score "+score)
-
       questions.questions.forEach((item, index) => {
         if (!item.hasOwnProperty('Answer')) {
-          item['Answer'] = null; // Add 'Answer' property with value null
+          item['Answer'] = "NA"; // Add 'Answer' property with value null
         }
       });
-      return result();
+
+      navigate("/result", {state : {id, quiz, questions, correctAnswers, score}});
+
+      
     }
   };
 
@@ -67,11 +73,12 @@ export default function StartQuiz() {
     if(ans.toLowerCase() ===  questions.questions[index].Correct_answer.toLowerCase()){
       changeColor(element, "green");
       setScore(score + questions.questions[index].Score);
+      setCorrectAnswers(correctAnswers+1);
     }
     else{
       changeColor(element, "red");
     }
-
+    
     questions.questions[index].Answer = ans;
     (console.log(questions.questions[index]['Answer']))
     setTimeout(function() {
@@ -79,7 +86,7 @@ export default function StartQuiz() {
       element.style.color = "black";
       setFib('');
       changeQuestion();
-    }, 2000);
+    }, 1000);
 
   }else{
     changeQuestion();
@@ -91,9 +98,6 @@ export default function StartQuiz() {
     element.style.color = "white";
   }
 
-  const result = () => {
-    return <div className="quiz-box">Result</div>;
-  };
 
   const QuizBox = ( question) => {
    
@@ -128,8 +132,8 @@ export default function StartQuiz() {
 
       <div className="card">
       {question.Question_text}
-      Time Left: 
-      <div id="qt"></div>
+      
+  
       </div>
 
       { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>

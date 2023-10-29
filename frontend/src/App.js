@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import AddQuestion from './components/AddQuestion';
 import StartQuizWithTimeLimit from './components/StartQuizWithTimeLimit';
 import StartQuizWithNoLimit from './components/StartQuizWithNoLimit';
+import Result from './components/Result';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="quiz-category" element={<> <Navbar/> <Sidebar/> <QuizCategory/> <Footer/> </>} />
           <Route path="start-quiz-time-limit" element={<> <Navbar/> <StartQuizWithTimeLimit/> <Footer/> </>} />
           <Route path="start-quiz-no-limit" element={<> <Navbar/> <StartQuizWithNoLimit/> <Footer/> </>} />
+          <Route path="result" element={<> <Navbar/> <Result /> <Footer/> </>} />
           <Route path="quiz-history" element={<> <Navbar/> <Sidebar/> <QuizHistory/> <Footer/> </>} />
           <Route path="leaderboard" element={<> <Navbar/> <Leaderboard/> <Footer/> </>} />
           <Route path="edit-profile" element={<> <Navbar/> <Sidebar/> <EditProfile/> <Footer/> </>} />
