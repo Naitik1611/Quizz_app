@@ -18,7 +18,6 @@ export default function Sidebar() {
     const createQuiz = () => {
          navigate("/create-quiz");
     }
-    
 
     return (
   
@@ -42,8 +41,7 @@ export default function Sidebar() {
            Edit Profile
         </li>
         <Card className='sidebar-image'>
-            <Card.Img variant="top" src="quiz.png" />
-            
+            <Card.Img className='side-img' variant="top" src="quiz.png" />
         </Card>
     </ul>
 

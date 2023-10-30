@@ -30,7 +30,7 @@ export default function CreateQuiz() {
             
             if(questionCount>0){
                 let questionArray = JSON.parse(localStorage.getItem("questionArray"));
-               
+                let i=1
                 questionArray.forEach((question => {    
                         const ul = document.getElementById('list');
                         const li = document.createElement('li');
@@ -38,7 +38,7 @@ export default function CreateQuiz() {
                         <div class="card">
                         <div class="row">
                           <div class="col-1">
-                            Q1
+                            Q${i++}
                           </div>
                           <div class="col-11">
                             ${question.Question_text}
@@ -206,20 +206,9 @@ export default function CreateQuiz() {
                     </div>
 
                     <div className='row'>
-                            <div className='row'>
-                                <div className='col-10'>
-                                   
-                                </div>
-                                <div className='col-1'>
-                                    <Button variant="primary" className='btn btn-edit'>Edit</Button>
-                                </div>
-                                <div className='col-1'>
-                                    <Button variant="danger" className='btn'>Delete</Button>
-                                </div>
-                            </div>
                          
-                                <ul id="list">
-                                </ul>
+                        <ul id="list">
+                        </ul>
                             
                     </div>
                 </div>

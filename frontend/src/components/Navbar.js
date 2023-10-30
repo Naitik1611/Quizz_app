@@ -22,8 +22,8 @@ export default function Navbar() {
                     <img alt="User" src="user1.png" width="40" height="40"/>{' '}
                     User Name
                 </NavBar.Text>
-                <Button variant="danger" className="btn nav-btn" onClick={() => navigate("/")}>Logout</Button>
-                <Button variant='primary' className="btn nav-btn" onClick={() => navigate("/")}>Contact Us</Button>
+                <Button variant="danger" className="btn lgt-btn" onClick={() => navigate("/")}>Logout</Button>
+                <Button variant='primary' className="btn ctc-btn" onClick={() => navigate("/")}>Contact Us</Button>
             </NavBar.Collapse>
        
     </NavBar>
