@@ -1,7 +1,18 @@
+const crypto = require('crypto');
 const Quiz = require('./models/quiz');
 const Answer = require('./models/answer');
 const {User} = require('./models/user');
 const Question = require('./models/questions');
+
+function encrypt(text, secret) {
+  const algorithm = 'aes-256-cbc';
+  const key = crypto.scryptSync(secret, 'quiz', 32); 
+  const iv = Buffer.alloc(16, 0); 
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return encrypted;
+}
 
 exports.attemptQuiz = async (quizId, userId, answers, res) => {
     try {
@@ -69,7 +80,13 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
       const questions = quiz.Questions;
       //console.log(questions);
       const questionData = questions.map((question) => ({
+        Question_id:question._id,
         Question_text: question.Question_text,
+        Question_type:question.Question_type,
+        Correct_answer:encrypt(question.Correct_answer, process,env.SECRET),
+        Explanation: question.Explanation,
+        Score: question.Score,
+        Time: question.Time,
         Options: question.Options,
       }));
       res.status(200).json({ questions: questionData });
