@@ -11,7 +11,7 @@ exports.filterQuizzesByCategory = async (req, res) => {
     const user = await User.findById(userId)
 
     quizzes = quizzes.map((quiz)=>{
-      let user_type = 2
+      let user_type = 0
       let participated = user.scores.forEach((score)=>quiz._id.toString() === score.Quiz_id.toString())
       console.log(quiz.Creator_id, userId)
       if(quiz.Creator_id){
