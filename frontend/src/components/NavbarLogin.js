@@ -11,9 +11,9 @@ export default function NavbarLogin() {
 
     return (
     <NavBar className="navbar-container">
-        <Container>
+       
             <NavBar.Brand href="#home" className='app-detail'>
-                <img alt="Logo" src="/img/logo.svg" width="30" height="30" className="app-logo"/>{' '}
+                <img alt="Logo" src="logo.jpg" width="120" height="60" className="app-logo"/>{' '}
                 Quiz App
             </NavBar.Brand>
             <NavBar.Toggle />
@@ -21,7 +21,7 @@ export default function NavbarLogin() {
                
                 <Button variant='primary' className="btn nav-btn" onClick={() => navigate("/")}>Contact Us</Button>
             </NavBar.Collapse>
-        </Container>
+        
     </NavBar>
     )
 }

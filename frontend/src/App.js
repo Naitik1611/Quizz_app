@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<><NavbarLogin/><Login/> <Footer/> </>} />
-          <Route path="register" element={<> <Register/> <Footer/> </>} />
+          <Route path="register" element={<> <NavbarLogin/><Register/> <Footer/> </>} />
           <Route path="home" element={<> <Navbar/> <Sidebar/> <Home/> <Footer/> </>} />
           <Route path="create-quiz" element={<> <Navbar/> <CreateQuiz/> <Footer/> </>} />
           <Route path="add-question" element={<> <Navbar/> <AddQuestion/> <Footer/> </>} />

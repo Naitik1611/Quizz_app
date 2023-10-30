@@ -8,15 +8,15 @@
     margin: 0;
     padding: 20px;
     height: 60px;
-    background-color: white;
+    background-color: whitesmoke;
     position: sticky;
     top: 0;
     z-index: 1;
 }
 
 .app-logo {
-    padding: 10px;
-    border: 1px solid #000;
+   padding: 1px;
+   border-radius: 10px;
 } 
 
 .nav-user {
@@ -97,32 +97,39 @@
 
 .login-bg{
    /* background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);*/
-   background-color: #F24C62;
-    height: 80vh;
+   background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);;
+    min-height: 92vh;
 }
 
 .login-container {
     width: 850px;
     margin: auto;
     display: flex;
-
     background-color: white;
+    border-radius: 5px;
 }
 
 .login-inner-container{
-    padding: 60px;
+    padding: 80px;
+}
+
+.register-inner-container{
+    padding: 20px;
 }
 
 .details-container {
     width: 400px;
     display: block ;
-    padding: 40px;
-    
+    padding: 30px;
 }
 
 .img-container {
     width: max-content;
     margin: 20px;
+}
+
+.img-register {
+    margin-top: 80px !important;
 }
 
 .icon{
@@ -142,7 +149,7 @@
 
 .inp-label {
     width: 350px;
-    margin: 10px auto 7px;
+    margin: 10px auto 5px;
     text-align: left;
 }
 
@@ -157,10 +164,10 @@
     margin: 40px auto 10px;
 }
 
-.toggle-login {
-    
-    margin: 10px auto;
+h3{
+    margin-bottom: 20px;
 }
+
 
 /* Create Quiz */
 .create-container {
@@ -191,7 +198,6 @@
     width: 100%;
     height: 80px;
     background-color: white;
-    padding: 20px;
 }
 
 
@@ -241,7 +247,7 @@
     }
 
     .btn-primary {
-        background: #F24C62;
+        background: rgb(95, 10, 135);
         border-radius: 5px;
         width: 150px;
         border: none;
