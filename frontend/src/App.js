@@ -28,17 +28,79 @@ function App() {
         <Routes>
           <Route path="/" element={<><NavbarLogin/><Login/> <Footer/> </>} />
           <Route path="register" element={<> <NavbarLogin/><Register/> <Footer/> </>} />
-          <Route path="home" element={<> <Navbar/> <Sidebar/> <Home/> <Footer/> </>} />
+         
+          <Route path="home" element={<>
+        <Navbar />
+        <div className="row middle-row">
+          <div className="col-2 left-col">
+          <Sidebar />
+          </div>
+          <div className="col-2"></div>
+          <div className="col-10 right-col">
+          <Home />
+          </div>
+        </div>
+        </>
+      } />
           <Route path="create-quiz" element={<> <Navbar/> <CreateQuiz/> <Footer/> </>} />
           <Route path="add-question" element={<> <Navbar/> <AddQuestion/> <Footer/> </>} />
-          <Route path="my-quiz" element={<> <Navbar/> <Sidebar/> <MyQuiz/> <Footer/> </>} />
-          <Route path="quiz-category" element={<> <Navbar/> <Sidebar/> <QuizCategory/> <Footer/> </>} />
+
+          <Route path="my-quiz" element={<>
+        <Navbar />
+        <div className="row middle-row">
+          <div className="col-2 left-col">
+          <Sidebar />
+          </div>
+          <div className="col-2"></div>
+          <div className="col-10 right-col">
+          <MyQuiz />
+          </div>
+        </div>
+        </>
+      } />
+          <Route path="quiz-category" element={<>
+        <Navbar />
+        <div className="row middle-row">
+          <div className="col-2 left-col">
+          <Sidebar />
+          </div>
+          <div className="col-2"></div>
+          <div className="col-10 right-col">
+          <QuizCategory />
+          </div>
+        </div>
+        </>
+      } />
           <Route path="start-quiz-time-limit" element={<> <Navbar/> <StartQuizWithTimeLimit/> <Footer/> </>} />
           <Route path="start-quiz-no-limit" element={<> <Navbar/> <StartQuizWithNoLimit/> <Footer/> </>} />
           <Route path="result" element={<> <Navbar/> <Result /> <Footer/> </>} />
-          <Route path="quiz-history" element={<> <Navbar/> <Sidebar/> <QuizHistory/> <Footer/> </>} />
+          <Route path="quiz-history" element={<>
+        <Navbar />
+        <div className="row middle-row">
+          <div className="col-2 left-col">
+          <Sidebar />
+          </div>
+          <div className="col-2"></div>
+          <div className="col-10 right-col">
+          <QuizHistory />
+          </div>
+        </div>
+        </>
+      } />
           <Route path="leaderboard" element={<> <Navbar/> <Leaderboard/> <Footer/> </>} />
-          <Route path="edit-profile" element={<> <Navbar/> <Sidebar/> <EditProfile/> <Footer/> </>} />
+          <Route path="edit-profile" element={<>
+        <Navbar />
+        <div className="row middle-row">
+          <div className="col-2 left-col">
+          <Sidebar />
+          </div>
+          <div className="col-2"></div>
+          <div className="col-10 right-col">
+          <EditProfile />
+          </div>
+        </div>
+        </>
+      } />
 
         </Routes>
       </BrowserRouter>

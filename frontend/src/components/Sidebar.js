@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
+import button from 'react-bootstrap/button';
 import Card from 'react-bootstrap/Card';
 
 export default function Sidebar() {
@@ -21,33 +21,31 @@ export default function Sidebar() {
     
 
     return (
-  <div className="sidebar-container">
+  
     <ul className='sidebar-content'>
-        <li className="sidebar-item">
-            <Button type="button" className="btn btn-primary side-create-btn" onClick={createQuiz}>Create Quiz</Button>
+        <li className="create-btn-box">
+            <button type="button" className="btn btn-primary create-btn" onClick={createQuiz}>Create Quiz</button>
         </li>
-        <li className="sidebar-item">
-            <Button variant="none" className="btn" onClick={() => navigate("/home")}>Dashboard</Button>
+        <li className="sidebar-item" onClick={() => navigate("/home")}>
+           Dashboard
         </li>
-        <li className="sidebar-item">
-            <Button variant="none" className="btn" onClick={() => navigate("/quiz-category")}>Quiz Category</Button>
+        <li className="sidebar-item" onClick={() => navigate("/quiz-category")}>
+           Quiz Category
         </li>
-        <li className="sidebar-item">
-            <Button variant="none" className="btn" onClick={() => navigate("/my-quiz")}>My Quiz</Button>
+        <li className="sidebar-item" onClick={() => navigate("/my-quiz")}>
+           My Quiz
         </li>
-        <li className="sidebar-item">
-            <Button variant="none" className="btn" onClick={() => navigate("/quiz-history")}>Quiz History</Button>
+        <li className="sidebar-item" onClick={() => navigate("/quiz-history")}>
+           Quiz History
         </li>
-        <li className="sidebar-item">
-            <Button variant="none" className="btn" onClick={() => navigate("/edit-profile")}>Edit Profile</Button>
+        <li className="sidebar-item" onClick={() => navigate("/edit-profile")}>
+           Edit Profile
         </li>
         <Card className='sidebar-image'>
-            <Card.Img variant="top" src="holder.js/100px160" />
-            <Card.Body>
-                <Card.Title>Sidebar</Card.Title>
-            </Card.Body>
+            <Card.Img variant="top" src="quiz.png" />
+            
         </Card>
     </ul>
-  </div>
+
     )
 }

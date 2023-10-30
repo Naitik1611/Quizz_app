@@ -10,22 +10,22 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     return (
-    <NavBar className="navbar-container">
-        <Container>
-            <NavBar.Brand href="#home" className='app-detail' onClick={() => navigate('/home')}>
-                <img alt="Logo" src="/img/logo.svg" width="30" height="30" className="app-logo"/>{' '}
+    <NavBar className="website-navbar">
+        
+            <NavBar.Brand href="#home" className='app-detail' onClick={() => navigate('/home')} style={{color:"white"}}>
+                <img alt="Logo" src="logo.jpg" width="120" height="60" className="app-logo"/>{' '}
                 Quiz App
             </NavBar.Brand>
             <NavBar.Toggle />
             <NavBar.Collapse className="justify-content-end">
                 <NavBar.Text className='nav-user'>
-                    <img alt="User" src="/img/logo.svg" width="30" height="30" className="nav-user-profile"/>{' '}
+                    <img alt="User" src="user1.png" width="40" height="40"/>{' '}
                     User Name
                 </NavBar.Text>
                 <Button variant="danger" className="btn nav-btn" onClick={() => navigate("/")}>Logout</Button>
                 <Button variant='primary' className="btn nav-btn" onClick={() => navigate("/")}>Contact Us</Button>
             </NavBar.Collapse>
-        </Container>
+       
     </NavBar>
     )
 }

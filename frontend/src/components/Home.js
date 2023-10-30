@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Footer from './Footer';
 
 export default function Home() {
  
@@ -52,24 +53,26 @@ export default function Home() {
 
     return (
     <div className="main-container">
+
         <Form className="home-search">
             <Form.Group className="mb-3" controlId="search-box">
                 <Form.Control type='text' className='search-box' placeholder='Search for quizzes on any topic'/>
             </Form.Group>
         </Form>
-
-        <div className='home-categories-container'>
-            <Row className='home-head'>
+      
+       
+     <Row className='home-head'>
                 <Col md={3} className='home-categories-label'>Latest Quizzes</Col>
                 <Col md={{span:2, offset:6}}>
                     <Button variant="primary" className="btn" onClick={() => navigate("/quiz-category")}>See More</Button>
                 </Col>
             </Row>
-            <div className='home-items'>
-                <Row xs={1} md={4} className="g-4">
+
+
+            <Row xs={1} md={4} className="g-4">
                     {quizArray.slice(0,4).map((quiz) => (
                         <Col key={quiz._id}>
-                        <Card>
+                        <Card className="card-box">
                             <Card.Img variant="top" src="holder.js/100px160" />
                             <Card.Body>
                                 <Card.Title>{ quiz.Title }</Card.Title>
@@ -79,18 +82,17 @@ export default function Home() {
                         </Col>
                     ))}
                 </Row>
-            </div>
-        </div>
+      
+        
 
-        <div className='home-recommended-container'>
-            <Row className='home-head'>
+<Row className='home-head'>
                 <Col md={3} className='home-recommended-label'>Recommended for you</Col>
             </Row>
             <div className='home-items'>
                 <Row xs={1} md={4} className="g-4">
                     {recommendedArray.slice(4,8).map((quiz) => (
                         <Col key={quiz._id}>
-                        <Card>
+                        <Card className="card-box">
                             <Card.Img variant="top" src="holder.js/100px160" />
                             <Card.Body>
                                 <Card.Title>{ quiz.Title }</Card.Title>
@@ -99,8 +101,11 @@ export default function Home() {
                         </Col>
                     ))}
                 </Row>
-            </div>
+
+
+    
         </div>
+        <Footer />
     </div>
     )
 }

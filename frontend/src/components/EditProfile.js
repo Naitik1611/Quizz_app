@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Footer from './Footer';
 
 export default function EditProfile() {
  
@@ -71,6 +72,7 @@ export default function EditProfile() {
             </Button>
 
           </Form>
+          <Footer />
       </div>
     )
 }

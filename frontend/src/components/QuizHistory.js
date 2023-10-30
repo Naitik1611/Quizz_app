@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Footer from './Footer';
 
 export default function QuizHistory() {
     
@@ -125,6 +126,7 @@ export default function QuizHistory() {
                     ))}
                 </Row>
             </div>
+            <Footer />
         </div>
     )
 }
