@@ -21,15 +21,40 @@ export default function Fib() {
        e.preventDefault();
        console.log("Save")
 
-   const questionDetails = {
+    const timer = document.getElementById('timer').value;
+
+    let questionDetails;
+    
+    if(timer==="0"){
+        
+        questionDetails = {
+            "Question_type": questionType,
+            "Time":{
+                "TimerAvailable": false
+            },
+            "Score" : Number(point),
+            "Question_text" : question,
+            "Correct_answer" : answer,
+            "Explanation": explanation
+        }   
+    }
+    else{
+        
+    questionDetails = {
     "Question_type": questionType,
-    "Time" : document.getElementById('timer').value,
-    "Score" : point,
+    "TimerAvailable": true,
+    "Time": {
+        "TimerAvailable": true,
+        "TimerDuration":timer
+    },
+    "Score" : Number(point),
     "Question_text" : question,
     "Correct_answer" : answer,
     "Explanation": explanation
 }
    
+    }
+
    console.log(questionDetails); 
 
   localStorage.setItem("questionCount", Number(localStorage.getItem("questionCount"))+1);
@@ -52,7 +77,7 @@ export default function Fib() {
 <div className="col">
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer"required>
-        <option value="None">None</option>
+        <option value="0">None</option>
         <option value="15">15 sec</option>
         <option value="30">30 sec</option>
         <option value="60">1 min</option>

@@ -13,7 +13,7 @@ export default function CreateQuiz() {
 
     const [quizName, setQuizName] = useState('');
     const [quizCategory, setQuizCategory] = useState('');
-    const [quizTime, setQuizTime] = useState('');
+    const [quizTime, setQuizTime] = useState(false);
     const [quizTimeMin, setQuizTimeMin] = useState('');
 
     var num = 1
@@ -22,6 +22,13 @@ export default function CreateQuiz() {
         setQuizName(localStorage.getItem("quizName"));
         setQuizCategory(localStorage.getItem("quizCategory"));
         setQuizTime(localStorage.getItem("quizTime"));
+        setQuizTimeMin(localStorage.getItem("quizTimeMin"));
+
+         
+        console.log(localStorage.getItem("quizName"));
+        console.log(localStorage.getItem("quizCategory"));
+        console.log(localStorage.getItem("quizTime"));
+        console.log(localStorage.getItem("quizTimeMin"));
       
         if (num===1) {
             console.log(localStorage.getItem("questionCount"));
@@ -71,50 +78,47 @@ export default function CreateQuiz() {
     localStorage.removeItem("quizTimeMin");   
 */
     const createQuiz = async (e) => {
+        console.log("Submitted")
+        console.log(localStorage.getItem("quizTime"))
+        console.log(typeof(quizTime));
         e.preventDefault();
-        if(quizTime===true) {
-            const quizData = {
-                quizName,
-                quizCategory,
-                quizTime,
-                quizTimeMin
-            }
-            console.log(quizData);
-            localStorage.setItem("quizTimeMin", quizTimeMin); 
+        console.log("Okay")
+        console.log(quizTime)
+
+        let qTime;
 
             if (quizCategory==="") {
                 alert("Please Select a Category")
-            } else {
-                if(quizTime===true) {
-                    const quizData = {
-                        quizName,
-                        quizCategory,
-                        quizTime,
-                        quizTimeMin
-                    }
-                    console.log(quizData);
-                } else {
-                    const quizData = {
-                        quizName,
-                        quizCategory,
-                        quizTime
-                    }
-                    console.log(quizData);
-                }
-            }
+            } 
 
             let questionArray = JSON.parse(localStorage.getItem("questionArray"));
 
             if(questionArray.length>0){
-                const quizDetails = {
-                    "Title": quizName,
-                    "Category": quizCategory,
-                    "Questions": questionArray,
-                    "Timer": {
-                    "TimerAvailable": quizTime
+
+                let quizDetails;
+
+                if(quizTime=="true") {
+                    quizDetails = {
+                        "Title": quizName,
+                        "Category": quizCategory,
+                        "Questions": questionArray,
+                        "Timer": {
+                        "TimerAvailable": true,
+                        "TimerDuration":quizTimeMin
+                        }
+                    }
+                } else {
+                    quizDetails = {
+                        "Title": quizName,
+                        "Category": quizCategory,
+                        "Questions": questionArray,
+                        "Timer": {
+                        "TimerAvailable": false
+                        }
                     }
                 }
-
+               
+console.log(quizDetails);
                 try {
                     const res = await axios.post('http://localhost:8080/quiz/create',quizDetails,{
                             headers: {
@@ -122,19 +126,29 @@ export default function CreateQuiz() {
                             }
                         }); 
                 console.log(res.data);
+                navigate("/home");
                 } catch (e) {
                     alert(e.message)
                 }
-                navigate("/home")
+               
+            }else{
+                alert("Please add questions!")
             }
         };
-    }
+
 
       const addQuestion = () => {
 
         localStorage.setItem("quizName", quizName);
         localStorage.setItem("quizCategory", quizCategory);
         localStorage.setItem("quizTime", quizTime);
+        localStorage.setItem("quizTimeMin", quizTimeMin); 
+            
+        
+        console.log(localStorage.getItem("quizName"));
+        console.log(localStorage.getItem("quizCategory"));
+        console.log(localStorage.getItem("quizTime"));
+        console.log(localStorage.getItem("quizTimeMin"));
 
         navigate("/add-question")
       }
@@ -142,9 +156,10 @@ export default function CreateQuiz() {
     return (
     <div className="create-container">
         <Form onSubmit={createQuiz}>
-            <div className="row">
-                <div className="col-3">
-                    <div className='row quiz-detail'>Quiz Details</div>
+            <div className="row create-quiz-row">
+                <div className="col-3 quiz-detail">
+                <div className="card card-quiz-details">
+                    Quiz Details
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizImage'>
                             <Form.Label className='quiz-label'>Image</Form.Label>
@@ -154,13 +169,13 @@ export default function CreateQuiz() {
                     <div className='row'>
                         <Form.Group className="mb-3">
                             <Form.Label htmlFor='quizName' className='quiz-label'>Quiz Name</Form.Label>
-                            <Form.Control type='text' id="quizName" className='quiz-name-inp' value={quizName} onChange={(e) => setQuizName(e.target.value)} required/>
+                            <Form.Control type='text' id="quizName" className='quiz-inp' value={quizName} onChange={(e) => setQuizName(e.target.value)} required/>
                         </Form.Group>
                     </div>
                     <div className='row'>
                         <Form.Group className="mb-3">
                             <Form.Label htmlFor='quizCategory' className='quiz-label'>Quiz Category</Form.Label>
-                            <Form.Select type='text' id='quizCategory' className='quiz-category-inp' value={quizCategory} onChange={(e) => setQuizCategory(e.target.value)} required>
+                            <Form.Select type='text' id='quizCategory' className='quiz-inp' value={quizCategory} onChange={(e) => setQuizCategory(e.target.value)} required>
                                 <option>Select</option>
                                 <option value="Computer Science">Computer Science</option>
                                 <option value="General Knowledge">General Knowledge</option>
@@ -174,7 +189,7 @@ export default function CreateQuiz() {
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTime'>
                             <Form.Label className='quiz-label'>Set overall Test Timer</Form.Label>
-                            <Form.Select className='quiz-time-inp' onChange={(e) => setQuizTime(e.target.value)} required>
+                            <Form.Select type="boolean" id="quizTime" className='quiz-inp' value={quizTime} onChange={(e) => setQuizTime(e.target.value)} required>
                                 <option value="false">No</option>
                                 <option value="true">Yes</option>
                             </Form.Select>
@@ -183,12 +198,13 @@ export default function CreateQuiz() {
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTimeMin'>
                             <Form.Label className='quiz-label'>Set Test Time in Minutes</Form.Label>
-                            <Form.Control type='number' className='quiz-time' min="1" onChange={(e) => setQuizTimeMin(e.target.value)}/>
+                            <Form.Control type='number' className='quiz-inp' min="1" value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
                         </Form.Group>
-                    </div>                    
+                    </div>   
+                    </div>                 
                 </div>
 
-                <div className='col-9'>
+                <div className='col-9 question-detail'>
                     <div className='row'>
                         <div className="col-2">
                             <Button variant="danger" className="btn" onClick={() => navigate("/home")}>Cancel</Button>
