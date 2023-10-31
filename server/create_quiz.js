@@ -25,12 +25,20 @@ exports.createQuiz = async (req, res) => {
       Title: Joi.string().required(),
       Category: Joi.string().required(),
       Timer: Joi.object({
-        TimerAvailable: Joi.boolean().required(),
+        // TimerAvailable: Joi.boolean().required(),
+        // TimerDuration: Joi.number().when('TimerAvailable', {
+        //   is: true,
+        //   then: Joi.number().required(),
+        //   otherwise: Joi.optional(),
+        // }),
+
+        TimerAvailable: Joi.number().required(),
         TimerDuration: Joi.number().when('TimerAvailable', {
-          is: true,
+          is: 1,
           then: Joi.number().required(),
           otherwise: Joi.optional(),
         }),
+        
       }).required(),
       Questions: Joi.array().items(
         Joi.object({
@@ -41,7 +49,7 @@ exports.createQuiz = async (req, res) => {
           Score: Joi.number().required(),
           Options: Joi.array().items(Joi.string()),
           Time: Joi.number().when('TimerAvailable', {
-            is: true,
+            is: 2,
             then: Joi.number().required(),
             otherwise: Joi.optional(),
           }),
@@ -76,6 +84,7 @@ exports.createQuiz = async (req, res) => {
   
     const user = await User.findById(req._id);
     console.log(req._id)
+    console.log(user._id)
     user.quizzes_id.push(quiz._id);
     await user.save();
   

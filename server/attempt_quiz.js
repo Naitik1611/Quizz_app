@@ -79,7 +79,7 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
       const q = await Quiz.findById(quizId)
       
       let participated = user.scores.forEach((score)=>q._id.toString() === score.Quiz_id.toString())
-      console.log(q.Creat)
+      // console.log(q.Creat)
       if(q.Creator_id){
         if(participated)
           return res.status(205).send({"message":"Already participated in this quiz"})
