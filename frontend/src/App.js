@@ -32,11 +32,11 @@ function App() {
           <Route path="home" element={<>
         <Navbar />
         <div className="row middle-row">
-          <div className="col-2 left-col">
+          <div className="col-3 left-col">
           <Sidebar />
           </div>
-          <div className="col-2"></div>
-          <div className="col-10 right-col">
+          <div className="col-3"></div>
+          <div className="col-9 right-col">
           <Home />
           </div>
         </div>
@@ -48,11 +48,11 @@ function App() {
           <Route path="my-quiz" element={<>
         <Navbar />
         <div className="row middle-row">
-          <div className="col-2 left-col">
+          <div className="col-3 left-col">
           <Sidebar />
           </div>
-          <div className="col-2"></div>
-          <div className="col-10 right-col">
+          <div className="col-3"></div>
+          <div className="col-9 right-col">
           <MyQuiz />
           </div>
         </div>
@@ -61,11 +61,11 @@ function App() {
           <Route path="quiz-category" element={<>
         <Navbar />
         <div className="row middle-row">
-          <div className="col-2 left-col">
+          <div className="col-3 left-col">
           <Sidebar />
           </div>
-          <div className="col-2"></div>
-          <div className="col-10 right-col">
+          <div className="col-3"></div>
+          <div className="col-9 right-col">
           <QuizCategory />
           </div>
         </div>
@@ -77,11 +77,11 @@ function App() {
           <Route path="quiz-history" element={<>
         <Navbar />
         <div className="row middle-row">
-          <div className="col-2 left-col">
+          <div className="col-3 left-col">
           <Sidebar />
           </div>
-          <div className="col-2"></div>
-          <div className="col-10 right-col">
+          <div className="col-3"></div>
+          <div className="col-9 right-col">
           <QuizHistory />
           </div>
         </div>
@@ -91,11 +91,11 @@ function App() {
           <Route path="edit-profile" element={<>
         <Navbar />
         <div className="row middle-row">
-          <div className="col-2 left-col">
+          <div className="col-3 left-col">
           <Sidebar />
           </div>
-          <div className="col-2"></div>
-          <div className="col-10 right-col">
+          <div className="col-3"></div>
+          <div className="col-9 right-col">
           <EditProfile />
           </div>
         </div>

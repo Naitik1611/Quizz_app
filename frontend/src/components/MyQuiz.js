@@ -59,11 +59,15 @@ export default function MyQuiz() {
 
     return (
         <div className="main-container">
-            <Row className='my-quiz'>
-                <Col md={2}>My Quizzes</Col>
-                <Col md={{ span: 3, offset: 7 }}>
+            <Row className='quiz-category'>
+            <Col md={4} className='page-title'>
+                    <h3>
+                        My Quizzes
+                    </h3>
+                </Col>
+                <Col md={{ span: 3, offset: 5 }}>
                     <Button variant="primary" className="btn filter-btn" onClick={() => setFilterModal(true)}>
-                    Filter by Category
+                        Filter
                     </Button>
 
                     <Modal show={filterModal} onHide={() => setFilterModal(false)}>
