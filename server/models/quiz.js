@@ -8,7 +8,7 @@ const quizSchema = new mongoose.Schema({
   Quiz_pin: Number,
   Created_at: { type: Date, default: Date.now },
   Timer: {
-    TimerAvailable: Boolean,//1 for no, 2 for quiz timer, 3 for per q timer
+    TimerAvailable: Number,//0 for no, 1 for quiz timer, 2 for per q timer
     TimerDuration: Number,
   },
   Participants: [
