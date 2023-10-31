@@ -58,6 +58,7 @@ export default function QuizCategory() {
                 }
             });
             const quiz = res.data;
+            console.log(quiz);
 
             const questionRes = await axios.get('http://localhost:8080/attempt_quiz/'+id, {
                 headers: {
@@ -67,11 +68,18 @@ export default function QuizCategory() {
             const questions = questionRes.data;
             console.log(questions)
 
-            if(quiz.Timer.TimerAvailable === true){
-                navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
+            if(questions.message){
+                alert(questions.message)
             }else{
-                navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                if(quiz.Timer.TimerAvailable === 1){
+                    navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
+                }else{
+                    navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                }
+
             }
+
+           
            
         } catch (e) {
             alert(e.message)

@@ -7,15 +7,6 @@ export default function Fib() {
    const navigate = useNavigate();
    const location = useLocation();
    const eachChoice = location.state.eachChoice;
-   const [tChoice, setTChoice] = useState(false);
-
-   useEffect(() => {
-    console.log(eachChoice);
-    if(eachChoice==="each"){
-        setTChoice(true);
-    }
-   
-   }, []); 
 
    const questionType = 3;
    const [point, setPoint] = useState(1);
@@ -27,17 +18,15 @@ export default function Fib() {
        e.preventDefault();
        console.log("Save")
 
-    const timer = document.getElementById('timer').value;
+    
 
     let questionDetails;
     
-    if(timer==="0"){
+    if(JSON.parse(localStorage.getItem('myBoolean'))){
         
         questionDetails = {
             "Question_type": questionType,
-            "Time":{
-                "TimerAvailable": false
-            },
+            "Time": Number(document.getElementById('timer').value),
             "Score" : Number(point),
             "Question_text" : question,
             "Correct_answer" : answer,
@@ -48,17 +37,11 @@ export default function Fib() {
         
     questionDetails = {
     "Question_type": questionType,
-    "TimerAvailable": true,
-    "Time": {
-        "TimerAvailable": true,
-        "TimerDuration":timer
-    },
     "Score" : Number(point),
     "Question_text" : question,
     "Correct_answer" : answer,
     "Explanation": explanation
 }
-   
     }
 
    console.log(questionDetails); 
@@ -79,10 +62,9 @@ export default function Fib() {
     
 <form onSubmit={saveQuestion}>
       <div className="row">
-      {tChoice && <div className="col">
+      {JSON.parse(localStorage.getItem('myBoolean')) && <div className="col">
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer"required>
-        <option value="0">None</option>
         <option value="15">15 sec</option>
         <option value="30">30 sec</option>
         <option value="60">1 min</option>

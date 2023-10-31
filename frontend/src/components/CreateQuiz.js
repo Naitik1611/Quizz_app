@@ -57,7 +57,7 @@ export default function CreateQuiz() {
                             Question Type: ${question.Question_type === 1 ? 'Multiple Choice' : question.Question_type === 2 ? 'True/False' : question.Question_type === 3 ? 'Fill-in-the-Blank' : 'Unknown Type'}
                           </div>
                           <div class="col-3">
-                           ${question.Time.TimerDuration !== undefined ? `Time: ${question.Time.TimerDuration} sec` : 'Time: None'}
+                           ${question.Time !== undefined ? `Time: ${question.Time} sec` : 'Time: None'}
 
                           </div>
                           <div class="col-3">
@@ -173,7 +173,8 @@ console.log(quizDetails);
         localStorage.setItem("quizName", quizName);
         localStorage.setItem("quizCategory", quizCategory);
         localStorage.setItem("quizTime", quizTime);
-        localStorage.setItem("quizTimeMin", quizTimeMin); 
+        localStorage.setItem("quizTimeMin", quizTimeMin);
+        localStorage.setItem("eachChoice", eachChoice); 
             
         
         console.log(localStorage.getItem("quizName"));
@@ -181,6 +182,13 @@ console.log(quizDetails);
         console.log(localStorage.getItem("quizTime"));
         console.log(localStorage.getItem("quizTimeMin"));
         console.log(timerChoice)
+        console.log(localStorage.getItem("eachChoice"));
+
+        if(quizTime==="each"){
+            localStorage.setItem('myBoolean', JSON.stringify(true));
+        }else{
+            localStorage.setItem('myBoolean', JSON.stringify(false));
+        }
 
         navigate("/add-question", {state: {eachChoice}})
       }

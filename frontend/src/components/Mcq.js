@@ -6,17 +6,8 @@ export default function Mcq() {
  
    const navigate = useNavigate();
   const location = useLocation();
-  const eachChoice = location.state.eachChoice;
-   const [tChoice, setTChoice] = useState(false);
-
-   useEffect(() => {
-    console.log(eachChoice);
-    if(eachChoice==="each"){
-        setTChoice(true);
-    }
-   
-   }, []); 
-   
+  const eachChoice = localStorage.getItem("eachChoice");
+  
 const [option, setOption] = useState(2);
 const questionType = 1;
 const [point, setPoint] = useState(1);
@@ -44,14 +35,32 @@ const removeOption = () => {
       answerOptionsArray.push(document.getElementById("option"+i).value);
     }
 
-    const questionDetails = {
-        "Question_type": questionType,
-        "Time" : document.getElementById('timer').value,
-        "Score" : point,
-        "Question_text" : question,
-        "Options" : answerOptionsArray,
-        "Correct_answer" : answerOptionsArray[document.querySelector('input[type="radio"]:checked').value],
-        "Explanation": explanation
+    let questionDetails;
+    
+    if(JSON.parse(localStorage.getItem('myBoolean'))){
+        
+        questionDetails = {
+            "Question_type": questionType,
+            "Time": Number(document.getElementById('timer').value),
+            "Score" : Number(point),
+            "Question_text" : question,
+            "Correct_answer" : answerOptionsArray[document.querySelector('input[type="radio"]:checked').value],
+            "Explanation": explanation,
+            "Options": answerOptionsArray
+
+        }   
+    }
+    else{
+      
+    questionDetails = {
+    "Question_type": questionType,
+    "Score" : Number(point),
+    "Question_text" : question,
+    "Correct_answer" : answerOptionsArray[document.querySelector('input[type="radio"]:checked').value],
+    "Explanation": explanation,
+    "Options": answerOptionsArray
+
+}
     }
 
     console.log(questionDetails);
@@ -71,10 +80,10 @@ const removeOption = () => {
 <form onSubmit={saveQuestion}>
       <div className="row">
 
-      {tChoice && <div className="col">
+      {JSON.parse(localStorage.getItem('myBoolean')) && <div className="col">
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer" required>
-        <option value="None" selected>None</option>
+
         <option value="15">15 sec</option>
         <option value="30">30 sec</option>
         <option value="60">1 min</option>

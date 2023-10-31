@@ -68,6 +68,11 @@ export default function Register() {
                   <Form.Control type="password" className="inp inp-pass" placeholder='Minimum 8 characters' onChange={(e) => setPassword(e.target.value)} required />
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="cnf-password">
+              <Form.Label className="inp-label register-label"><img className="icon" src="key.png" alt="Password"/>Confirm Password</Form.Label>
+              <Form.Control type="password" className="inp inp-pass" placeholder='Confirm Password' onChange={(e) => setCnfPassword(e.target.value)} required />
+            </Form.Group>
+
                 <div className="both-button">
                 <Button variant="primary" type="submit" className="btn form-btn">
                     Sign Up
