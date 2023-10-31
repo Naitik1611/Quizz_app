@@ -1,17 +1,7 @@
-const crypto = require('crypto');
 const Quiz = require('./models/quiz');
 const Answer = require('./models/answer');
 const {User} = require('./models/user');
 const Question = require('./models/questions');
-
-function encrypt(text, encryptionKey) {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey), iv);
-  let encrypted = cipher.update(text, 'utf8', 'base64');
-  encrypted += cipher.final('base64');
-  const encryptedData = `${iv.toString('base64')}:${encrypted}`;
-  return encryptedData;
-}
 
 exports.attemptQuiz = async (quizId, userId, answers, res) => {
     try {
@@ -98,7 +88,7 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
         Question_id:question._id,
         Question_text: question.Question_text,
         Question_type:question.Question_type,
-        Correct_answer:encrypt(question.Correct_answer, process.env.SECRET),
+        Correct_answer:question.Correct_answer,
         Explanation: question.Explanation,
         Score: question.Score,
         Time: question.Time,
