@@ -50,6 +50,15 @@
     display: none;
 }
 
+.app-detail {
+    color: #fff;
+    font-weight: 700;
+}
+
+.app-detail-login {
+    font-weight: 700;
+}
+
 
 /* Sidebar */
 
@@ -149,7 +158,7 @@
 
 .login-bg{
    /* background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);*/
-    background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);;
+    background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);
     min-height: 60vh;
 }
 
@@ -378,10 +387,10 @@ Footer {
 }
 
 .quiz-box{
-    width: 60%;
+    width: 100%;
     background-color: white;
     margin: auto;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -425,6 +434,108 @@ Footer {
     margin-bottom: 10px;
 }
 
+/* Start Quiz */
+
+.detail-row {
+    width: 100% !important;
+}
+
+.progress-col, .count-col, .score-col, .time-col {
+    padding: 15px 0 0 10px;
+    font-size: 16px;
+}
+
+.progress {
+    color: #702963;
+}
+
+.progress-col, .progress {
+    width: 100% !important;
+}
+
+.count-col, .score-col, .time-col {
+    width: 50% !important;
+}
+
+.time-col {
+    text-align: center;
+}
+
+.next-btn {
+    margin-top: 10px;
+}
+
+.attempt-card {
+    padding: 20px;
+}
+
+.res-page-btn {
+    text-align: center;
+}
+
+.review-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.res-name {
+    text-align: center;
+}
+ 
+.res-det {
+    text-align: center;
+    background-color: rgb(95, 10, 135);
+    color: #fff;
+    padding: 5px;
+}
+
+.score-disp {
+    text-align: center;
+    width: max-content;
+    margin: auto;
+    padding: 30px;
+    background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);
+    color: #fff;
+}
+
+.true-card {
+    margin: 20px auto;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+}
+
+.contact-container {
+    width: 90%;
+    background-color: white;
+    margin: auto;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.contact-col {
+    width: 100%;
+    margin-top: 20px; 
+}
+
+.contact-body {
+    background-image: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%);
+    color: #fff;
+    border-radius: 0 0 5px 5px;
+}
+
+.contact-title {
+    width: 100%;
+    text-align: center;
+    font-weight: 900;
+}
+
+.contact-name {
+    font-weight: 900;
+    margin-bottom: 10px;
+}
 
 /* MQ - Media Queries */
 
@@ -433,6 +544,14 @@ Footer {
 }
 
 @media screen and (min-width: 480px) {
+    
+    .progress-col, .count-col, .score-col, .time-col {
+        width: 50% !important;
+    }
+
+    .count-col, .time-col {
+        text-align: right;
+    }
     
     .add-btn-container{
         width: 100%;
@@ -472,6 +591,20 @@ Footer {
 }
 
 @media screen and (min-width: 600px) {
+
+    .review-btn {
+        width: max-content;
+        margin-right: 10px;
+    }
+
+    .progress-col, .count-col, .score-col, .time-col {
+        font-size: 18px;
+    }
+
+    .quiz-box{
+        width: 90%;
+        padding: 30px;
+    }
 
     .img-link {
         width: 50%;
@@ -515,6 +648,15 @@ Footer {
 }
 
 @media screen and (min-width: 770px) {
+
+    .contact-col {
+        width: 50%;
+    }
+
+    .quiz-box{
+        width: 80%;
+        padding: 30px;
+    }
 
     .opt-btn-cont {
         width: 20%;
@@ -605,6 +747,11 @@ Footer {
 
 @media screen and (min-width: 1000px) {
 
+    .quiz-box{
+        width: 70%;
+        padding: 30px;
+    }
+
     .question-box {
         width: 50%;
     }
@@ -654,10 +801,18 @@ Footer {
         height: 120px !important;
     }
     
+    .form-btn {
+        width: 350px;
+    }
 
 }
 
 @media screen and (min-width: 1200px) {
+
+    
+    .contact-col {
+        width: 25%; 
+    }
     
     .ques-txt {
         width: 40%;
@@ -697,5 +852,4 @@ Footer {
     .login-img {
         width: 75%;
     }
-
 }

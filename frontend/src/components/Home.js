@@ -163,7 +163,7 @@ export default function Home() {
             </Row>
             <div className='home-items'>
                 <Row xs={1} md={3} className="g-4">
-                    {recommendedArray.slice(5,8).map((quiz) => (
+                    {recommendedArray.slice(0,3).map((quiz) => (
                         <Col key={quiz._id}>
                         <Card className="card-box">
                             <Card.Img variant="top" src="holder.js/100px160" />

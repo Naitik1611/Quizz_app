@@ -61,44 +61,56 @@ export default function Result() {
   
   return (<div className="start-quiz-container">
          <div className="quiz-box">
-          Quiz Result
+          <h2 className="res-name">
+            Quiz Result
+          </h2>
+          <br/>
           <div className="row">
-            <div className="col">
-              <div className="card">
-                  Total Questions
+            <div className="col-4">
+              <div className="card res-det">
+                  Total Questions:
                   <br />
                   {questions.questions.length}
               </div>
             </div>
 
-            <div className="col">
-               <div className="card">
-                Total Correct Answers
+            <div className="col-4">
+               <div className="card res-det">
+                Total Correct Answers:
                 <br />
                 {correctAnswers}
               </div>
             </div>
 
-            <div className="col">
-            <div className="card">
-                Your Points
+            <div className="col-4">
+            <div className="card res-det">
+                Your Points:
                 <br />
                 {score} / {maxScore}
                 </div>
             </div>
           </div>
+          <br />
 
           <div className="row">
-            <div className="card">
-              Your Score
-              <br />
-              {Math.ceil((score/maxScore) * 100)}%
+            <div className="col-12">
+              <div className="card score-disp">
+                  <h4>
+                    Your Score
+                  </h4>
+                <br />
+                  <h2>
+                    {Math.ceil((score/maxScore) * 100)}%
+                  </h2>
+              </div>
             </div>
           </div>
-
-          <button type="button" className="btn btn-primary" onClick={() => navigate('')}> Review Quiz </button>
-          <button type="button" className="btn btn-primary" onClick={() => navigate('')}> View Leaderboard </button>
-          <button type="button" className="btn btn-primary" onClick={() => navigate('/home')}> Go to Dashboard</button>
+          <br />
+          <div className="res-page-btn">
+            <button type="button" className="btn btn-info review-btn" onClick={() => navigate('/home')}> View Leaderboard </button>
+            <button type="button" className="btn btn-secondary review-btn" onClick={() => navigate('/home')}> Review Quiz </button>
+            <button type="button" className="btn btn-warning review-btn" onClick={() => navigate('/home')}> Go to Dashboard</button>
+          </div>
          </div>
   </div>)
 }

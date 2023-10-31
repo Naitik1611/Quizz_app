@@ -43,8 +43,6 @@ export default function StartQuiz() {
   }
   }, [timeLeft]);
 
-
-
   const playQuiz = () => {
     console.log(index);
     
@@ -56,14 +54,9 @@ export default function StartQuiz() {
           item['Answer'] = "NA"; // Add 'Answer' property with value null
         }
       });
-
       navigate("/result", {state : {id, quiz, questions, correctAnswers, score}});
-
-      
     }
   };
-
-  
 
   const checkAnswer = (ans) => {
     console.log(ans);
@@ -98,71 +91,70 @@ export default function StartQuiz() {
     element.style.color = "white";
   }
 
-
   const QuizBox = ( question) => {
    
     return (
       <div className="quiz-box">
-        {quiz.Title}
-        <div className="row">
-        <div className="col">
-          Completed
-        <div className="progress">
-  <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
-</div>
+        <div className="quiz-title-box">
+          <h3>
+            {quiz.Title}
+          </h3>
         </div>
-        <div className="col">
-          Question {index+1} of {questions.questions.length}
+        <div className="row detail-row">
+          <div className="col-3 progress-col">
+            Completed
+            <div className="progress">
+              <div className="progress-bar success" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
+            </div>
+          </div>
+          <div className="col-3 count-col">
+            Question: {index+1} of {questions.questions.length}
+          </div>
+          <div className="col-3 score-col">
+            Points: {question.Score}
+          </div>
+          <div className="col-3 time-col">
+            <div id="countdown">
+            Timer: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
+            </div>
+          </div>
         </div>
-        <div className="col">
-          Points: {question.Score}
-        </div>
-        <div className="col">
-      
-        <div id="countdown">
-        Timer: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
-
-        </div>
-        </div>
-
-        </div>
-
   
       <hr />
 
-      <div className="card">
-      {question.Question_text}
-      
-  
+      <div className="card attempt-card">
+        <div className="form-label card-title">
+          <h4>
+            {question.Question_text}  
+          </h4>
+        </div>
+        <div className="card-body">
+          { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>
+            <div className="card true-card" id={question.Options[i]} onClick={() => checkAnswer(question.Options[i])}>
+            {question.Options[i]}
+            </div>
+          </span>)}
+
+          { question.Question_type=== 2 && <>
+            <div className="row">
+              <div className="col-6 card true-card" id="true" onClick={() => checkAnswer("true")}>
+              True
+              </div> 
+              <div className="col-6 card true-card" id="false" onClick={() => checkAnswer("false")}>
+              False
+              </div> 
+            </div>
+          </>
+          }
+
+          { question.Question_type === 3 && <>
+            <input type="text" id={fib} value={fib} className="form-control input-box" placeholder="Enter answer here..." style={{marginTop:"10px"}} onChange={(e) => setFib(e.target.value)} required></input>
+            <button type="button" className="btn btn-primary next-btn" onClick={() => checkAnswer(fib)}> Next</button>
+            </>
+          }
+        </div>
       </div>
-
-      { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>
-
-      <div className="card" id={question.Options[i]} onClick={() => checkAnswer(question.Options[i])}>
-      {question.Options[i]}
-      </div>
-            </span>)}
-
-      { question.Question_type=== 2 && <>
-      <div className="card" id="true" onClick={() => checkAnswer("true")}>
-      True
-      </div> 
-      <div className="card" id="false" onClick={() => checkAnswer("false")}>
-      False
-      </div> 
-      </>
-      }
-
-{ question.Question_type === 3 && <>
-      <div className="card" id="true">
-      <input type="text" id={fib} value={fib} className="input-box" placeholder="Enter answer here..." style={{marginTop:"10px"}} onChange={(e) => setFib(e.target.value)} required></input>
-      </div> 
-      <button type="button" className="btn btn-primary" onClick={() => checkAnswer(fib)}> Next</button>
-      </>
-      }
-
-      </div>
-      
+    </div>
       
     );
   };

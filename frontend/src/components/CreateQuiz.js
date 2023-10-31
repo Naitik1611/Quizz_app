@@ -204,7 +204,7 @@ console.log(quizDetails);
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizImage'>
                             <Form.Label className='quiz-label'>Image</Form.Label>
-                            <Form.Control type='file' className='inp-file'/>
+                            <Form.Control type='file' className='inp-file' accept='image/*'/>
                         </Form.Group>
                     </div>
                     <div className='row'>
@@ -258,7 +258,7 @@ console.log(quizDetails);
                             <Button type="submit" variant="success btn-quiz-create" className="btn">Save</Button>
                         </div>
                     </div>
-                    
+
                     <div className='add-btn-container'>
                         <Button type="button" className="btn btn-primary btn-add-ques" onClick={addQuestion}>Add Question</Button>
                     </div>

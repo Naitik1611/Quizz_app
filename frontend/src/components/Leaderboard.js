@@ -10,6 +10,7 @@ export default function Leaderboard() {
     const navigate = useNavigate();
 
     return (
+        
         <div className='quiz-leaderboard'>
             <div className='details-quiz'>
                 <Row>
