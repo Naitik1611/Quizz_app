@@ -15,13 +15,15 @@ export default function QuizCategory() {
     const navigate = useNavigate();
     const [filterModal, setFilterModal] = useState(false);
     const [startModal, setStartModal] = useState(false);
+    const [modalData, setModalData] = useState('');
+
 
     const [filterCategory, setfilterCategory] = useState('');
 
     const [quizArray, setquizArray] = useState([]);
 
     var num = 1
-    useEffect((async) => {
+    useEffect(() => {
         if (num===1) {
            getQuiz();
             }
@@ -37,6 +39,7 @@ export default function QuizCategory() {
                     }
                 });
                 setquizArray(res.data);
+                console.log(res.data)
             } else {
                 const res = await axios.get('http://localhost:8080/filter/'+filterCategory, {
                     headers: {
@@ -44,6 +47,7 @@ export default function QuizCategory() {
                     }
                 });
                 setquizArray(res.data);
+                console.log(res.data)
             }
         } catch (e) {
             alert(e.message)
@@ -72,14 +76,23 @@ export default function QuizCategory() {
                 alert(questions.message)
             }else{
                 if(quiz.Timer.TimerAvailable === 1){
+                    localStorage.setItem("timeLimit", quiz.Timer.TimerDuration )
+                    console.log(localStorage.getItem("timeLimit"));
                     navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
-                }else{
+                }else if(quiz.Timer.TimerAvailable === 2){
+                    localStorage.setItem("isTimer", "yes" )
+                    console.log(localStorage.getItem("timeLimit"));
                     navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                }else if(quiz.Timer.TimerAvailable === 0){
+                    localStorage.setItem("isTimer", "no" )
+                    console.log(localStorage.getItem("timeLimit"));
+                    navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                }else{
+                    
                 }
 
             }
-
-           
+   
            
         } catch (e) {
             alert(e.message)
@@ -140,54 +153,56 @@ export default function QuizCategory() {
             
             <div>
                 <Row xs={1} md={2} className="g-4">
-                    {quizArray.map((data) => (
-                        <Col key={data._id}>
-                        <Card className='quiz-card'>
-                            <Card.Body className='card-body-quiz'>
-                                <Row>
-                                    <Col md={4} className='quiz-img'>
-                                        <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
-                                    </Col>
-                                    <Col md={{span: 7, offset:1}} className='quiz-card-details'>
-                                        <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>
-                                        <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
-                                        <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
-                                        <Card.Text className='quiz-details'>Duration: No limit</Card.Text>
-                                        <Card.Text className='quiz-details'>Date: {data.Created_at}</Card.Text>
-                                        <Button variant="info" className='btn btn-leaderboard' >
-                                            Leaderboard
-                                        </Button>{" "}
-                                        <Button variant="success" className='btn' onClick={() => setStartModal(true)}>
-                                            Start Quiz
-                                        </Button>
+                {quizArray.map((data) => (
+                <Col key={data._id}>
+                <Card className='quiz-card'>
+                    <Card.Body className='card-body-quiz'>
+                        <Row>
+                            <Col md={4} className='quiz-img'>
+                                <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
+                            </Col>
+                            <Col md={{span: 7, offset:1}} className='quiz-card-details'>
+                                <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>
+                                <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
+                                <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
+                                <Card.Text className='quiz-details'>Duration: No limit</Card.Text>
+                                <Card.Text className='quiz-details'>Date: {data.Created_at}</Card.Text>
+                                <Button variant="info" className='btn btn-leaderboard' >
+                                    Leaderboard
+                                </Button>{" "}
+                                <Button variant="success" className='btn' onClick={() => {setModalData(data._id);setStartModal(true)}}>
+                                    Start Quiz
+                                </Button>
 
-                                        <Modal show={startModal} onHide={() => setStartModal(false)}>
-                                            <Modal.Header closeButton>
-                                            <Modal.Title>Start Quiz</Modal.Title>
-                                            </Modal.Header>
-                                            <Form>
-                                                <Modal.Body>
-                                                        <Form.Group className="mb-3">
-                                                            Proceed to Start Quiz?
-                                                        </Form.Group>
-                                                </Modal.Body>
-                                                <Modal.Footer>
-                                                    <Button variant="danger" className='btn' onClick={() => setStartModal(false)}>
-                                                        Cancel
-                                                    </Button>
-                                                    <Button variant="success" className='btn' type='button' onClick={() => startQuiz(data._id)}>
-                                                        Start Quiz
-                                                    </Button>
-                                                </Modal.Footer>
-                                            </Form>
-                                        </Modal>
-                                    </Col>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                        </Col>
-                    ))}
-                </Row>
+                                <Modal show={startModal}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title>Start Quiz</Modal.Title>
+                                    </Modal.Header>
+                                    <Form>
+                                        <Modal.Body>
+                                                <Form.Group className="mb-3">
+                                                    Proceed to Start Quiz?
+                                                </Form.Group>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="danger" className='btn' onClick={() => setStartModal(false)}>
+                                                Cancel
+                                            </Button>
+                                            <Button variant="success" className='btn' type='button' onClick={() => {setStartModal(false);startQuiz(modalData)}}>
+                                                Start Quiz
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Form>
+                                </Modal>
+
+                               
+                              
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+                </Col>
+                        ))}        </Row>
             </div>
             <Footer />
         </div>

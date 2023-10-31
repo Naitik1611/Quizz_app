@@ -79,10 +79,12 @@ export default function Home() {
             const questions = questionRes.data;
             console.log(questions)
 
+            console.log(quiz.Timer.TimerAvailable)
+
             if(quiz.Timer.TimerAvailable === true){
-                navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
+             //   navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
             }else{
-                navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+              //  navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
             }
            
         } catch (e) {

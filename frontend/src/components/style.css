@@ -292,7 +292,7 @@ margin:0;
     background-color: whitesmoke;
     padding:20px;
 }
-.question-container, .start-quiz-container{
+.question-container{
 
     padding: 20px;
     text-align: left;
@@ -370,6 +370,126 @@ margin:0;
 .quiz-category {
     margin-bottom: 10px;
 }
+
+.start-quiz-container{
+
+    padding: 20px;
+    text-align: left;
+    background-color:#f8f7f7;
+    min-height: 92vh;
+}
+
+.start-quiz-box{
+    width: 60%;
+    background-color: white;
+    margin: auto;
+    margin-top: 30px;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color:#702963;
+}
+
+.quiz-header{
+    text-align: center;
+    color: grey;
+    
+}
+
+.countdown-col{
+    
+    
+}
+
+.countdown{
+    color: white;
+    background-color:#702963;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 50%;
+    margin-top: -2px;
+    font-size: large;
+width:80%;
+    
+}
+
+.overall-countdown{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: x-large;
+    width:20%;
+    background-color: #702963;
+    color:white; 
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: -20px;
+    border-radius: 3px;
+}
+
+.question-display{
+    font-size: larger;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+.option-card{
+    margin-top: 15px;
+    height:50px;
+    padding:10px;
+    padding-left: 20px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.option-card:hover{
+    background-color: whitesmoke;
+    
+}
+
+.score-box{
+text-align: center;
+padding:30px;
+line-height: 3;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+margin-top: 20px;
+}
+
+.score-card{
+    text-align: center;
+    margin-top:40px;
+    height:100px;
+    padding:30px;
+    padding-top: 20px;
+    
+line-height: 2;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+font-size: x-large;
+min-height: 140px;
+
+}
+
+.figure{
+    font-size: larger;
+}
+
+
+.result-button{
+    margin-top: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media screen and (min-width: 400px) {

@@ -13,7 +13,7 @@ export default function CreateQuiz() {
 
     const [quizName, setQuizName] = useState('');
     const [quizCategory, setQuizCategory] = useState('');
-    const [quizTime, setQuizTime] = useState('');
+    const [quizTime, setQuizTime] = useState('no');
     const [quizTimeMin, setQuizTimeMin] = useState('');
 
     const [timerChoice, setTimerChoice] = useState(false);
@@ -21,7 +21,7 @@ export default function CreateQuiz() {
 
     var num = 1
     useEffect(() => {
-
+        console.log(quizTime);
         setQuizName(localStorage.getItem("quizName"));
         setQuizCategory(localStorage.getItem("quizCategory"));
         setQuizTime(localStorage.getItem("quizTime"));
@@ -119,7 +119,8 @@ export default function CreateQuiz() {
 
                 let quizDetails;
 
-                if(quizTime==="yes") {
+                if(localStorage.getItem("quizTime")==="yes") {
+                    console.log("Yes")
                     quizDetails = {
                         "Title": quizName,
                         "Category": quizCategory,
@@ -129,7 +130,8 @@ export default function CreateQuiz() {
                         "TimerDuration":Number(quizTimeMin)
                         }
                     }
-                } else if(quizTime==="no") {
+                } else if(localStorage.getItem("quizTime")==="no") {
+                    console.log("No")
                     quizDetails = {
                         "Title": quizName,
                         "Category": quizCategory,
@@ -139,6 +141,7 @@ export default function CreateQuiz() {
                         }
                     }
                 }else{
+                    console.log("Set each")
                     quizDetails = {
                         "Title": quizName,
                         "Category": quizCategory,
@@ -172,7 +175,7 @@ console.log(quizDetails);
 
         localStorage.setItem("quizName", quizName);
         localStorage.setItem("quizCategory", quizCategory);
-        localStorage.setItem("quizTime", quizTime);
+        localStorage.setItem("quizTime", document.getElementById("quizTime").value);
         localStorage.setItem("quizTimeMin", quizTimeMin);
         localStorage.setItem("eachChoice", eachChoice); 
             

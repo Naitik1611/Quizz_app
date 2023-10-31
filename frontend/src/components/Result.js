@@ -38,7 +38,7 @@ export default function Result() {
   
       console.log(answers);
       console.log(quizAnswers);
-  
+ /*
       try {    
           const res = await axios.post('http://localhost:8080/attempt_quiz/'+id, quizAnswers, {
               headers: {
@@ -51,7 +51,9 @@ export default function Result() {
       } catch (e) {
           alert(e.message)
       }
+    */   
   }
+ 
   
 
   const maxScore = questions.questions.reduce((accumulator, currentQuestion) => {
@@ -60,45 +62,48 @@ export default function Result() {
  
   
   return (<div className="start-quiz-container">
-         <div className="quiz-box">
-          Quiz Result
+         <div className="start-quiz-box">
+        <h4>  Quiz Result</h4>
           <div className="row">
             <div className="col">
-              <div className="card">
+              <div className="card score-box">
                   Total Questions
                   <br />
-                  {questions.questions.length}
+             <span className="figure">   {questions.questions.length}</span>  
               </div>
             </div>
 
             <div className="col">
-               <div className="card">
+               <div className="card score-box">
                 Total Correct Answers
                 <br />
-                {correctAnswers}
+                <span className="figure">       {correctAnswers}</span>  
               </div>
             </div>
 
             <div className="col">
-            <div className="card">
+            <div className="card score-box">
                 Your Points
                 <br />
-                {score} / {maxScore}
+                <span className="figure">    {score} / {maxScore}</span>  
                 </div>
             </div>
           </div>
 
-          <div className="row">
-            <div className="card">
+          
+            <div className="card score-card">
               Your Score
               <br />
               {Math.ceil((score/maxScore) * 100)}%
+              
             </div>
-          </div>
+          
+          <div className="d-flex justify-content-center result-button">
 
           <button type="button" className="btn btn-primary" onClick={() => navigate('')}> Review Quiz </button>
           <button type="button" className="btn btn-primary" onClick={() => navigate('')}> View Leaderboard </button>
           <button type="button" className="btn btn-primary" onClick={() => navigate('/home')}> Go to Dashboard</button>
+          </div>
          </div>
   </div>)
 }

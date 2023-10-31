@@ -15,19 +15,25 @@ export default function StartQuiz() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [fib, setFib] = useState('');
 
-  const [timeLeft, setTimeLeft] = useState("None");
+  const [timeLeft, setTimeLeft] = useState(questions.questions[0].Time !== undefined ? questions.questions[0].Time : 0);
 
   const changeQuestion = () => {
     if (index < questions.questions.length) {
       console.log(questions)
       setIndex(index + 1);
-      setTimeLeft(15);
+
+      if (questions && questions.questions && questions.questions[index + 1] && questions.questions[index + 1].Time !== undefined) {
+        setTimeLeft(questions.questions[index + 1].Time);
+      } else {
+        setTimeLeft(0);
+      }
+      console.log(timeLeft);
       playQuiz();
     }
   };
 
   useEffect(() => {
-    if (typeof timeLeft === 'number') {
+    if (localStorage.getItem("isTimer") === "yes") {
     const countdown = setInterval(() => {
       if (timeLeft > 0) {
         setTimeLeft(prevTime => prevTime - 1);
@@ -38,8 +44,6 @@ export default function StartQuiz() {
     }, 1000);
 
     return () => clearInterval(countdown);
-  }else{
-    document.getElementById("countdown").innerHTML= ""
   }
   }, [timeLeft]);
 
@@ -76,7 +80,7 @@ export default function StartQuiz() {
       setCorrectAnswers(correctAnswers+1);
     }
     else{
-      changeColor(element, "red");
+      changeColor(element, "rgb(227, 7, 7)");
     }
     
     questions.questions[index].Answer = ans;
@@ -102,62 +106,74 @@ export default function StartQuiz() {
   const QuizBox = ( question) => {
    
     return (
-      <div className="quiz-box">
-        {quiz.Title}
-        <div className="row">
-        <div className="col">
-          Completed
-        <div className="progress">
-  <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
+      <div className="start-quiz-box">
+      
+
+      <div className="row">
+        <div className="col-10">
+        <h4>  {quiz.Title}</h4>
+        </div>
+        <div className="col-2">
+        <button type="button" className="btn btn-danger" onClick={() => setIndex(questions.questions.length+1)}> End Test</button>
+        </div>
+      </div>
+      <hr/>
+        <div className="row quiz-header">
+        <div className="col-4" style={{ display: "flex", alignItems: "center" }}>
+        Completed 
+        <div className="progress" style={{ width: "100%", marginLeft: "10px" }}>
+        <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
 </div>
         </div>
-        <div className="col">
+        <div className="col-3">
           Question {index+1} of {questions.questions.length}
         </div>
-        <div className="col">
+        <div className="col-3">
           Points: {question.Score}
         </div>
-        <div className="col">
+        <div className="col-2 countdown-col">
       
-        <div id="countdown">
-        Timer: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
+       {localStorage.getItem("isTimer") === "yes" && <div id="countdown" className="countdown">
+       {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
 
-        </div>
-        </div>
-
+        </div>}
         </div>
 
-  
-      <hr />
+        </div>
+        <hr/>
 
-      <div className="card">
-      {question.Question_text}
-      
-  
-      </div>
+
+  <div className="question-display">
+  Q. &nbsp;{question.Question_text}
+  </div>
+     
+    
 
       { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>
 
-      <div className="card" id={question.Options[i]} onClick={() => checkAnswer(question.Options[i])}>
+      <div className="card option-card" id={question.Options[i]} onClick={() => checkAnswer(question.Options[i])}>
       {question.Options[i]}
       </div>
             </span>)}
 
       { question.Question_type=== 2 && <>
-      <div className="card" id="true" onClick={() => checkAnswer("true")}>
+      <div className="card option-card" id="true" onClick={() => checkAnswer("true")}>
       True
       </div> 
-      <div className="card" id="false" onClick={() => checkAnswer("false")}>
+      <div className="card option-card" id="false" onClick={() => checkAnswer("false")}>
       False
       </div> 
       </>
       }
 
 { question.Question_type === 3 && <>
-      <div className="card" id="true">
-      <input type="text" id={fib} value={fib} className="input-box" placeholder="Enter answer here..." style={{marginTop:"10px"}} onChange={(e) => setFib(e.target.value)} required></input>
-      </div> 
-      <button type="button" className="btn btn-primary" onClick={() => checkAnswer(fib)}> Next</button>
+     
+      <input type="text" id={fib} value={fib} className="input-box option-card" placeholder="Enter answer here..." style={{marginTop:"10px"}} onChange={(e) => setFib(e.target.value)} required></input>
+      
+      <div class="d-flex justify-content-center" style={{marginTop:"40px"}}>
+      <button type="button" className="btn btn-primary" style={{width:"150px",padding:"10px"}} onClick={() => checkAnswer(fib)}> Next</button>
+</div>
+      
       </>
       }
 
