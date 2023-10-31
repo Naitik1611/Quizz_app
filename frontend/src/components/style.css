@@ -240,27 +240,42 @@ Footer {
 
 .create-quiz-row{
 background-color: whitesmoke;
+margin:0;
 }
 
-.quiz-detail{
-    border: 1px solid #000; 
+.quiz-detail, .question-detail{
     padding: 20px;
 }
 
-.question-detail{
-    border: 1px solid #000; 
-}
 
 .card-quiz-details{
     padding:20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     text-align: left;
+    min-height: 86vh;
+
 }
 
 .quiz-inp{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.question-list{
+    margin-top: 20px;
+    height: 70vh; 
+    overflow: auto; 
+}
+
+.question-list li{
+    list-style: none;
+}
+
+.card-question-list{
+    margin-top: 25px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: whitesmoke;
+    padding:20px;
+}
 .question-container, .start-quiz-container{
 
     padding: 20px;
@@ -292,7 +307,8 @@ background-color: whitesmoke;
     }
     
     .button-width{
-        min-width: 100px;
+      
+        
     }
     
     .quiz-box{
@@ -307,8 +323,9 @@ background-color: whitesmoke;
     .btn-primary {
         background: #702963;
         border-radius: 5px;
-        width: 150px;
+        min-width: 80px;
         border: none;
+        margin-left: 5px;
       }
       
 

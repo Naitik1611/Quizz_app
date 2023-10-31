@@ -6,8 +6,14 @@ export default function Fib() {
  
    const navigate = useNavigate();
    const location = useLocation();
+   const eachChoice = location.state.eachChoice;
+   const [tChoice, setTChoice] = useState(false);
 
    useEffect(() => {
+    console.log(eachChoice);
+    if(eachChoice==="each"){
+        setTChoice(true);
+    }
    
    }, []); 
 
@@ -73,8 +79,7 @@ export default function Fib() {
     
 <form onSubmit={saveQuestion}>
       <div className="row">
-
-<div className="col">
+      {tChoice && <div className="col">
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer"required>
         <option value="0">None</option>
@@ -84,11 +89,13 @@ export default function Fib() {
         <option value="120">2 min</option>
     </select>
 </div>
+}
 <div className="col">
 
     <label htmlFor="points" className="">Points</label><br />
-    <input type="number" id="points" className="input-box" placeholder='' onChange={(e) => setPoint(e.target.value)} required></input>
+    <input type="number" id="points" min="1" className="input-box" placeholder='' onChange={(e) => setPoint(e.target.value)} required></input>
 </div>
+
 
 </div>
 <br/>

@@ -1,11 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Mcq() {
  
    const navigate = useNavigate();
+  const location = useLocation();
+  const eachChoice = location.state.eachChoice;
+   const [tChoice, setTChoice] = useState(false);
 
+   useEffect(() => {
+    console.log(eachChoice);
+    if(eachChoice==="each"){
+        setTChoice(true);
+    }
+   
+   }, []); 
    
 const [option, setOption] = useState(2);
 const questionType = 1;
@@ -61,7 +71,7 @@ const removeOption = () => {
 <form onSubmit={saveQuestion}>
       <div className="row">
 
-<div className="col">
+      {tChoice && <div className="col">
     <label htmlFor="timer" className="">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer" required>
         <option value="None" selected>None</option>
@@ -70,11 +80,11 @@ const removeOption = () => {
         <option value="60">1 min</option>
         <option value="120">2 min</option>
     </select>
-</div>
+</div>}
 <div className="col">
 
     <label htmlFor="point" className="">Points</label><br />
-    <input type="number" id="point" className="input-box" placeholder='' onChange={(e) => setPoint(e.target.value)} required></input>
+    <input type="number" id="point" min="1" className="input-box" placeholder='' onChange={(e) => setPoint(e.target.value)} required></input>
 </div>
 
 </div>

@@ -14,6 +14,7 @@ export default function Sidebar() {
     localStorage.setItem("quizName", "");
     localStorage.setItem("quizCategory", "");
     localStorage.setItem("quizTime", "");
+    localStorage.setItem("quizTimeMin", "");
 
     const createQuiz = () => {
          navigate("/create-quiz");

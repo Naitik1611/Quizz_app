@@ -13,8 +13,11 @@ export default function CreateQuiz() {
 
     const [quizName, setQuizName] = useState('');
     const [quizCategory, setQuizCategory] = useState('');
-    const [quizTime, setQuizTime] = useState(false);
+    const [quizTime, setQuizTime] = useState('');
     const [quizTimeMin, setQuizTimeMin] = useState('');
+
+    const [timerChoice, setTimerChoice] = useState(false);
+    const [eachChoice, setEachChoice] = useState('no');
 
     var num = 1
     useEffect(() => {
@@ -38,38 +41,57 @@ export default function CreateQuiz() {
             if(questionCount>0){
                 let questionArray = JSON.parse(localStorage.getItem("questionArray"));
                
-                questionArray.forEach((question => {    
+                questionArray.forEach(((question, index) => {    
                         const ul = document.getElementById('list');
                         const li = document.createElement('li');
                         li.innerHTML = `
-                        <div class="card">
+                        <div class="card card-question-list">
                         <div class="row">
-                          <div class="col-1">
-                            Q1
-                          </div>
-                          <div class="col-11">
-                            ${question.Question_text}
+                          <div class="col" style="font-size:large; font-weight: bold; color:#702963">
+                            Q ${index+1}. &nbsp; ${question.Question_text}
                           </div>
                         </div>   
+                        <br>
                         <div class="row">
-                          <div class="col-6">
-                            Question Type: ${question.Question_type}
+                          <div class="col-4">
+                            Question Type: ${question.Question_type === 1 ? 'Multiple Choice' : question.Question_type === 2 ? 'True/False' : question.Question_type === 3 ? 'Fill-in-the-Blank' : 'Unknown Type'}
                           </div>
                           <div class="col-3">
-                            Time: ${question.Time}
+                           ${question.Time.TimerDuration !== undefined ? `Time: ${question.Time.TimerDuration} sec` : 'Time: None'}
+
                           </div>
                           <div class="col-3">
                             Point: ${question.Score}
+                          </div>
+                          <div class="col-2">
+                          <button type="button" class="btn btn-danger">Delete</button>
                           </div>
                         </div> 
                       </div>
                             `;
                         ul.appendChild(li);
                 }));
+            }else{
+                const ul = document.getElementById('list');
+                const li = document.createElement('li');
+                li.innerHTML = `<div class="card card-question-list">Add questions to this Quiz!</div>`
+                ul.appendChild(li);
             }
             num++;
         }
     }, []);
+
+    const setQuizTimeFunc = (e) =>{
+        setQuizTime(e);
+        if(e ==="no"){
+            setTimerChoice(false);
+        }else if(e ==="each"){
+            setTimerChoice(false);
+            setEachChoice("each")
+        }else{
+            setTimerChoice(true);
+        }
+    }
 
 /*
     localStorage.removeItem("quizName");
@@ -97,23 +119,32 @@ export default function CreateQuiz() {
 
                 let quizDetails;
 
-                if(quizTime=="true") {
+                if(quizTime==="yes") {
                     quizDetails = {
                         "Title": quizName,
                         "Category": quizCategory,
                         "Questions": questionArray,
                         "Timer": {
-                        "TimerAvailable": true,
-                        "TimerDuration":quizTimeMin
+                        "TimerAvailable": 1,
+                        "TimerDuration":Number(quizTimeMin)
                         }
                     }
-                } else {
+                } else if(quizTime==="no") {
                     quizDetails = {
                         "Title": quizName,
                         "Category": quizCategory,
                         "Questions": questionArray,
                         "Timer": {
-                        "TimerAvailable": false
+                        "TimerAvailable": 0
+                        }
+                    }
+                }else{
+                    quizDetails = {
+                        "Title": quizName,
+                        "Category": quizCategory,
+                        "Questions": questionArray,
+                        "Timer": {
+                        "TimerAvailable": 2
                         }
                     }
                 }
@@ -149,8 +180,9 @@ console.log(quizDetails);
         console.log(localStorage.getItem("quizCategory"));
         console.log(localStorage.getItem("quizTime"));
         console.log(localStorage.getItem("quizTimeMin"));
+        console.log(timerChoice)
 
-        navigate("/add-question")
+        navigate("/add-question", {state: {eachChoice}})
       }
 
     return (
@@ -159,7 +191,8 @@ console.log(quizDetails);
             <div className="row create-quiz-row">
                 <div className="col-3 quiz-detail">
                 <div className="card card-quiz-details">
-                    Quiz Details
+                   <h4>Quiz Details</h4> 
+                   <br/>
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizImage'>
                             <Form.Label className='quiz-label'>Image</Form.Label>
@@ -189,22 +222,26 @@ console.log(quizDetails);
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTime'>
                             <Form.Label className='quiz-label'>Set overall Test Timer</Form.Label>
-                            <Form.Select type="boolean" id="quizTime" className='quiz-inp' value={quizTime} onChange={(e) => setQuizTime(e.target.value)} required>
-                                <option value="false">No</option>
-                                <option value="true">Yes</option>
+                            <Form.Select type="boolean" id="quizTime" className='quiz-inp' value={quizTime} onChange={(e) => setQuizTimeFunc(e.target.value)} required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                                <option value="each">Set timer for each question</option>
                             </Form.Select>
                         </Form.Group>
                     </div>
-                    <div className='row'>
+                 {timerChoice && <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTimeMin'>
                             <Form.Label className='quiz-label'>Set Test Time in Minutes</Form.Label>
-                            <Form.Control type='number' className='quiz-inp' min="1" value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
+                            <Form.Control type='number' id="quizTimeMin" className='quiz-inp' value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
                         </Form.Group>
-                    </div>   
+                    </div>  
+                    
+                }
                     </div>                 
                 </div>
 
                 <div className='col-9 question-detail'>
+                    <div className="card card-quiz-details">
                     <div className='row'>
                         <div className="col-2">
                             <Button variant="danger" className="btn" onClick={() => navigate("/home")}>Cancel</Button>
@@ -221,25 +258,15 @@ console.log(quizDetails);
                         </div>
                     </div>
 
-                    <div className='row'>
-                            <div className='row'>
-                                <div className='col-10'>
-                                   
-                                </div>
-                                <div className='col-1'>
-                                    <Button variant="primary" className='btn btn-edit'>Edit</Button>
-                                </div>
-                                <div className='col-1'>
-                                    <Button variant="danger" className='btn'>Delete</Button>
-                                </div>
-                            </div>
+            
                          
-                                <ul id="list">
+                                <ul id="list" className="question-list">
                                 </ul>
                             
                     </div>
+                    </div>
                 </div>
-            </div>  
+             
         </Form>
     </div>
     )
