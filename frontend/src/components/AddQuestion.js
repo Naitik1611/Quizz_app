@@ -62,10 +62,10 @@ return (
     <div className="question-box">
 
         <div className="row">
-            <div className="col-4">
+            <div className="col-4 ques-page">
             <h4>Add Question</h4>
             </div>
-            <div className="col-8">
+            <div className="col-8 ques-type">
             <label htmlFor="questionType" className="">Select Question Type</label>
                 <br />
                 <select className="form-select input-box" id="questionType" aria-label="Default select example" value={questionType} onChange={(e) => changeQuestionFormat(e.target.value)}>

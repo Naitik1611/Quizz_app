@@ -44,7 +44,7 @@ export default function EditProfile() {
 
             <Form.Group className="mb-3" controlId="profile-pic">
               <Form.Label className="inp-label">Profile Photo</Form.Label>
-              <Form.Control type="file" className="inp inp-user" placeholder='Enter First Name' onChange={(e) => setProfilePic(e.target.value)} accept='.png, .jpg' />
+              <Form.Control type="file" className="inp inp-user" placeholder='Choose Photo' onChange={(e) => setProfilePic(e.target.value)} accept='.png, .jpg' />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="fname">

@@ -153,11 +153,11 @@ export default function QuizCategory() {
                                         <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
                                         <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
                                         <Card.Text className='quiz-details'>Duration: No limit</Card.Text>
-                                        <Card.Text className='quiz-details'>Date: {data.Created_at}</Card.Text>
-                                        <Button variant="info" className='btn btn-leaderboard' >
+                                        <Card.Text className='quiz-details'>Date: {data.Created_at.slice(0,10)}</Card.Text>
+                                        <Button variant="info" className='btn btn-leaderboard card-btn' >
                                             Leaderboard
                                         </Button>{" "}
-                                        <Button variant="success" className='btn' onClick={() => setStartModal(true)}>
+                                        <Button variant="success" className='btn card-btn' onClick={() => setStartModal(true)}>
                                             Start Quiz
                                         </Button>
 

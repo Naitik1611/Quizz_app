@@ -107,13 +107,13 @@ export default function MyQuiz() {
                     {quizArray.map((data) => (
                         <Col key={data._id}>
                         <Card className='quiz-card'>
-                            <Card.Header className='card-header'>{data.Title}</Card.Header>
-                            <Card.Body className='card-body'>
+                            <Card.Body className='card-body-quiz'>
                                 <Row>
                                     <Col md={4}>
                                         <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
                                     </Col>
                                     <Col md={{span: 7, offset:1}}>
+                                        <Card.Title className='card-title'>{data.Title}</Card.Title>
                                         <Card.Text className='quiz-details'>Category: {data.Category}</Card.Text>
                                         <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
                                         <Card.Text className='quiz-details'>Duration: {}</Card.Text>

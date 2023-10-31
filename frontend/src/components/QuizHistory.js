@@ -18,6 +18,7 @@ export default function QuizHistory() {
     const [filterCategory, setFilterCategory] = useState('');
 
     const [quizArray, setquizArray] = useState([]);
+    const [scores, setscores] = useState([]);
 
     var num = 1
     useEffect((async) => {
@@ -43,6 +44,7 @@ export default function QuizHistory() {
                     }
                 });
                 setquizArray(res.data.quizzes);
+                setscores(res.data.scores)
             } else {
                 const res = await axios.get('http://localhost:8080/user/history', {
                     headers: {
@@ -107,17 +109,16 @@ export default function QuizHistory() {
                     {quizArray.map((data) => (
                         <Col key={data._id}>
                         <Card className='quiz-card'>
-                            <Card.Header className='card-header'>{data.Title}</Card.Header>
-                            <Card.Body className='card-body'>
+                            <Card.Body className='card-body-quiz'>
                                 <Row>
                                     <Col md={4}>
                                         <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
                                     </Col>
                                     <Col md={{span: 7, offset:1}}>
+                                        <Card.Title className='card-title'>{data.Title}</Card.Title>
                                         <Card.Text className='quiz-details'>Category: {data.Category}</Card.Text>
                                         <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
-                                        <Card.Text className='quiz-details'>Score: xx/yy</Card.Text>
-                                        <Card.Text className='quiz-details'>Date: </Card.Text>
+                                        <Card.Text className='quiz-details'>Score: {data.score}/yy</Card.Text>
                                         <Button variant="info" className='btn btn-leaderboard' onClick={() => navigate("/leaderboard")}>
                                             Leaderboard
                                         </Button>
