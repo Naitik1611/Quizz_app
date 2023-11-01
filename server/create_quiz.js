@@ -131,6 +131,23 @@ exports.createQuiz = async (req, res) => {
   
   exports.deleteQuizById = async (req, res) => {
     try {
+      const quiz = await Quiz.findById(req.params.id);
+      const user=await User.findById(quiz.Creator_id);
+      //console.log(user);
+      user.quizzes_id.pull(quiz._id);
+      await user.save();
+      await Question.deleteMany({ _id: { $in: quiz.Questions } });
+      const participants = quiz.Participants;
+      //console.log(participants);
+      if (participants.length>0){
+      for (const participant of participants) {
+        const user = await User.findById(participant.user_id);
+        if (user) {
+          user.scores = user.scores.filter((score) => !score.Quiz_id.equals(quiz._id));
+          await user.save();
+        }
+      }
+    }
       await Quiz.findByIdAndDelete(req.params.id);
       res.json({ message: 'Quiz deleted successfully' });
     } catch (error) {
