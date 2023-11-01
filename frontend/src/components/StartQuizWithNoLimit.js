@@ -47,8 +47,6 @@ export default function StartQuiz() {
   }
   }, [timeLeft]);
 
-
-
   const playQuiz = () => {
     console.log(index);
     
@@ -60,14 +58,9 @@ export default function StartQuiz() {
           item['Answer'] = "NA"; // Add 'Answer' property with value null
         }
       });
-
       navigate("/result", {state : {id, quiz, questions, correctAnswers, score}});
-
-      
     }
   };
-
-  
 
   const checkAnswer = (ans) => {
     console.log(ans);
@@ -101,7 +94,6 @@ export default function StartQuiz() {
     element.style.backgroundColor = color;
     element.style.color = "white";
   }
-
 
   const QuizBox = ( question) => {
    

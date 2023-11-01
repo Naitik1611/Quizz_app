@@ -53,18 +53,18 @@ export default function CreateQuiz() {
                         </div>   
                         <br>
                         <div class="row">
-                          <div class="col-4">
+                          <div class="col-5 ques-card ques-txt">
                             Question Type: ${question.Question_type === 1 ? 'Multiple Choice' : question.Question_type === 2 ? 'True/False' : question.Question_type === 3 ? 'Fill-in-the-Blank' : 'Unknown Type'}
                           </div>
-                          <div class="col-3">
+                          <div class="col-3 ques-card ques-time">
                            ${question.Time !== undefined ? `Time: ${question.Time} sec` : 'Time: None'}
 
                           </div>
-                          <div class="col-3">
-                            Point: ${question.Score}
+                          <div class="col-2 ques-card ques-score">
+                            Points: ${question.Score}
                           </div>
-                          <div class="col-2">
-                          <button type="button" class="btn btn-danger">Delete</button>
+                          <div class="col-2 ques-card ques-del">
+                            <button type="button" class="btn btn-danger">Delete</button>
                           </div>
                         </div> 
                       </div>
@@ -207,19 +207,19 @@ console.log(quizDetails);
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizImage'>
                             <Form.Label className='quiz-label'>Image</Form.Label>
-                            <Form.Control type='file' className='inp-file'/>
+                            <Form.Control type='file' className='inp-file' accept='image/*'/>
                         </Form.Group>
                     </div>
                     <div className='row'>
-                        <Form.Group className="mb-3">
-                            <Form.Label htmlFor='quizName' className='quiz-label'>Quiz Name</Form.Label>
-                            <Form.Control type='text' id="quizName" className='quiz-inp' value={quizName} onChange={(e) => setQuizName(e.target.value)} required/>
+                        <Form.Group className="mb-3" controlId='quizName'>
+                            <Form.Label className='quiz-label'>Quiz Name</Form.Label>
+                            <Form.Control type='text' className='quiz-inp' value={quizName} onChange={(e) => setQuizName(e.target.value)} required/>
                         </Form.Group>
                     </div>
                     <div className='row'>
-                        <Form.Group className="mb-3">
-                            <Form.Label htmlFor='quizCategory' className='quiz-label'>Quiz Category</Form.Label>
-                            <Form.Select type='text' id='quizCategory' className='quiz-inp' value={quizCategory} onChange={(e) => setQuizCategory(e.target.value)} required>
+                        <Form.Group className="mb-3" controlId='quizCategory'>
+                            <Form.Label className='quiz-label'>Quiz Category</Form.Label>
+                            <Form.Select type='text' className='quiz-inp' value={quizCategory} onChange={(e) => setQuizCategory(e.target.value)} required>
                                 <option>Select</option>
                                 <option value="Computer Science">Computer Science</option>
                                 <option value="General Knowledge">General Knowledge</option>
@@ -233,7 +233,7 @@ console.log(quizDetails);
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTime'>
                             <Form.Label className='quiz-label'>Set overall Test Timer</Form.Label>
-                            <Form.Select type="boolean" id="quizTime" className='quiz-inp' value={quizTime} onChange={(e) => setQuizTimeFunc(e.target.value)} required>
+                            <Form.Select type="boolean" className='quiz-inp' value={quizTime} onChange={(e) => setQuizTimeFunc(e.target.value)} required>
                                 <option value="no">No</option>
                                 <option value="yes">Yes</option>
                                 <option value="each">Set timer for each question</option>
@@ -243,7 +243,7 @@ console.log(quizDetails);
                  {timerChoice && <div className='row'>
                         <Form.Group className="mb-3" controlId='quizTimeMin'>
                             <Form.Label className='quiz-label'>Set Test Time in Minutes</Form.Label>
-                            <Form.Control type='number' id="quizTimeMin" className='quiz-inp' value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
+                            <Form.Control type='number' className='quiz-inp' value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
                         </Form.Group>
                     </div>  
                     
@@ -253,26 +253,23 @@ console.log(quizDetails);
 
                 <div className='col-9 question-detail'>
                     <div className="card card-quiz-details">
-                    <div className='row'>
-                        <div className="col-2">
-                            <Button variant="danger" className="btn" onClick={() => navigate("/home")}>Cancel</Button>
+                    <div className='btn-container'>
+                        <div className="quiz-can-btn">
+                            <Button variant="danger" className="btn btn-quiz-create" onClick={() => navigate("/home")}>Cancel</Button>
                         </div>
-                        <div className='col-6'></div>
-                        <div className='col-2'>
-                            <Button type="button" className="btn btn-primary btn-add-ques" onClick={addQuestion}>Add Question</Button>
-                        </div>
-                        <div className='col-2'>
-                            <Button type="submit" variant="success" className="btn">Done</Button>
-                        </div>
-                        <div id='ques-container'>
-
+                        <div className='quiz-save-btn'>
+                            <Button type="submit" variant="success btn-quiz-create" className="btn">Save</Button>
                         </div>
                     </div>
 
-            
-                         
-                                <ul id="list" className="question-list">
-                                </ul>
+                    <div className='add-btn-container'>
+                        <Button type="button" className="btn btn-primary btn-add-ques" onClick={addQuestion}>Add Question</Button>
+                    </div>
+
+                    <div className='question-list-container'>
+                        <ul id="list" className="question-list">
+                        </ul>
+                    </div>
                             
                     </div>
                     </div>

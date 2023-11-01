@@ -18,6 +18,7 @@ export default function QuizHistory() {
     const [filterCategory, setFilterCategory] = useState('');
 
     const [quizArray, setquizArray] = useState([]);
+    const [scores, setscores] = useState([]);
 
     var num = 1
     useEffect((async) => {
@@ -43,6 +44,7 @@ export default function QuizHistory() {
                     }
                 });
                 setquizArray(res.data.quizzes);
+                setscores(res.data.scores)
             } else {
                 const res = await axios.get('http://localhost:8080/user/history', {
                     headers: {

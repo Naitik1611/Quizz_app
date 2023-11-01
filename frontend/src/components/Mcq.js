@@ -75,13 +75,13 @@ const removeOption = () => {
   };
 
     return (
-  <div className="">
+  <div className="mcq-page">
 
 <form onSubmit={saveQuestion}>
       <div className="row">
 
       {JSON.parse(localStorage.getItem('myBoolean')) && <div className="col">
-    <label htmlFor="timer" className="">Set Timer</label><br />
+    <label htmlFor="timer" className="timer">Set Timer</label><br />
     <select className="form-select input-box" aria-label="Default select example" id="timer" required>
 
         <option value="15">15 sec</option>
@@ -93,7 +93,7 @@ const removeOption = () => {
 <div className="col">
 
     <label htmlFor="point" className="">Points</label><br />
-    <input type="number" id="point" min="1" className="input-box" placeholder='' onChange={(e) => setPoint(e.target.value)} required></input>
+    <input type="number" id="point" min="1" className="form-control input-box" placeholder='' onChange={(e) => setPoint(e.target.value)} required></input>
 </div>
 
 </div>
@@ -101,15 +101,15 @@ const removeOption = () => {
 <br/>
          Question
 <br />
-    <input type="text" id="question" className="input-box" placeholder="Enter the question here..." onChange={(e) => setQuestion(e.target.value)} style={{marginTop:"10px"}} required></input>
+    <input type="text" id="question" className="form-control input-box" placeholder="Enter the question here..." onChange={(e) => setQuestion(e.target.value)} style={{marginTop:"10px"}} required></input>
             <br />
 
             <div className="row" style={{marginTop:"10px"}}>
-                <div className="col-7">
-                <input type="text" id="questionImg" className="input-box" placeholder="Paste image link here..."></input>
+                <div className="col-7 img-link">
+                <input type="text" id="questionImg" className="form-control input-box" placeholder="Paste image link here..."></input>
                 </div>
-                <div className="col-5">
-                <input type="file" name="image" id="image" accept="image/*" className="" style={{marginTop:"10px"}}/>
+                <div className="col-5 img-file">
+                <input type="file" name="image" id="image" accept="image/*" className="form-control" style={{marginTop:"10px"}}/>
                 </div>
             </div>
 <br/>
@@ -127,12 +127,12 @@ const removeOption = () => {
                 <div className="option-row">
                     <div className="row">
                         <div className="col-10">
-                        <input type="text" id={"option"+i} className="input-box" placeholder="Enter option..." required></input>
+                        <input type="text" id={"option"+i} className="form-control input-box" placeholder="Enter option..." required></input>
                         </div>
 
                         <div class="col-2">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" value={i} id={i} style={{marginTop:"15px"}} required/>
-</div>
+                      </div>
                        
                     </div>
                     
@@ -140,11 +140,11 @@ const removeOption = () => {
             </span>)}
 
             <div className="row" style={{marginTop:"10px"}}>
-                <div className="col-2">
-                <button type="button" className="btn btn-primary button-width" onClick={addOption}>Add</button>
+                <div className="col-4 opt-btn-cont">
+                <button type="button" className="btn btn-primary option-btn" onClick={addOption}>Add</button>
                 </div>
-                <div className="col-10">
-                <button type="button" className="btn btn-primary button-width" onClick={removeOption}>Remove</button>
+                <div className="col-4 opt-btn-cont">
+                <button type="button" className="btn btn-primary option-btn" onClick={removeOption}>Remove</button>
                 </div>
         
             </div>
@@ -153,11 +153,11 @@ const removeOption = () => {
             <br/>
         
             <div className="row" style={{marginTop:"20px"}}>
-                <div className="col-2">
-                <button type="button" className="btn btn-primary button-width" onClick={() => navigate("/create-quiz")}>Cancel</button>
+                <div className="col-4 opt-btn-cont">
+                <button type="button" className="btn btn-primary option-btn" onClick={() => navigate("/create-quiz")}>Cancel</button>
                 </div>
-                <div className="col-10">
-                <button type="submit" className="btn btn-primary button-width">Save Question</button>
+                <div className="col-4 opt-btn-cont">
+                <button type="submit" className="btn btn-primary option-btn">Save Question</button>
                 </div>
             </div>
             </form> 

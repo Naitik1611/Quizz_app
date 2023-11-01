@@ -92,6 +92,7 @@ export default function Result() {
                 </div>
             </div>
           </div>
+          <br />
 
           
             <div className="card score-card">

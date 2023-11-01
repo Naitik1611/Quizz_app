@@ -12,6 +12,8 @@ import QuizCategory from './components/QuizCategory'
 import QuizHistory from './components/QuizHistory'
 import Leaderboard from './components/Leaderboard'
 import EditProfile from './components/EditProfile'
+import ContactUs from './components/ContactUs'
+import NavbarContactUs from './components/NavbarContactUs'
 
 import Footer from './components/Footer';
 import AddQuestion from './components/AddQuestion';
@@ -42,6 +44,7 @@ function App() {
         </div>
         </>
       } />
+
           <Route path="create-quiz" element={<> <Navbar/> <CreateQuiz/> <Footer/> </>} />
           <Route path="add-question" element={<> <Navbar/> <AddQuestion/> <Footer/> </>} />
 
@@ -58,6 +61,7 @@ function App() {
         </div>
         </>
       } />
+
           <Route path="quiz-category" element={<>
         <Navbar />
         <div className="row middle-row">
@@ -71,9 +75,11 @@ function App() {
         </div>
         </>
       } />
+
           <Route path="start-quiz-time-limit" element={<> <Navbar/> <StartQuizWithTimeLimit/> <Footer/> </>} />
           <Route path="start-quiz-no-limit" element={<> <Navbar/> <StartQuizWithNoLimit/> <Footer/> </>} />
           <Route path="result" element={<> <Navbar/> <Result /> <Footer/> </>} />
+
           <Route path="quiz-history" element={<>
         <Navbar />
         <div className="row middle-row">
@@ -87,7 +93,10 @@ function App() {
         </div>
         </>
       } />
+
           <Route path="leaderboard" element={<> <Navbar/> <Leaderboard/> <Footer/> </>} />
+          <Route path="contact-us" element={<> <NavbarContactUs/> <ContactUs/> <Footer/> </>} />
+
           <Route path="edit-profile" element={<>
         <Navbar />
         <div className="row middle-row">
