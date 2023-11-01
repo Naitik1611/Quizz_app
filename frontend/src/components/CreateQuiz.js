@@ -27,6 +27,12 @@ export default function CreateQuiz() {
         setQuizTime(localStorage.getItem("quizTime"));
         setQuizTimeMin(localStorage.getItem("quizTimeMin"));
 
+        if(localStorage.getItem("quizTimeMin") !== ""){
+            setTimerChoice(true);
+        }else{
+            setTimerChoice(false);
+        }
+
          
         console.log(localStorage.getItem("quizName"));
         console.log(localStorage.getItem("quizCategory"));
@@ -64,7 +70,7 @@ export default function CreateQuiz() {
                             Points: ${question.Score}
                           </div>
                           <div class="col-2 ques-card ques-del">
-                            <button type="button" class="btn btn-danger delete-btn">Delete</button>
+                            <button type="button" class="btn btn-danger delete-btn">Remove</button>
                           </div>
                         </div> 
                       </div>
@@ -75,6 +81,7 @@ export default function CreateQuiz() {
                                 const storedArray = JSON.parse(localStorage.getItem('questionArray') || '[]');
                                 storedArray.splice(index, 1);
                                 localStorage.setItem('questionArray', JSON.stringify(storedArray));
+                                window.location.reload();
                                       
                             });
                         ul.appendChild(li);
@@ -93,9 +100,11 @@ export default function CreateQuiz() {
         setQuizTime(e);
         if(e ==="no"){
             setTimerChoice(false);
+            localStorage.setItem("quizTimeMin","");
         }else if(e ==="each"){
             setTimerChoice(false);
             setEachChoice("each")
+            localStorage.setItem("quizTimeMin","");
         }else{
             setTimerChoice(true);
         }
@@ -284,6 +293,7 @@ console.log(quizDetails);
                 </div>
              
         </Form>
+      
     </div>
     )
 }

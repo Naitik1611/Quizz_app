@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 export default function Result() {
   const navigate = useNavigate();
@@ -11,6 +14,7 @@ export default function Result() {
   const questions = location.state.questions;
   const correctAnswers = location.state.correctAnswers;
   const score = location.state.score;
+  const [review, setReview] = useState(false);
 
 
   var num = 1
@@ -104,9 +108,31 @@ export default function Result() {
           
           <div className="res-page-btn">
             <button type="button" className="btn btn-info review-btn" onClick={() => {localStorage.setItem("path", window.location.pathname);navigate("/leaderboard", {state : {id, quiz, questions}})}}> View Leaderboard </button>
-            <button type="button" className="btn btn-secondary review-btn" onClick={() => navigate('')}> Review Quiz </button>
+            <button type="button" className="btn btn-secondary review-btn" onClick={() => {setReview(review => !review);console.log("hello")}}> Review Quiz </button>
             <button type="button" className="btn btn-warning review-btn" onClick={() => navigate('/home')}> Go to Dashboard</button>
           </div>
+
+          {review && questions.questions.map((data, index) => (
+                        <Col key={index}>
+
+<Card className='quiz-card'>
+                    <Card.Body className='card-body-quiz'>
+                        <Row>
+                            <Col md={{span: 12}} className='quiz-card-details'>
+                                <Card.Title className='card-title'><h4>Q.{index+1} &nbsp;&nbsp;{data.Question_text}</h4></Card.Title>
+                                <Card.Text className='quiz-details'>Correct Answer: {data.Correct_answer} </Card.Text>
+                                <Card.Text className='quiz-details'>Your answer: {data.Answer} {data.Answer === data.Correct_answer ? "✅" : "❌"}</Card.Text>
+                                <Card.Text className='quiz-details'>Explanation: {data.Explanation} </Card.Text>
+                  
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+                        
+                        </Col>
+                    ))}
+
+
          </div>
   </div>)
 }

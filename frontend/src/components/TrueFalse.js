@@ -28,7 +28,7 @@ if(JSON.parse(localStorage.getItem('myBoolean'))){
         "Time": Number(document.getElementById('timer').value),
         "Score" : Number(point),
         "Question_text" : question,
-        "Correct_answer" : answer,
+        "Correct_answer" : document.querySelector('input[type="radio"]:checked').value,
         "Explanation": explanation
     }   
 }
@@ -38,7 +38,7 @@ questionDetails = {
 "Question_type": questionType,
 "Score" : Number(point),
 "Question_text" : question,
-"Correct_answer" : answer,
+"Correct_answer" : document.querySelector('input[type="radio"]:checked').value,
 "Explanation": explanation
 }
 }
@@ -88,11 +88,11 @@ return (
             <br />
 
             <div className="row" style={{marginTop:"10px"}}>
-                <div className="col">
-                <button type="button" class="btn btn-light input-box" value="true" onClick={(e) => setAnswer(e.target.value)}>True</button>
+                <div className="col-3">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" value="true" id="true" required/> True
                 </div>
-                <div className="col">
-                <button type="button" class="btn btn-light input-box" value="false" onClick={(e) => setAnswer(e.target.value)}>False</button>
+                <div className="col-9">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" value="false" id="false" required/> False
                 </div>
             </div>
 
