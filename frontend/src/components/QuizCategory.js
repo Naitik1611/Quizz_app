@@ -129,7 +129,7 @@ export default function QuizCategory() {
             <Row className='quiz-category'>
                 <Col md={4} className='page-title'>
                     <h3>
-                        Quiz Category
+                        All Quizzes
                     </h3>
                     
                 </Col>

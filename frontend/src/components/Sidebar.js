@@ -29,8 +29,8 @@ export default function Sidebar() {
         <li className="sidebar-item" onClick={() => navigate("/home")}>
            Dashboard
         </li>
-        <li className="sidebar-item" onClick={() => navigate("/quiz-category")}>
-           Quiz Category
+        <li className="sidebar-item" onClick={() => navigate("/all-quizzes")}>
+           All Quizzes
         </li>
         <li className="sidebar-item" onClick={() => navigate("/my-quiz")}>
            My Quiz

@@ -149,7 +149,7 @@ export default function Home() {
 
             <Row >
                 <Col md={12}>
-                    <Button variant="primary" className="btn see-btn" onClick={() => navigate("/quiz-category")}>See More</Button>  
+                    <Button variant="primary" className="btn see-btn" onClick={() => navigate("/all-quizzes")}>See More</Button>  
                 </Col>
             </Row>
 

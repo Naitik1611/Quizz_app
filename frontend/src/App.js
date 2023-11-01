@@ -62,7 +62,7 @@ function App() {
         </>
       } />
 
-          <Route path="quiz-category" element={<>
+          <Route path="all-quizzes" element={<>
         <Navbar />
         <div className="row middle-row">
           <div className="col-3 left-col">
