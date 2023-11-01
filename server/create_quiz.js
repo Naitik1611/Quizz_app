@@ -97,7 +97,7 @@ exports.createQuiz = async (req, res) => {
   
   exports.getAllQuizzes = async (req, res) => {
     try {
-      const quizzes = await Quiz.find();
+      const quizzes = await Quiz.find().sort({ Created_at: -1 });
       res.json(quizzes);
     } catch (error) {
       console.error(error);
