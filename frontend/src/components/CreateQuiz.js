@@ -127,7 +127,7 @@ export default function CreateQuiz() {
                         "Questions": questionArray,
                         "Timer": {
                         "TimerAvailable": 1,
-                        "TimerDuration":Number(quizTimeMin)
+                        "TimerDuration":Number(quizTimeMin)*60
                         }
                     }
                 } else if(localStorage.getItem("quizTime")==="no") {

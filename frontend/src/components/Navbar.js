@@ -20,7 +20,7 @@ export default function Navbar() {
             <NavBar.Collapse className="justify-content-end">
                 <NavBar.Text className='nav-user'>
                     <img alt="User" src="user1.png" width="40" height="40"/>{' '}
-                    User Name
+                 &nbsp;{localStorage.getItem("userName")}
                 </NavBar.Text>
                 <Button variant="danger" className="btn lgt-btn" onClick={() => navigate("/")}>Logout</Button>
                 <Button variant='primary' className="btn ctc-btn" onClick={() => navigate("/")}>Contact Us</Button>

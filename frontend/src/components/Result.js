@@ -32,13 +32,16 @@ export default function Result() {
     });
   
       const quizAnswers = {
-          "userId": "6538f646a0e1b8b5da91744c",
+          "userId": localStorage.getItem("userId"),
           "answers": answers
       }
   
       console.log(answers);
       console.log(quizAnswers);
- /*
+
+     
+
+ 
       try {    
           const res = await axios.post('http://localhost:8080/attempt_quiz/'+id, quizAnswers, {
               headers: {
@@ -46,12 +49,12 @@ export default function Result() {
               }
           });
           console.log(res.data);
-
+      
    
       } catch (e) {
           alert(e.message)
       }
-    */   
+    
   }
  
   
@@ -101,7 +104,7 @@ export default function Result() {
           <div className="d-flex justify-content-center result-button">
 
           <button type="button" className="btn btn-primary" onClick={() => navigate('')}> Review Quiz </button>
-          <button type="button" className="btn btn-primary" onClick={() => navigate('')}> View Leaderboard </button>
+          <button type="button" className="btn btn-primary" onClick={() => navigate("/leaderboard", {state : {id, quiz, questions}})}> View Leaderboard </button>
           <button type="button" className="btn btn-primary" onClick={() => navigate('/home')}> Go to Dashboard</button>
           </div>
          </div>

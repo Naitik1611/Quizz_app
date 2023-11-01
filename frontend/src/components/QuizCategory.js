@@ -54,6 +54,24 @@ export default function QuizCategory() {
         }
     };
 
+ const goToLeaderboard = async (id, quizData) => {
+
+    try {    
+        const questionRes = await axios.get('http://localhost:8080/attempt_quiz/'+id, {
+            headers: {
+                'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+            }
+        });
+        const questions = questionRes.data;
+        console.log(questions)
+
+        navigate("/leaderboard", {state : {id, quiz: quizData, questions}})
+       
+    } catch (e) {
+        alert(e.message)
+    }
+    
+ }
     const startQuiz = async (id) => {
         try {    
             const res = await axios.get('http://localhost:8080/quiz/byId/'+id, {
@@ -112,6 +130,7 @@ export default function QuizCategory() {
                     <h3>
                         Quiz Category
                     </h3>
+                    
                 </Col>
                 <Col md={{ span: 3, offset: 5 }}>
                     <Button variant="primary" className="btn filter-btn" onClick={() => setFilterModal(true)}>
@@ -150,24 +169,24 @@ export default function QuizCategory() {
                     </Modal>
                 </Col>
             </Row>
-            
+            <hr/>
             <div>
                 <Row xs={1} md={2} className="g-4">
                 {quizArray.map((data) => (
                 <Col key={data._id}>
-                <Card className='quiz-card'>
+                <Card className='quiz-card' style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", border:"none",padding:"10px"}}>
                     <Card.Body className='card-body-quiz'>
                         <Row>
-                            <Col md={4} className='quiz-img'>
-                                <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
+                            <Col md={{span: 5}} className='quiz-img'>
+                                <Card.Img variant="top" src="quizDefault.png"  className='quiz-img'/> 
                             </Col>
-                            <Col md={{span: 7, offset:1}} className='quiz-card-details'>
+                            <Col md={{span: 7}} className='quiz-card-details' style={{textAlign:"left", lineHeight: "1", color:"grey", fontSize:"14px"}}>
                                 <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>
                                 <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
-                                <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
-                                <Card.Text className='quiz-details'>Duration: No limit</Card.Text>
-                                <Card.Text className='quiz-details'>Date: {data.Created_at}</Card.Text>
-                                <Button variant="info" className='btn btn-leaderboard' >
+                                <Card.Text className='quiz-details'>Questions: {data.Questions.length} &nbsp;&nbsp;&nbsp; Duration: {data.Timer.TimerDuration ? (data.Timer.TimerDuration)/60+" min": "No time limit"}</Card.Text>
+                                <Card.Text className='quiz-details'></Card.Text>
+                                <Card.Text className='quiz-details'>Date Created: {new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(data.Created_at))}</Card.Text>
+                                <Button variant="info" className='btn btn-leaderboard'  onClick={() => goToLeaderboard(data._id, data)}>
                                     Leaderboard
                                 </Button>{" "}
                                 <Button variant="success" className='btn' onClick={() => {setModalData(data._id);setStartModal(true)}}>

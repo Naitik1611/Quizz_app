@@ -20,14 +20,20 @@ export default function Login() {
       }
 
       const storeToken = (token) => {
-        localStorage.setItem("token", token.data);
+        localStorage.setItem("token", token.token);
+        localStorage.setItem("userId", token.id);
+        localStorage.setItem("userName", token.username);
+
+        console.log(localStorage.getItem("token"));
+        console.log(localStorage.getItem("userId"));
+        console.log(localStorage.getItem("userName"));
+
       };
 
       try {
         const res = await axios.post('http://localhost:8080/api/auth',loginData)
-        storeToken(res.data);
+        storeToken(res.data.data);
         navigate("/home")
-        console.log(res.data);
       } catch (e) {
         alert(e.message)
       }

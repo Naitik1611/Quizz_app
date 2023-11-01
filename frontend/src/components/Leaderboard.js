@@ -1,53 +1,127 @@
-import React from 'react'
+import React,  { useState, useEffect } from 'react'
 import './style.css'
-import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 export default function Leaderboard() {
  
     const navigate = useNavigate();
 
-    return (
-        <div className='quiz-leaderboard'>
-            <div className='details-quiz'>
-                <Row>
-                    <Col md={2}>Quiz Name</Col>
-                    <Col md={2}>Quiz Category</Col>
-                    <Col md={{span:2, offset:1}}>Total Questions: xx</Col>
-                    <Col md={2}>Duration: xx</Col>
-                    <Col md={2}>Total Score:</Col>
-                </Row>
-            </div>
+    const location = useLocation();
+    const quizId = location.state.id;
+    const quiz = location.state.quiz;
+    const questions = location.state.questions;
+    const maxScore = location.state.maxScore;
+    const [scoreArray, setScoreArray] = useState([]);
+    
 
+    var num = 1
+    useEffect((async) => {
+        if (num===1) {
+           getLeaderboard();
+            }
+            num++;
+    }, []);
+
+    const getLeaderboard = async () => {
+console.log(quizId);
+console.log(quiz)
+        try {    
+            const res = await axios.get('http://localhost:8080/leaderboard/'+quizId, {
+                headers: {
+                    'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                }
+            });
+
+            res.data = res.data.reduce((acc, current) => {
+                const x = acc.find(item => item.user_id === current.user_id);
+                if (!x) {
+                  return acc.concat([current]);
+                }
+                return acc;
+              }, []);
+            console.log(res.data);
+            setScoreArray(res.data);
+              
+     
+        } catch (e) {
+            alert(e.message)
+        }
+
+    }
+
+    return (
+        <div className='start-quiz-container'>
+            <div className='leaderboard-box'>
+            <div class="d-flex justify-content-center">
+            <h3>  Leaderboard</h3>
+            </div>
+                <h5 style={{textAlign:"left", marginTop:"20px",marginBottom:"20px"}}>{quiz.Title}</h5>
+           
+            <hr/>
+        <div className="row quiz-header">
+        <div className="col-3">
+        Quiz Category
+        <br/>
+        {quiz.Category}
+        </div>
+        <div className="col-3">
+        Total Questions
+        <br/>
+        {quiz.Questions.length}
+        </div>
+        <div className="col-3">
+        Duration
+        <br/> {quiz.Timer.TimerDuration ? (quiz.Timer.TimerDuration)/60+" min": "No time limit"}
+        </div>
+        <div className="col-3">
+        Total Score
+        <br/>
+
+        {questions.questions.reduce((accumulator, currentQuestion) => {
+    return accumulator + parseInt(currentQuestion['Score']);
+}, 0)}
+        </div>
+        </div>
+
+        
+        <hr/>
+        
             <div className='ranks-board'>
-                <Row className="g-1">
+
+           
+
+            
+
+                <Row className="g-1" style={{textAlign:"center",padding:"10px", marginBottom:"15px",marginTop:"15px", fontSize:"large", backgroundColor:"whitesmoke"}}>
                     <Col md={{span: 1, offset: 1}}>Rank</Col>
-                    <Col md={{span: 3, offset: 2}}>
+                    <Col md={{span: 3, offset: 1}}>
                         Username
                     </Col>
-                    <Col md={{span:2, offset: 2}}>Points</Col>
+                    <Col md={{span:2, offset: 3}} style={{textAlign:"right"}}>Points</Col>
                 </Row>
-                <Row className="g-1">
-                    <Col md={{span: 1, offset: 1}}>My Rank</Col>
-                    <Col md={{span: 3, offset: 2}}>
-                        My Username
-                    </Col>
-                    <Col md={{span:2, offset: 2}}>My Points</Col>
-                </Row>
-                {Array.from({ length: 10 }).map((_, idx) => (
-                    <Row key={idx} className="g-1">
+               
+
+                {scoreArray.map((data, idx) => (
+
+                    <Row key={idx} className="g-1" style={{borderTop:"2px solid #d9d9d9",padding:"10px"}}>
                         <Col md={{span: 1, offset: 1}}>{idx+1}</Col>
-                        <Col md={{span: 3, offset: 2}}>
-                            <img alt="User" src="/img/logo.svg" width="20" height="20" className="nav-user-profile" />{' '}User Name
+                        <Col md={{span: 3, offset: 1}}>
+                             <img alt="User" src="user1.png" width="30" height="30"/>&nbsp;&nbsp;{data.firstName +" "+ data.lastName}
+                             {data.user_id === localStorage.getItem("userId") ? "  (me)" : ""}
                         </Col>
-                        <Col md={{span:2, offset: 2}}>Points</Col>
+                        <Col md={{span:2, offset: 3}} style={{textAlign:"right"}}>{data.score}</Col>
                     </Row>
                 ))}
+                <div class="d-flex justify-content-center" style={{marginTop:"40px"}}>
                 <Button variant="primary" className='btn' onClick={() => navigate('/home')}>
                     Go To Dashboard
                 </Button>
+                </div>
+            </div>
             </div>
         </div>
 

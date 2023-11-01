@@ -103,53 +103,35 @@ export default function MyQuiz() {
             </Row>
             
             <div>
-                <Row xs={1} md={2} className="g-4">
+                <Row xs={1} md={2} className="g-4" style={{minHeight:"76vh"}}>
                     {quizArray.map((data) => (
                         <Col key={data._id}>
-                        <Card className='quiz-card'>
-                            <Card.Header className='card-header'>{data.Title}</Card.Header>
-                            <Card.Body className='card-body'>
-                                <Row>
-                                    <Col md={4}>
-                                        <Card.Img variant="top" src="holder.js/100px160" className='quiz-img'/> 
-                                    </Col>
-                                    <Col md={{span: 7, offset:1}}>
-                                        <Card.Text className='quiz-details'>Category: {data.Category}</Card.Text>
-                                        <Card.Text className='quiz-details'>Questions: {data.Questions.length}</Card.Text>
-                                        <Card.Text className='quiz-details'>Duration: {}</Card.Text>
-                                        <Card.Text className='quiz-details'>Date: {data.Created_at}</Card.Text>
-                                        <Button variant="info" className='btn btn-leaderboard' onClick={() => navigate("/leaderboard")}>
-                                            Leaderboard
-                                        </Button>{' '}
-                                        <Button variant="danger" className='btn' onClick={() => setDeleteModal(true)}>
-                                            Delete
-                                        </Button>
 
-                                        <Modal show={deleteModal} onHide={() => setDeleteModal(false)}>
-                                            <Modal.Header closeButton>
-                                            <Modal.Title>Delete Quiz</Modal.Title>
-                                            </Modal.Header>
-                                            <Form >
-                                                <Modal.Body>
-                                                        <Form.Group className="mb-3">
-                                                            Proceed to Delete Quiz?
-                                                        </Form.Group>
-                                                </Modal.Body>
-                                                <Modal.Footer>
-                                                    <Button variant="secondary" className='btn' onClick={() => setDeleteModal(false)}>
-                                                        Cancel
-                                                    </Button>
-                                                    <Button variant="danger" className='btn' type='submit'>
-                                                        Delete
-                                                    </Button>
-                                                </Modal.Footer>
-                                            </Form>
-                                        </Modal>
-
-                                    </Col>
-                                </Row>
-                            </Card.Body>
-                        </Card>
+<Card className='quiz-card' style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", border:"none",padding:"10px"}}>
+                    <Card.Body className='card-body-quiz'>
+                        <Row>
+                            <Col md={{span: 5}} className='quiz-img'>
+                                <Card.Img variant="top" src="quizDefault.png"  className='quiz-img'/> 
+                            </Col>
+                            <Col md={{span: 7}} className='quiz-card-details' style={{textAlign:"left", lineHeight: "1", color:"grey", fontSize:"14px"}}>
+                                <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>
+                                <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
+                                <Card.Text className='quiz-details'>Questions: {data.Questions.length} &nbsp;&nbsp;&nbsp; Duration: {data.Timer.TimerDuration ? (data.Timer.TimerDuration)/60+" min": "No time limit"}</Card.Text>
+                                <Card.Text className='quiz-details'></Card.Text>
+                                <Card.Text className='quiz-details'>Date Created: {new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(data.Created_at))}</Card.Text>
+                                <Button variant="info" className='btn btn-leaderboard'>
+                                    Leaderboard
+                                </Button>{" "}
+                                <Button variant="success" className='btn'>
+                                    Start Quiz
+                                </Button>
+                               
+                              
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+                        
                         </Col>
                     ))}
                 </Row>
