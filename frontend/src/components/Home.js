@@ -56,7 +56,7 @@ export default function Home() {
                     'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
                 }
             });
-            setrecommendedArray(res.data);
+            setrecommendedArray(res.data.quizzes);
         } catch (e) {
             alert(e.message)
         }
@@ -137,7 +137,7 @@ export default function Home() {
                     {quizArray.slice(0,6).map((quiz) => (
                         <Col key={quiz._id}>
                         <Card className="card-box">
-                            <Card.Img variant="top" src="holder.js/100px160" />
+                            <Card.Img variant="top" src="quizDefault.png" />
                             <Card.Body className='quiz-card-body'>
                                 <Card.Text className='quiz-cat'>Category: {quiz.Category}</Card.Text>
                                 <Card.Title className='quiz-title'>{ quiz.Title }</Card.Title>
@@ -165,20 +165,18 @@ export default function Home() {
             </Row>
             <div className='home-items'>
                 <Row xs={1} md={3} className="g-4">
-                    {/*recommendedArray.slice(0,3).map((quiz) => (
+                    {recommendedArray.slice(0,6).map((quiz) => (
                         <Col key={quiz._id}>
                         <Card className="card-box">
-                            <Card.Img variant="top" src="holder.js/100px160" />
+                            <Card.Img variant="top" src="quizDefault.png" />
                             <Card.Body className='quiz-card-body'>
                                 <Card.Text className='quiz-cat'>Category: {quiz.Category}</Card.Text>
                                 <Card.Title className='quiz-title'>{ quiz.Title }</Card.Title>
                             </Card.Body>
                         </Card>
                         </Col>
-                    ))*/}
+                    ))}
                 </Row>
-
-
     
         </div>
         <Footer />

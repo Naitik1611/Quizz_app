@@ -66,26 +66,26 @@ export default function Result() {
   
   return (<div className="start-quiz-container">
          <div className="start-quiz-box">
-        <h4>  Quiz Result</h4>
+        <h4 className="res-name">  Quiz Result</h4>
           <div className="row">
-            <div className="col">
-              <div className="card score-box">
+            <div className="col-4 score-box">
+              <div className="card res-det">
                   Total Questions
                   <br />
              <span className="figure">   {questions.questions.length}</span>  
               </div>
             </div>
 
-            <div className="col">
-               <div className="card score-box">
-                Total Correct Answers
+            <div className="col-4 score-box">
+               <div className="card res-det">
+                Correct Answers
                 <br />
                 <span className="figure">       {correctAnswers}</span>  
               </div>
             </div>
 
-            <div className="col">
-            <div className="card score-box">
+            <div className="col-4 score-box">
+            <div className="card res-det">
                 Your Points
                 <br />
                 <span className="figure">    {score} / {maxScore}</span>  
@@ -95,18 +95,17 @@ export default function Result() {
           <br />
 
           
-            <div className="card score-card">
+            <div className="card score-card score-disp">
               Your Score
               <br />
               {Math.ceil((score/maxScore) * 100)}%
               
             </div>
           
-          <div className="d-flex justify-content-center result-button">
-
-          <button type="button" className="btn btn-primary" onClick={() => navigate('')}> Review Quiz </button>
-          <button type="button" className="btn btn-primary" onClick={() => {localStorage.setItem("path", window.location.pathname);navigate("/leaderboard", {state : {id, quiz, questions}})}}> View Leaderboard </button>
-          <button type="button" className="btn btn-primary" onClick={() => navigate('/home')}> Go to Dashboard</button>
+          <div className="res-page-btn">
+            <button type="button" className="btn btn-info review-btn" onClick={() => {localStorage.setItem("path", window.location.pathname);navigate("/leaderboard", {state : {id, quiz, questions}})}}> View Leaderboard </button>
+            <button type="button" className="btn btn-secondary review-btn" onClick={() => navigate('')}> Review Quiz </button>
+            <button type="button" className="btn btn-warning review-btn" onClick={() => navigate('/home')}> Go to Dashboard</button>
           </div>
          </div>
   </div>)
