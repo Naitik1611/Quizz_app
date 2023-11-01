@@ -35,6 +35,10 @@
     display: none;
 } 
 
+.nav-img {
+    border-radius: 50%;
+}
+
 .nav-btn {
     margin: auto 10px;
     display: none;
@@ -314,6 +318,10 @@ Footer {
     text-align: left;
 }
 
+.quiz-details {
+    width: 100% !important;
+}
+
 .quiz-inp{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -388,15 +396,6 @@ Footer {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.quiz-box{
-    width: 100%;
-    background-color: white;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
 .btn-primary {
     background: #702963;
     border-radius: 5px;
@@ -437,33 +436,26 @@ Footer {
 }
 
 .start-quiz-container{
-
     padding: 20px;
     text-align: left;
     background-color:#f8f7f7;
-    min-height: 92vh;
+    /* min-height: 80vh; */
 }
 
 .start-quiz-box{
-    width: 60%;
+    width: 100%;
     background-color: white;
     margin: auto;
-    margin-top: 30px;
-    padding: 60px;
+    margin-top: 10px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color:#702963;
 }
 
 .quiz-header{
-    text-align: center;
+    /* text-align: center; */
     color: grey;
-    
-}
-
-.countdown-col{
-    
-    
 }
 
 .countdown{
@@ -474,7 +466,7 @@ Footer {
     border-radius: 50%;
     margin-top: -2px;
     font-size: large;
-width:80%;
+    width:80%;
     
 }
 
@@ -512,11 +504,7 @@ width:80%;
 }
 
 .score-box{
-text-align: center;
-padding:30px;
-line-height: 3;
-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-margin-top: 20px;
+    width: 100%;
 }
 
 .score-card{
@@ -525,18 +513,15 @@ margin-top: 20px;
     height:100px;
     padding:30px;
     padding-top: 20px;
-    
-line-height: 2;
-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-font-size: x-large;
-min-height: 140px;
-
+    line-height: 2;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-size: x-large;
+    min-height: 140px;
 }
 
 .figure{
     font-size: larger;
 }
-
 
 .result-button{
     margin-top: 40px;
@@ -588,20 +573,26 @@ h4{
     width: 100% !important;
 }
 
+.title-col, .end-btn-col, .end-test {
+    width: 100%;
+    text-align: center;
+}
+
 .progress-col, .count-col, .score-col, .time-col {
     padding: 15px 0 0 10px;
     font-size: 16px;
 }
 
+.progress-col, .count-col { 
+    width: 100%;
+}
+
 .progress {
-    color: #702963;
+    margin-top: 5px;
+    width: 75%;
 }
 
-.progress-col, .progress {
-    width: 100% !important;
-}
-
-.count-col, .score-col, .time-col {
+.score-col, .time-col {
     width: 50% !important;
 }
 
@@ -619,6 +610,7 @@ h4{
 
 .res-page-btn {
     text-align: center;
+    margin-top: 20px;
 }
 
 .review-btn {
@@ -628,13 +620,16 @@ h4{
 
 .res-name {
     text-align: center;
+    margin-bottom: 20px;
 }
  
 .res-det {
     text-align: center;
     background-color: rgb(95, 10, 135);
     color: #fff;
-    padding: 5px;
+    padding: 10px 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 20px;
 }
 
 .score-disp {
@@ -692,13 +687,33 @@ h4{
 }
 
 @media screen and (min-width: 480px) {
+
+    .title-col {
+        width: 75%;
+        text-align: left;
+    } 
+    
+    .end-btn-col {
+        width: 25%;
+        text-align: right;
+    } 
+    
+    .end-test {
+        width: max-content;
+    }
     
     .progress-col, .count-col, .score-col, .time-col {
         width: 50% !important;
+        padding-left: 20px;
+    }
+
+    .progress {
+        width: 90%;
     }
 
     .count-col, .time-col {
         text-align: right;
+        padding-right: 15px;
     }
     
     .add-btn-container{
@@ -740,6 +755,7 @@ h4{
 }
 
 @media screen and (min-width: 600px) {
+    
 
     .review-btn {
         width: max-content;
@@ -750,7 +766,7 @@ h4{
         font-size: 18px;
     }
 
-    .quiz-box{
+    .start-quiz-box{
         width: 90%;
         padding: 30px;
     }
@@ -798,11 +814,15 @@ h4{
 
 @media screen and (min-width: 770px) {
 
+    .score-box{
+        width: 33.33%;
+    }
+
     .contact-col {
         width: 50%;
     }
 
-    .quiz-box{
+    .start-quiz-box{
         width: 80%;
         padding: 30px;
     }
@@ -896,9 +916,9 @@ h4{
 
 @media screen and (min-width: 1000px) {
 
-    .quiz-box{
+    .start-quiz-box{
         width: 70%;
-        padding: 30px;
+        padding: 50px;
     }
 
     .question-box {

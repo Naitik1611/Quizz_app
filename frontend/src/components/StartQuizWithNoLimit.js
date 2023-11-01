@@ -102,28 +102,28 @@ export default function StartQuiz() {
       
 
       <div className="row">
-        <div className="col-10">
-        <h4>  {quiz.Title}</h4>
+        <div className="col-10 title-col">
+        <h4>{quiz.Title}</h4>
         </div>
-        <div className="col-2">
-        <button type="button" className="btn btn-danger" onClick={() => setIndex(questions.questions.length+1)}> End Test</button>
+        <div className="col-2 end-btn-col">
+        <button type="button" className="btn btn-danger end-test" onClick={() => setIndex(questions.questions.length+1)}> End Test</button>
         </div>
       </div>
       <hr/>
         <div className="row quiz-header">
-        <div className="col-4" style={{ display: "flex", alignItems: "center" }}>
+        <div className="col-3 progress-col">
         Completed 
-        <div className="progress" style={{ width: "100%", marginLeft: "10px" }}>
-        <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
-</div>
+        <div className="progress">
+          <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
         </div>
-        <div className="col-3">
-          Question {index+1} of {questions.questions.length}
         </div>
-        <div className="col-3">
-          Points: {question.Score}
+        <div className="col-3 count-col">
+          Question: {index+1} of {questions.questions.length}
         </div>
-        <div className="col-2 countdown-col">
+        <div className="col-3 score-col">
+          Question Points: {question.Score}
+        </div>
+        <div className="col-3 time-col">
       
        {localStorage.getItem("isTimer") === "yes" && <div id="countdown" className="countdown">
        {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}

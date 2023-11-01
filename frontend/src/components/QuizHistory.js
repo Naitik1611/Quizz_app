@@ -118,7 +118,8 @@ export default function QuizHistory() {
                             <Col md={{span: 7}} className='quiz-card-details' style={{textAlign:"left", lineHeight: "1", color:"grey", fontSize:"14px"}}>
                                 <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>
                                 <Card.Text className='quiz-details'>Category: {data.Category} </Card.Text>
-                                <Card.Text className='quiz-details'>Questions: {data.Questions.length} &nbsp;&nbsp;&nbsp; Duration: {data.Timer.TimerDuration ? (data.Timer.TimerDuration)/60+" min": "No time limit"}</Card.Text>
+                                <Card.Text className='quiz-details'>Questions: {data.Questions.length} </Card.Text> 
+                                <Card.Text className='quiz-details'> Duration: {data.Timer.TimerDuration ? (data.Timer.TimerDuration)/60+" min": "No time limit"}</Card.Text>
                                 <Card.Text className='quiz-details'></Card.Text>
                                 <Card.Text className='quiz-details'>Date Created: {new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(data.Created_at))}</Card.Text>
                                 <Button variant="info" className='btn btn-leaderboard'>
