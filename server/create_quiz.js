@@ -114,9 +114,17 @@ exports.createQuiz = async (req, res) => {
       const questions = await Question.find({ _id: { $in: quiz.Questions } });
 
       res.json({
-        ...quiz,
+        _id: quiz._id,
+        Timer: quiz.Timer,
+        Title: quiz.Title,
+        Category: quiz.Category,
+        Questions:quiz.Questions,
+        Creator_id: quiz.Creator_id,
+        Quiz_pin: quiz.Quiz_pin,
+        Created_at: quiz.Created_at,
+        Participants: quiz.Participants,
         total_socre: questions.reduce((acc, curr) => acc + curr.Score, 0),
-      });
+      })
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
