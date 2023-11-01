@@ -124,11 +124,10 @@ export default function StartQuiz() {
           Question Points: {question.Score}
         </div>
         <div className="col-3 time-col">
-      
-       {localStorage.getItem("isTimer") === "yes" && <div id="countdown" className="countdown">
-       {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
 
-        </div>}
+            {localStorage.getItem("isTimer") === "yes" && <div id="countdown" className="countdown">
+            {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' + (timeLeft % 60) : timeLeft % 60}
+            </div>}
         </div>
 
         </div>

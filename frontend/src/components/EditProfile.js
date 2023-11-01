@@ -10,7 +10,7 @@ export default function EditProfile() {
  
     const navigate = useNavigate();
     
-    const [profilePic, setProfilePic] = useState('');
+    const [profilePic, setProfilePic] = useState('user1.png');
     const [fname, setfname] = useState('');
     const [lname, setlname] = useState('');
     const id =  localStorage.getItem('userId');
@@ -63,10 +63,12 @@ export default function EditProfile() {
 
     return (
       <div className="main-container">
-          <Form className="login-form" onSubmit={handleEditProfile}>
+          <Form className="login-form edit-form" onSubmit={handleEditProfile}>
             <h3>Edit Profile</h3>
 
             <Form.Group className="mb-3" controlId="profile-pic">
+              {/* <img alt='' src={"http://localhost:8080/uploads/"+localStorage.getItem('userId')} className='edit-profile-pic'/>
+              <br/> */}
               <Form.Label className="inp-label">Profile Photo</Form.Label>
               <Form.Control type="file" className="inp inp-user" placeholder='Choose Photo' onChange={handleImage} accept='image/*' />
             </Form.Group>
@@ -83,7 +85,7 @@ export default function EditProfile() {
 
             <Form.Group className="mb-3" controlId="email">
               <Form.Label className="inp-label">Email address</Form.Label>
-              <Form.Control type="email" className="inp inp-user" placeholder='Enter Email' disabled />
+              <Form.Control type="email" className="inp inp-user" placeholder='Email' disabled readOnly/>
             </Form.Group>
 
             <Button variant="primary" type="submit" className="btn form-btn">

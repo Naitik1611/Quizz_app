@@ -169,7 +169,7 @@ export default function CreateQuiz() {
                     }
                 }
                
-console.log(quizDetails);
+                console.log(quizDetails);
                 try {
                     const res = await axios.post('http://localhost:8080/quiz/create',quizDetails,{
                             headers: {
@@ -257,14 +257,13 @@ console.log(quizDetails);
                             </Form.Select>
                         </Form.Group>
                     </div>
-                 {timerChoice && <div className='row'>
-                        <Form.Group className="mb-3" controlId='quizTimeMin'>
-                            <Form.Label className='quiz-label'>Set Test Time in Minutes</Form.Label>
-                            <Form.Control type='number' className='quiz-inp' value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
-                        </Form.Group>
-                    </div>  
-                    
-                }
+                    {timerChoice && <div className='row'>
+                            <Form.Group className="mb-3" controlId='quizTimeMin'>
+                                <Form.Label className='quiz-label'>Set Test Time in Minutes</Form.Label>
+                                <Form.Control type='number' className='quiz-inp' value={quizTimeMin} onChange={(e) => setQuizTimeMin(e.target.value)}/>
+                            </Form.Group>
+                        </div>  
+                    }
                     </div>                 
                 </div>
 
@@ -280,7 +279,8 @@ console.log(quizDetails);
                     </div>
 
                     <div className='add-btn-container'>
-                        <Button type="button" className="btn btn-primary btn-add-ques" onClick={addQuestion}>Add Question</Button>
+                        <button type="button" className="btn-add-ques" onClick={addQuestion}>Click To Add Question</button>
+                        
                     </div>
 
                     <div className='question-list-container'>
