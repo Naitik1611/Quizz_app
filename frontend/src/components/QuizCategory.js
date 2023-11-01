@@ -65,6 +65,7 @@ export default function QuizCategory() {
         const questions = questionRes.data;
         console.log(questions)
 
+        localStorage.setItem("path", window.location.pathname);
         navigate("/leaderboard", {state : {id, quiz: quizData, questions}})
        
     } catch (e) {

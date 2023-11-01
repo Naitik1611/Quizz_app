@@ -41,7 +41,7 @@ export default function Sidebar() {
         <li className="sidebar-item" onClick={() => navigate("/edit-profile")}>
            Edit Profile
         </li>
-        <Card className='sidebar-image'>
+        <Card className='sidebar-image' style={{padding:"40px"}}>
             <Card.Img className='side-img' variant="top" src="quiz.png" />
         </Card>
     </ul>

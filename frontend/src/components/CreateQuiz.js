@@ -64,11 +64,19 @@ export default function CreateQuiz() {
                             Points: ${question.Score}
                           </div>
                           <div class="col-2 ques-card ques-del">
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-danger delete-btn">Delete</button>
                           </div>
                         </div> 
                       </div>
                             `;
+
+                            li.querySelector('.delete-btn').addEventListener('click', () => {
+                                console.log(index);
+                                const storedArray = JSON.parse(localStorage.getItem('questionArray') || '[]');
+                                storedArray.splice(index, 1);
+                                localStorage.setItem('questionArray', JSON.stringify(storedArray));
+                                      
+                            });
                         ul.appendChild(li);
                 }));
             }else{

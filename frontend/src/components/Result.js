@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Result() {
   const navigate = useNavigate();
   const location = useLocation();
-  const id = location.state.id;
+  const id = location.state.id || 0;
   const quiz = location.state.quiz;
   const questions = location.state.questions;
   const correctAnswers = location.state.correctAnswers;
@@ -105,7 +105,7 @@ export default function Result() {
           <div className="d-flex justify-content-center result-button">
 
           <button type="button" className="btn btn-primary" onClick={() => navigate('')}> Review Quiz </button>
-          <button type="button" className="btn btn-primary" onClick={() => navigate("/leaderboard", {state : {id, quiz, questions}})}> View Leaderboard </button>
+          <button type="button" className="btn btn-primary" onClick={() => {localStorage.setItem("path", window.location.pathname);navigate("/leaderboard", {state : {id, quiz, questions}})}}> View Leaderboard </button>
           <button type="button" className="btn btn-primary" onClick={() => navigate('/home')}> Go to Dashboard</button>
           </div>
          </div>

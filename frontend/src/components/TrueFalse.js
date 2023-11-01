@@ -83,17 +83,7 @@ return (
     
     <input type="text" id="question" className="form-control input-box" placeholder="Enter the question here..." style={{marginTop:"10px"}} onChange={(e) => setQuestion(e.target.value)} required></input>
             <br />
-
-            <div className="row" style={{marginTop:"10px"}}>
-                <div className="col-7 img-link">
-                <input type="text" id="questionImg" className="form-control input-box" placeholder="Paste image link here..."></input>
-                </div>
-                <div className="col-5 img-file">
-                <input type="file" name="image" id="image" accept="image/*" className="form-control" style={{marginTop:"10px"}}/>
-                </div>
-            </div>
-            
-            <br/>
+           
            Answer
             <br />
 

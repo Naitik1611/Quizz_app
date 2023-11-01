@@ -86,11 +86,11 @@ export default function Fib() {
     
     <input type="text" id="question" className="form-control input-box" placeholder="Enter the question here..." onChange={(e) => setQuestion(e.target.value)} style={{marginTop:"10px"}} required></input>
             <br />
-            <br/>
+          
            Answer
             <br />
             <input type="text" id="question" className="form-control input-box" placeholder="Enter answer here..." onChange={(e) => setAnswer(e.target.value)} style={{marginTop:"10px"}} required></input>
-            <br/><br/>
+            <br/>
            Explanation
             <br />
 

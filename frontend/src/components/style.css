@@ -404,6 +404,10 @@ Footer {
     border: none;
     margin-left: 5px;
 }
+
+.btn-primary:hover {
+    background: #7b346e;
+}
       
 /* New Changes */
 

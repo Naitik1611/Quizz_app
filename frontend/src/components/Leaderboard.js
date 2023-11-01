@@ -13,18 +13,22 @@ export default function Leaderboard() {
     const location = useLocation();
     const quizId = location.state.id;
     const quiz = location.state.quiz;
-    const questions = location.state.questions;
-    const maxScore = location.state.maxScore;
     const [scoreArray, setScoreArray] = useState([]);
+    const [isResult, setIsResult] = useState(true);
     
 
     var num = 1
     useEffect((async) => {
         if (num===1) {
            getLeaderboard();
+           if(localStorage.getItem("path") === "/result"){
+                setIsResult(false);
+           }
+          
             }
             num++;
     }, []);
+
 
     const getLeaderboard = async () => {
 console.log(quizId);
@@ -45,7 +49,7 @@ console.log(quiz)
               }, []);
             console.log(res.data);
             setScoreArray(res.data);
-              
+             
      
         } catch (e) {
             alert(e.message)
@@ -59,7 +63,7 @@ console.log(quiz)
             <div class="d-flex justify-content-center">
             <h3>  Leaderboard</h3>
             </div>
-                <h5 style={{textAlign:"left", marginTop:"20px",marginBottom:"20px"}}>{quiz.Title}</h5>
+                <h5 style={{textAlign:"left", marginTop:"20px",marginBottom:"20px"}}>Quiz Title : {quiz.Title}</h5>
            
             <hr/>
         <div className="row quiz-header">
@@ -81,9 +85,7 @@ console.log(quiz)
         Total Score
         <br/>
 
-        {questions.questions.reduce((accumulator, currentQuestion) => {
-    return accumulator + parseInt(currentQuestion['Score']);
-}, 0)}
+        {quiz.total_socre}
         </div>
         </div>
 
@@ -117,6 +119,9 @@ console.log(quiz)
                     </Row>
                 ))}
                 <div class="d-flex justify-content-center" style={{marginTop:"40px"}}>
+               {isResult && <Button variant="primary" className='btn' onClick={() => navigate(localStorage.getItem("path"))}>
+                    Go Back
+                </Button>}
                 <Button variant="primary" className='btn' onClick={() => navigate('/home')}>
                     Go To Dashboard
                 </Button>

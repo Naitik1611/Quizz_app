@@ -58,12 +58,32 @@ export default function QuizHistory() {
         }
     };
 
+    const goToLeaderboard = async (id) => {
+
+        try {    
+            const res = await axios.get('http://localhost:8080/quiz/byId/'+id, {
+                headers: {
+                    'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                }
+            });
+            const quiz = res.data;
+            console.log(quiz)
+    
+            localStorage.setItem("path", window.location.pathname);
+            navigate("/leaderboard", {state : {id, quiz}})
+           
+        } catch (e) {
+            alert(e.message)
+        }
+        
+     }
+
     return (
         <div className="main-container">
             <Row className='quiz-category'>
             <Col md={4} className='page-title'>
                     <h3>
-                        Quizzes History
+                        Quiz History
                     </h3>
                 </Col>
                 <Col md={{ span: 3, offset: 5 }}>
@@ -103,7 +123,7 @@ export default function QuizHistory() {
                     </Modal>
                 </Col>
             </Row>
-            
+            <hr/>
             <div >
                 <Row xs={1} md={2} className="g-4" style={{minHeight:"76vh"}}>
                     {quizArray.map((data) => (
@@ -121,12 +141,10 @@ export default function QuizHistory() {
                                 <Card.Text className='quiz-details'>Questions: {data.Questions.length} &nbsp;&nbsp;&nbsp; Duration: {data.Timer.TimerDuration ? (data.Timer.TimerDuration)/60+" min": "No time limit"}</Card.Text>
                                 <Card.Text className='quiz-details'></Card.Text>
                                 <Card.Text className='quiz-details'>Date Created: {new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(data.Created_at))}</Card.Text>
-                                <Button variant="info" className='btn btn-leaderboard'>
+                                <Button variant="info" className='btn btn-leaderboard' onClick={() => goToLeaderboard(data._id)}>
                                     Leaderboard
                                 </Button>{" "}
-                                <Button variant="success" className='btn'>
-                                    Start Quiz
-                                </Button>
+                                
                                 
                             </Col>
                         </Row>

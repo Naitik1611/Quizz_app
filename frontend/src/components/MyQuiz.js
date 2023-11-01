@@ -13,8 +13,10 @@ import Footer from './Footer';
 export default function MyQuiz() {
     
     const navigate = useNavigate();
+    
     const [filterModal, setFilterModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [modalData, setModalData] = useState('');
 
     const [filterCategory, setfilterCategory] = useState('');
 
@@ -56,6 +58,43 @@ export default function MyQuiz() {
             alert(e.message)
         }
     };
+
+    const deleteQuiz = async (id) => {
+
+        try {    
+            const res = await axios.delete('http://localhost:8080/quiz/delete/'+id, {
+                headers: {
+                    'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                }
+            });
+            console.log(res.data)
+           getQuiz();
+    
+        } catch (e) {
+            alert(e.message)
+        }
+        
+     }
+
+    const goToLeaderboard = async (id) => {
+
+        try {    
+            const res = await axios.get('http://localhost:8080/quiz/byId/'+id, {
+                headers: {
+                    'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                }
+            });
+            const quiz = res.data;
+            console.log(quiz)
+    
+            localStorage.setItem("path", window.location.pathname)
+            navigate("/leaderboard", {state : {id, quiz}})
+           
+        } catch (e) {
+            alert(e.message)
+        }
+        
+     }
 
     return (
         <div className="main-container">
@@ -101,7 +140,7 @@ export default function MyQuiz() {
                     </Modal>
                 </Col>
             </Row>
-            
+            <hr/>
             <div>
                 <Row xs={1} md={2} className="g-4" style={{minHeight:"76vh"}}>
                     {quizArray.map((data) => (
@@ -119,13 +158,35 @@ export default function MyQuiz() {
                                 <Card.Text className='quiz-details'>Questions: {data.Questions.length} &nbsp;&nbsp;&nbsp; Duration: {data.Timer.TimerDuration ? (data.Timer.TimerDuration)/60+" min": "No time limit"}</Card.Text>
                                 <Card.Text className='quiz-details'></Card.Text>
                                 <Card.Text className='quiz-details'>Date Created: {new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(data.Created_at))}</Card.Text>
-                                <Button variant="info" className='btn btn-leaderboard'>
+                                <Button variant="info" className='btn btn-leaderboard' onClick={() => goToLeaderboard(data._id)}>
                                     Leaderboard
                                 </Button>{" "}
-                                <Button variant="success" className='btn'>
-                                    Start Quiz
-                                </Button>
+
+                                <Button variant="danger" className='btn btn-leaderboard' onClick={() => {setModalData(data._id);setDeleteModal(true)}}>
+                                    Delete
+                                </Button>{" "}
                                
+                                <Modal show={deleteModal}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title>Start Quiz</Modal.Title>
+                                    </Modal.Header>
+                                    <Form>
+                                        <Modal.Body>
+                                                <Form.Group className="mb-3">
+                                                    Proceed to Delete Quiz?
+                                                </Form.Group>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="primary" className='btn' onClick={() => setDeleteModal(false)}>
+                                                Cancel
+                                            </Button>
+                                            <Button variant="danger" className='btn' type='button' onClick={() => {setDeleteModal(false);deleteQuiz(modalData)}}>
+                                                Delete
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Form>
+                                </Modal>
+
                               
                             </Col>
                         </Row>

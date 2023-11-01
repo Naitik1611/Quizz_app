@@ -104,21 +104,12 @@ const removeOption = () => {
     <input type="text" id="question" className="form-control input-box" placeholder="Enter the question here..." onChange={(e) => setQuestion(e.target.value)} style={{marginTop:"10px"}} required></input>
             <br />
 
-            <div className="row" style={{marginTop:"10px"}}>
-                <div className="col-7 img-link">
-                <input type="text" id="questionImg" className="form-control input-box" placeholder="Paste image link here..."></input>
-                </div>
-                <div className="col-5 img-file">
-                <input type="file" name="image" id="image" accept="image/*" className="form-control" style={{marginTop:"10px"}}/>
-                </div>
-            </div>
-<br/>
             <div className="row">
-                        <div className="col-10">
+                        <div className="col-9">
                         Answer Options
                         </div>
-                        <div className="col-2">
-                        Mark
+                        <div className="col-3">
+                       &nbsp;&nbsp; Mark Correct
                         </div>
                     </div>
 
@@ -126,11 +117,11 @@ const removeOption = () => {
 
                 <div className="option-row">
                     <div className="row">
-                        <div className="col-10">
+                        <div className="col-9">
                         <input type="text" id={"option"+i} className="form-control input-box" placeholder="Enter option..." required></input>
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-3 d-flex justify-content-center">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" value={i} id={i} style={{marginTop:"15px"}} required/>
                       </div>
                        
