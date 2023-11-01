@@ -11,6 +11,7 @@ const leaderboardRoute=require('./routes/leaderboard');
 const filterRoute=require('./routes/filter');
 const userControlRoute=require('./routes/user_control');
 const recommendataion=require('./routes/recommendataion');
+const path = require('path');
 
 
 
@@ -19,7 +20,10 @@ try {
     
     app.use(express.json());
     // app.use(cors());
-  
+
+    const publicDirectory = path.join(__dirname, 'uploads');
+    app.use('/uploads', express.static(publicDirectory));
+    
     app.use("/api/users", userRoutes);
     app.use("/api/auth", authRoutes);
     app.use('/quiz', createQuizRoutes);

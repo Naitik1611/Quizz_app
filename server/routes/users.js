@@ -2,7 +2,8 @@ const router=require("express").Router();
 const {User,validate}=require("../models/user");
 const userController = require('../user_update'); 
 const bcrypt=require("bcrypt");
-
+const token=require("../token_authentication");
+const upload = require('../uploadImage'); 
 router.post("/",async(req,res)=>{
     try{
         const {error}=validate(req.body);
@@ -25,5 +26,8 @@ router.post("/",async(req,res)=>{
 
 router.put('/update/:userId', userController.updateUserData);
 
+router.post('/upload_user',token,upload.single('file'), (req, res) => {
+    res.send({"message":'Form data and file received.'});
+});
 
 module.exports=router;
