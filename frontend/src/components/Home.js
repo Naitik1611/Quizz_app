@@ -137,8 +137,8 @@ export default function Home() {
 
 
             <Row xs={1} md={3} className="g-4">
-                    {quizArray.slice(0,6).map((quiz) => (
-                        <Col key={quiz._id}>
+                    {quizArray.slice(0,12).map((quiz) => (
+                        <Col key={quiz._id} className='home-quiz-card'>
                         <Card className="card-box">
                             <Card.Img variant="top" src="quizDefault.png" />
                             <Card.Body className='quiz-card-body'>
@@ -168,8 +168,8 @@ export default function Home() {
             </Row>
             <div className='home-items'>
                 <Row xs={1} md={3} className="g-4">
-                    {recommendedArray.slice(0,6).map((quiz) => (
-                        <Col key={quiz._id}>
+                    {recommendedArray.slice(0,12).map((quiz) => (
+                        <Col key={quiz._id} className='home-quiz-card'>
                         <Card className="card-box">
                             <Card.Img variant="top" src="quizDefault.png" />
                             <Card.Body className='quiz-card-body'>

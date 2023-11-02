@@ -22,7 +22,7 @@ export default function Navbar() {
         <NavBar className="website-navbar">
         
             <NavBar.Brand href="#home" className='app-detail' onClick={() => navigate('/home')} style={{color:"white"}}>
-                <img alt="Logo" src="logo.jpg" width="120" height="60" className="app-logo"/>{' '}
+                <img alt="Logo" src="logo.png" width="60" height="60" className="app-logo"/>{' '}
                 Quiz App
             </NavBar.Brand>
             <NavBar.Toggle />
