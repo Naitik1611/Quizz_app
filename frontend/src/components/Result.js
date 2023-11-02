@@ -71,8 +71,8 @@ export default function Result() {
   return (<div className="start-quiz-container">
          <div className="start-quiz-box">
         <h4 className="res-name">  Quiz Result</h4>
-          <div className="row">
-            <div className="col-4 score-box">
+          <div className="row" style={{padding:"0", margin:"0"}}>
+            <div className="col-3 score-box">
               <div className="card res-det">
                   Total Questions
                   <br />
@@ -80,7 +80,7 @@ export default function Result() {
               </div>
             </div>
 
-            <div className="col-4 score-box">
+            <div className="col-3 score-box">
                <div className="card res-det">
                 Correct Answers
                 <br />
@@ -88,23 +88,25 @@ export default function Result() {
               </div>
             </div>
 
-            <div className="col-4 score-box">
+            <div className="col-3 score-box">
             <div className="card res-det">
-                Your Points
+               Your Points
                 <br />
                 <span className="figure">    {score} / {maxScore}</span>  
+                </div>
+            </div>
+
+            <div className="col-3 score-box">
+            <div className="card res-det">
+            Your Score
+                <br />
+                <span className="figure">    {Math.ceil((score/maxScore) * 100)}%</span>  
                 </div>
             </div>
           </div>
           <br />
 
-          
-            <div className="card score-card score-disp">
-              Your Score
-              <br />
-              {Math.ceil((score/maxScore) * 100)}%
-              
-            </div>
+      
           
           <div className="res-page-btn">
             <button type="button" className="btn btn-info review-btn" onClick={() => {localStorage.setItem("path", window.location.pathname);navigate("/leaderboard", {state : {id, quiz, questions}})}}> View Leaderboard </button>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    // Redirect all 404 errors to the main index.html
+    const path = window.location.pathname;
+    const url = path === '/404.html' ? '/' : path;
+    window.location.replace('/' + url);
+  </script>
+</head>
+<body>
+  <!-- This file doesn't need content -->
+</body>
+</html>

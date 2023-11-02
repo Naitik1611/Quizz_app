@@ -655,7 +655,7 @@ h4{
     text-align: center;
     background-color: #702963;
     color: #fff;
-    padding: 10px 0;
+    padding: 40px 0;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin-top: 20px;
 }
@@ -855,7 +855,8 @@ h4{
     }
 
     .score-box{
-        width: 33.33%;
+        width: 25%;
+       
     }
 
     .contact-col {

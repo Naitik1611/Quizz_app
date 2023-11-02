@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
  
@@ -79,7 +80,7 @@ export default function Register() {
                 </Button>
                 </div>
                 <Form.Group className='toggle-login'>
-                    Already have an account?{' '}<a href="/"> Login</a>
+                    Already have an account?{' '} <Link to="/">Login</Link>
                 </Form.Group>
               </Form>
 
