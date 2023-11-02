@@ -42,12 +42,13 @@ export default function QuizCategory() {
                 setquizArray(res.data);
                 console.log(res.data)
             } else {
-                const res = await axios.get('http://localhost:8080/filter/'+filterCategory, {
+                const res = await axios.get('http://localhost:8080/quiz/', {
                     headers: {
                         'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
                     }
                 });
-                setquizArray(res.data);
+                setquizArray(res.data.filter((quiz) => quiz.Category === filterCategory));
+                
                 console.log(res.data)
             }
         } catch (e) {
