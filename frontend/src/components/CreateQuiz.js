@@ -18,6 +18,7 @@ export default function CreateQuiz() {
 
     const [timerChoice, setTimerChoice] = useState(false);
     const [eachChoice, setEachChoice] = useState('no');
+    const [quizPic, setQuizPic] = useState('quizDefault.png');
 
     var num = 1
     useEffect(() => {
@@ -110,6 +111,11 @@ export default function CreateQuiz() {
         }
     }
 
+    const handleImage = (e) => {
+        setQuizPic(e.target.files);
+        console.log(quizPic)
+      }
+
 /*
     localStorage.removeItem("quizName");
     localStorage.removeItem("quizCategory");
@@ -177,6 +183,21 @@ export default function CreateQuiz() {
                             }
                         }); 
                 console.log(res.data);
+
+                if(quizPic) {
+                    const data = new FormData();
+                      for(var x = 0; x<quizPic.length; x++) {
+                          data.append('file', quizPic[x])
+                    }
+                    const picres = await axios.post('http://localhost:8080/quiz/upload_quiz/'+ res.data._id, data, {
+                      headers: {
+                          'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                      }
+                    })
+                    console.log(data);
+                    console.log(picres.data);
+                  }
+
                 navigate("/home");
                 } catch (e) {
                     alert(e.message)
@@ -224,7 +245,7 @@ export default function CreateQuiz() {
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizImage'>
                             <Form.Label className='quiz-label'>Image</Form.Label>
-                            <Form.Control type='file' className='inp-file' accept='image/*'/>
+                            <Form.Control type="file" className="" placeholder='' onChange={handleImage} accept='image/*' />
                         </Form.Group>
                     </div>
                     <div className='row'>
