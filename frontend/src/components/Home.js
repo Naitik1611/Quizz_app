@@ -138,18 +138,19 @@ export default function Home() {
                 <Form.Control type='text' className='search-box' onChange={searchQuiz} placeholder='Search for quizzes on any topic'/>
                 {searchbox && <ul className='searchlist'>
                     {searchArray.map((quiz) => (
-                        <li className='search-item' onClick={() => startQuiz(quiz._id)}>{quiz.Title}</li>
+                        <li className='search-item' onClick={() => {setModalData(quiz._id);setStartModal(true)}}>{quiz.Title}</li>
                     ))}
                     </ul>}
             </Form.Group>
         </Form>
       
-       
+      
             <Row className='home-head'>
                 <Col className='home-categories-label'>
                     <h3>
                         Latest Quizzes
                     </h3>
+                    <hr/>
                 </Col>
             </Row>
 
@@ -206,6 +207,7 @@ export default function Home() {
                     <h3>
                         Recommended Quizzes for you    
                     </h3>
+                    <hr/>
                 </Col>
             </Row>
             <div className='home-items'>

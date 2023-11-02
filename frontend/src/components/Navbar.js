@@ -28,11 +28,11 @@ export default function Navbar() {
             <NavBar.Toggle />
             <NavBar.Collapse className="justify-content-end">
                 <NavBar.Text className='nav-user'>
-                    <img alt='' src={profilePic} className='nav-img' width="40" height="40"/>{' '}
-                    {localStorage.getItem('username')}
+                    <img alt='' src={profilePic} onError={(e) => e.target.src = 'user1.png'} className='nav-img' width="40" height="40"/>{' '}
+                   &nbsp; {localStorage.getItem('userName')}
                 </NavBar.Text>
                 <Button variant="danger" className="btn lgt-btn" onClick={() => navigate("/")}>Logout</Button>
-                <Button variant='primary' className="btn ctc-btn" onClick={() => navigate("/")}>Contact Us</Button>
+                <Button variant='primary' className="btn ctc-btn" onClick={() => navigate("/contact-us")}>Contact Us</Button>
             </NavBar.Collapse>
        
         </NavBar>

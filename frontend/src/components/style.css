@@ -125,14 +125,23 @@
 .searchlist {
     list-style-type: none;
     text-align: left;
-    max-height: 80px !important;
+    max-height: 135px !important;
     overflow-y: scroll;
     width: inherit;
     margin: auto;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .search-item {
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    height: 45px;
+    width: 100%; 
+    box-sizing: border-box; 
+    padding:10px;
+    color:#702963;
+
 }
 
 .search-box {
@@ -680,7 +689,7 @@ h4{
 }
 
 .contact-container {
-    width: 90%;
+    width: 70%;
     background-color: white;
     margin: auto;
     padding: 30px;
@@ -1142,3 +1151,26 @@ h4{
         width: 75%;
     }
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(200, 200, 200); 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #afafaf; 
+  }
+  
