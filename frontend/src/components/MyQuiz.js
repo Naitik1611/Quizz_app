@@ -150,7 +150,7 @@ export default function MyQuiz() {
                     <Card.Body className='card-body-quiz'>
                         <Row>
                             <Col md={{span: 5}} className='quiz-img'>
-                                <Card.Img variant="top" src="quizDefault.png"  className='quiz-img'/> 
+                                <Card.Img variant="top" src={`http://localhost:8080/uploads/${data._id}`} onError={(e) => e.target.src = 'quizDefault.png'} className='quiz-img'/> 
                             </Col>
                             <Col md={{span: 7}} className='quiz-card-details' style={{textAlign:"left", lineHeight: "1", color:"grey", fontSize:"14px"}}>
                                 <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>

@@ -16,6 +16,7 @@ export default function QuizCategory() {
     const [filterModal, setFilterModal] = useState(false);
     const [startModal, setStartModal] = useState(false);
     const [modalData, setModalData] = useState('');
+    const [notAllowedModal, setNotAllowedModal] = useState(false);
 
 
     const [filterCategory, setfilterCategory] = useState('');
@@ -92,7 +93,7 @@ export default function QuizCategory() {
             console.log(questions)
 
             if(questions.message){
-                alert(questions.message)
+                setNotAllowedModal(true);
             }else{
                 if(quiz.Timer.TimerAvailable === 1){
                     localStorage.setItem("timeLimit", quiz.Timer.TimerDuration )
@@ -179,7 +180,7 @@ export default function QuizCategory() {
                     <Card.Body className='card-body-quiz'>
                         <Row>
                             <Col md={{span: 5}} className='quiz-img'>
-                                <Card.Img variant="top" src={`http://localhost:8080/quiz/upload_quiz/${data._id}`}  className='quiz-img'/> 
+                                <Card.Img variant="top" src={`http://localhost:8080/uploads/${data._id}`} onError={(e) => e.target.src = 'quizDefault.png'} className='quiz-img'/> 
                             </Col>
                             <Col md={{span: 7}} className='quiz-card-details' style={{textAlign:"left", lineHeight: "1", color:"grey", fontSize:"14px"}}>
                                 <Card.Title className='card-title'><h4>{data.Title}</h4></Card.Title>
@@ -223,6 +224,25 @@ export default function QuizCategory() {
                 </Card>
                 </Col>
                         ))}        </Row>
+
+<Modal show={notAllowedModal}>
+<Modal.Header closeButton>
+<Modal.Title>Creator Access Denied</Modal.Title>
+</Modal.Header>
+<Form>
+    <Modal.Body>
+            <Form.Group className="mb-3">
+            You cannot attempt this quiz as it was created by you!
+            </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="danger" className='btn' onClick={() => setNotAllowedModal(false)}>
+            Cancel
+        </Button>
+        
+    </Modal.Footer>
+</Form>
+</Modal>
             </div>
             <Footer />
         </div>

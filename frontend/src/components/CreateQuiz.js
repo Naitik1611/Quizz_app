@@ -111,11 +111,6 @@ export default function CreateQuiz() {
         }
     }
 
-    const handleImage = (e) => {
-        setQuizPic(e.target.files);
-        console.log(quizPic)
-      }
-
 /*
     localStorage.removeItem("quizName");
     localStorage.removeItem("quizCategory");
@@ -182,14 +177,16 @@ export default function CreateQuiz() {
                                 'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
                             }
                         }); 
-                console.log(res.data);
+                console.log(res.data.quiz);
 
                 if(quizPic) {
                     const data = new FormData();
                       for(var x = 0; x<quizPic.length; x++) {
                           data.append('file', quizPic[x])
                     }
-                    const picres = await axios.post('http://localhost:8080/quiz/upload_quiz/'+ res.data._id, data, {
+                
+                    console.log(res.data.quiz._id)
+                    const picres = await axios.post('http://localhost:8080/quiz/upload_quiz/'+ res.data.quiz._id, data, {
                       headers: {
                           'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
                       }
@@ -245,7 +242,7 @@ export default function CreateQuiz() {
                     <div className='row'>
                         <Form.Group className="mb-3" controlId='quizImage'>
                             <Form.Label className='quiz-label'>Image</Form.Label>
-                            <Form.Control type="file" className="" placeholder='' onChange={handleImage} accept='image/*' />
+                            <Form.Control type="file" className="" placeholder='' onChange={(e) => setQuizPic(e.target.files)} accept='image/*' />
                         </Form.Group>
                     </div>
                     <div className='row'>

@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Footer from './Footer';
+import Modal from 'react-bootstrap/Modal';
 
 export default function Home() {
  
@@ -19,6 +20,10 @@ export default function Home() {
     const [quizArray, setquizArray] = useState([]);
     const [recommendedArray, setrecommendedArray] = useState([]);
     const [searchArray, setsearchArray] = useState([]);
+
+    const [startModal, setStartModal] = useState(false);
+    const [notAllowedModal, setNotAllowedModal] = useState(false);
+    const [modalData, setModalData] = useState('');
 
     localStorage.setItem('quiz_array',JSON.stringify([]));
     
@@ -70,6 +75,7 @@ export default function Home() {
                 }
             });
             const quiz = res.data;
+            console.log(quiz);
 
             const questionRes = await axios.get('http://localhost:8080/attempt_quiz/'+id, {
                 headers: {
@@ -79,18 +85,33 @@ export default function Home() {
             const questions = questionRes.data;
             console.log(questions)
 
-            console.log(quiz.Timer.TimerAvailable)
-
-            if(quiz.Timer.TimerAvailable === true){
-             //   navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
+            if(questions.message){
+                setNotAllowedModal(true);
             }else{
-              //  navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                if(quiz.Timer.TimerAvailable === 1){
+                    localStorage.setItem("timeLimit", quiz.Timer.TimerDuration )
+                    console.log(localStorage.getItem("timeLimit"));
+                    navigate("/start-quiz-time-limit", {state : {id, quiz, questions}});
+                }else if(quiz.Timer.TimerAvailable === 2){
+                    localStorage.setItem("isTimer", "yes" )
+                    console.log(localStorage.getItem("timeLimit"));
+                    navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                }else if(quiz.Timer.TimerAvailable === 0){
+                    localStorage.setItem("isTimer", "no" )
+                    console.log(localStorage.getItem("timeLimit"));
+                    navigate("/start-quiz-no-limit", {state : {id, quiz, questions}});
+                }else{
+                    
+                }
+
             }
+   
            
         } catch (e) {
             alert(e.message)
         }
     }
+
 
     const searchQuiz = async(e) => {
         e.preventDefault()
@@ -135,15 +156,39 @@ export default function Home() {
 
             <Row xs={1} md={3} className="g-4">
                     {quizArray.slice(0,6).map((quiz) => (
+                        <>
                         <Col key={quiz._id}>
-                        <Card className="card-box">
-                            <Card.Img variant="top" src="quizDefault.png" />
+                        <Card className="card-box" onClick={() => {setModalData(quiz._id);setStartModal(true)}}>
+                            <Card.Img variant="top" src={`http://localhost:8080/uploads/${quiz._id}`} onError={(e) => e.target.src = 'quizDefault.png'}/>
                             <Card.Body className='quiz-card-body'>
                                 <Card.Text className='quiz-cat'>Category: {quiz.Category}</Card.Text>
                                 <Card.Title className='quiz-title'>{ quiz.Title }</Card.Title>
                             </Card.Body>
                         </Card>
                         </Col>
+
+                        
+<Modal show={startModal}>
+<Modal.Header closeButton>
+<Modal.Title>Start Quiz</Modal.Title>
+</Modal.Header>
+<Form>
+    <Modal.Body>
+            <Form.Group className="mb-3">
+                Proceed to Start Quiz?
+            </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="danger" className='btn' onClick={() => setStartModal(false)}>
+            Cancel
+        </Button>
+        <Button variant="success" className='btn' type='button' onClick={() => {setStartModal(false);startQuiz(modalData)}}>
+            Start Quiz
+        </Button>
+    </Modal.Footer>
+</Form>
+</Modal>
+                        </>
                     ))}
             </Row>
 
@@ -166,18 +211,61 @@ export default function Home() {
             <div className='home-items'>
                 <Row xs={1} md={3} className="g-4">
                     {recommendedArray.slice(0,6).map((quiz) => (
+                        <>
                         <Col key={quiz._id}>
-                        <Card className="card-box">
-                            <Card.Img variant="top" src="quizDefault.png" />
+                        <Card className="card-box" onClick={() => {setModalData(quiz._id);setStartModal(true)}}>
+                            <Card.Img variant="top" src={`http://localhost:8080/uploads/${quiz._id}`} onError={(e) => e.target.src = 'quizDefault.png'} />
                             <Card.Body className='quiz-card-body'>
                                 <Card.Text className='quiz-cat'>Category: {quiz.Category}</Card.Text>
                                 <Card.Title className='quiz-title'>{ quiz.Title }</Card.Title>
                             </Card.Body>
                         </Card>
                         </Col>
-                    ))}
+
+<Modal show={startModal}>
+<Modal.Header closeButton>
+<Modal.Title>Start Quiz</Modal.Title>
+</Modal.Header>
+<Form>
+    <Modal.Body>
+            <Form.Group className="mb-3">
+                Proceed to Start Quiz?
+            </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="danger" className='btn' onClick={() => setStartModal(false)}>
+            Cancel
+        </Button>
+        <Button variant="success" className='btn' type='button' onClick={() => {setStartModal(false);startQuiz(modalData)}}>
+            Start Quiz
+        </Button>
+    </Modal.Footer>
+</Form>
+</Modal>
+
+
+               </>     ))}
                 </Row>
-    
+
+
+                <Modal show={notAllowedModal}>
+<Modal.Header closeButton>
+<Modal.Title>Creator Access Denied</Modal.Title>
+</Modal.Header>
+<Form>
+    <Modal.Body>
+            <Form.Group className="mb-3">
+            You cannot attempt this quiz as it was created by you!
+            </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="danger" className='btn' onClick={() => setNotAllowedModal(false)}>
+            Cancel
+        </Button>
+        
+    </Modal.Footer>
+</Form>
+</Modal>
         </div>
         <Footer />
     </div>
