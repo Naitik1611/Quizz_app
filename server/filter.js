@@ -4,7 +4,7 @@ const Quiz = require('./models/quiz');
 exports.filterQuizzesByCategory = async (req, res) => {
   try {
     const { category } = req.params; 
-    let quizzes = await Quiz.find({ Category: category }); 
+    let quizzes = await Quiz.find({ Category: category }).sort({ Created_at: -1 }); 
 
     res.status(200).json({ quizzes });
   } catch (error) {
