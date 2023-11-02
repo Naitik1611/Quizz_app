@@ -21,6 +21,7 @@ import StartQuizWithTimeLimit from './components/StartQuizWithTimeLimit';
 import StartQuizWithNoLimit from './components/StartQuizWithNoLimit';
 import Result from './components/Result';
 import NavbarLogin from './components/NavbarLogin';
+import NotFoundComponent from './components/NotFoundComponent';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
 
       <BrowserRouter>
         <Routes>
+
+          <Route path='*' element={<NotFoundComponent/>} />
+
           <Route path="/" element={<><NavbarLogin/><Login/> <Footer/> </>} />
           <Route path="register" element={<> <NavbarLogin/><Register/> <Footer/> </>} />
          

@@ -19,7 +19,7 @@ export default function Navbar() {
     }
 
     return (
-    <NavBar className="website-navbar">
+        <NavBar className="website-navbar">
         
             <NavBar.Brand href="#home" className='app-detail' onClick={() => navigate('/home')} style={{color:"white"}}>
                 <img alt="Logo" src="logo.jpg" width="120" height="60" className="app-logo"/>{' '}
@@ -35,6 +35,6 @@ export default function Navbar() {
                 <Button variant='primary' className="btn ctc-btn" onClick={() => navigate("/")}>Contact Us</Button>
             </NavBar.Collapse>
        
-    </NavBar>
+        </NavBar>
     )
 }

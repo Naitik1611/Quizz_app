@@ -311,8 +311,8 @@ Footer {
 .btn-add-ques {
     padding: 10px;
     width: 100%;
-    background-color: #fff;
-    color: #7b346e;
+    background-color: #7b346e;
+    color: #fff;
     border: 5px dashed #7b346e;
     font-size: 18px;
     font-weight: 700;
@@ -323,7 +323,7 @@ Footer {
 }
 
 .btn-add-ques:hover {
-    background-color: #7029634b;
+    background-color: #7b346ed0;
 }
 
 .card-quiz-details{
@@ -639,6 +639,7 @@ h4{
 .res-page-btn {
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .review-btn {
@@ -648,7 +649,9 @@ h4{
 
 .res-name {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    font-weight: 700;
+    font-size: 30px;
 }
  
 .res-det {
@@ -706,6 +709,30 @@ h4{
 .contact-name {
     font-weight: 900;
     margin-bottom: 10px;
+}
+
+.ans-card {
+    margin-bottom: 30px;
+    border: 2px solid #7b346e;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.ans-title {
+    font-weight: 900;
+}
+
+/* Not Found Page */ 
+
+.not-found-page {
+    margin: -10px auto;
+    padding: 10% 20px;
+    height: 100vh !important;
+    background-color:#f8f7f7;
+}
+
+.not-found {
+    margin: auto;
+    vertical-align: middle;
 }
 
 /* MQ - Media Queries */
@@ -776,7 +803,7 @@ h4{
     
 
     .review-btn {
-        width: max-content;
+        width: 50%;
         margin-right: 10px;
     }
 
@@ -794,6 +821,10 @@ h4{
     }
     
     .img-file {
+        width: 50%;
+    }
+
+    .score-box{
         width: 50%;
     }
     
@@ -854,9 +885,9 @@ h4{
         padding-top: 0;    
     }
 
-    .score-box{
-        width: 25%;
-       
+    .review-btn {
+        width: max-content;
+        margin-right: 10px;
     }
 
     .contact-col {
@@ -965,6 +996,12 @@ h4{
 
 @media screen and (min-width: 1000px) {
 
+    .ans-card {
+        width: 80%;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+
     .progress-col {
         width: 35% !important;
         padding-left: 20px;
@@ -982,6 +1019,10 @@ h4{
 
     .progress {
         width: 100%;
+    }
+
+    .score-box{
+        width: 25%;
     }
 
     .count-col, .score-col {
@@ -1065,6 +1106,11 @@ h4{
         width: 30%;
     }
     
+    .res-box {
+        width: 70%;
+        padding: 50px;
+    }
+
     .ques-score {
         width: 20%;
     }

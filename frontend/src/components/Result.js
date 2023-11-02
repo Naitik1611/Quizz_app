@@ -69,9 +69,9 @@ export default function Result() {
  
   
   return (<div className="start-quiz-container">
-         <div className="start-quiz-box">
+         <div className="start-quiz-box res-box">
         <h4 className="res-name">  Quiz Result</h4>
-          <div className="row" style={{padding:"0", margin:"0"}}>
+          <div className="row" style={{padding:"50px 0", margin:"0"}}>
             <div className="col-3 score-box">
               <div className="card res-det">
                   Total Questions
@@ -117,14 +117,14 @@ export default function Result() {
           {review && questions.questions.map((data, index) => (
                         <Col key={index}>
 
-<Card className='quiz-card'>
-                    <Card.Body className='card-body-quiz'>
+                <Card className='ans-card'>
+                    <Card.Body className='card-body-ans'>
                         <Row>
-                            <Col md={{span: 12}} className='quiz-card-details'>
-                                <Card.Title className='card-title'><h4>Q.{index+1} &nbsp;&nbsp;{data.Question_text}</h4></Card.Title>
-                                <Card.Text className='quiz-details'>Correct Answer: {data.Correct_answer} </Card.Text>
-                                <Card.Text className='quiz-details'>Your answer: {data.Answer} {data.Answer === data.Correct_answer ? "✅" : "❌"}</Card.Text>
-                                <Card.Text className='quiz-details'>Explanation: {data.Explanation} </Card.Text>
+                            <Col md={{span: 12}} className='ans-card-details'>
+                                <Card.Title className='ans-title'><h4>Q.{index+1} &nbsp;&nbsp;{data.Question_text}</h4></Card.Title>
+                                <Card.Text className='ans-details'>Correct Answer: {data.Correct_answer} </Card.Text>
+                                <Card.Text className='ans-details'>Your answer: {data.Answer} {data.Answer === data.Correct_answer ? "✅" : "❌"}</Card.Text>
+                                <Card.Text className='ans-details'>Explanation: {data.Explanation} </Card.Text>
                   
                             </Col>
                         </Row>
