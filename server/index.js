@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express=require("express");
 const app=express();
-// const cors=require("cors");
+const cors=require("cors");
 const connection=require("./db");
 const userRoutes=require("./routes/users");
 const authRoutes=require("./routes/auth");
 const createQuizRoutes=require('./routes/create_quiz');
 const attemptQuizRoute=require('./routes/attempt_quiz');
 const leaderboardRoute=require('./routes/leaderboard');
-const filterRoute=require('./routes/filter');
 const userControlRoute=require('./routes/user_control');
 const recommendataion=require('./routes/recommendataion');
 const path = require('path');
@@ -19,7 +18,7 @@ try {
     connection();
     
     app.use(express.json());
-    // app.use(cors());
+    app.use(cors());
 
     const publicDirectory = path.join(__dirname, 'uploads');
     app.use('/uploads', express.static(publicDirectory));
@@ -29,7 +28,6 @@ try {
     app.use('/quiz', createQuizRoutes);
     app.use('/attempt_quiz', attemptQuizRoute);
     app.use('/leaderboard', leaderboardRoute);
-    app.use('/filter', filterRoute);
     app.use('/user', userControlRoute);
     app.use('/recommend',recommendataion)
     
