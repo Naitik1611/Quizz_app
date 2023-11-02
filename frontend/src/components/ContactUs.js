@@ -13,7 +13,7 @@ export default function ContactUs() {
         <div className='row contact-row'>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Shivani Eranjikal</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
@@ -22,7 +22,7 @@ export default function ContactUs() {
             </div>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Naitik Shah</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
@@ -31,7 +31,7 @@ export default function ContactUs() {
             </div>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Sankaralingam</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
@@ -40,7 +40,7 @@ export default function ContactUs() {
             </div>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Shubham Bhattad</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
