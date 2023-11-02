@@ -109,11 +109,11 @@ console.log(quiz)
 
                 {scoreArray.map((data, idx) => (
 
-                    <Row key={idx} className="g-1" style={{borderTop:"2px solid #d9d9d9",padding:"10px"}}>
+                    <Row key={idx} className="g-1" style={{borderTop:"2px solid #d9d9d9",padding:"10px",fontWeight: data.user_id === localStorage.getItem("userId") ? "bold" : "normal"}}>
                         <Col md={{span: 1, offset: 1}}>{idx+1}</Col>
                         <Col md={{span: 3, offset: 1}}>
                              <img alt="User" src="user1.png" width="30" height="30"/>&nbsp;&nbsp;{data.firstName +" "+ data.lastName}
-                             {data.user_id === localStorage.getItem("userId") ? "  (me)" : ""}
+                          &nbsp;   {data.user_id === localStorage.getItem("userId") ?  "(me)" : ""}
                         </Col>
                         <Col md={{span:2, offset: 3}} style={{textAlign:"right"}}>{data.score}</Col>
                     </Row>

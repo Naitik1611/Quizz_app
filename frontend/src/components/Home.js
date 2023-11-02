@@ -116,15 +116,18 @@ export default function Home() {
     const searchQuiz = async(e) => {
         e.preventDefault()
         setsearchTxt(e.target.value)
-        console.log(searchTxt);
+        console.log(searchTxt.toLowerCase());
         try {
             setsearchbox(true)
             const temp = JSON.parse(localStorage.getItem("quiz_array"))
-            const res = temp.filter((quiz) => quiz.Title.toLowerCase().includes(searchTxt.toLowerCase()))
+            const res = temp.filter((quiz) => quiz.Title.toLowerCase().includes(searchTxt))
 
             console.log(res);
             setsearchArray(res)
             console.log(searchArray);
+            if(searchTxt === ''){
+                setsearchbox(false)
+            }
         } catch (error) {
             alert(e.message)
         }
@@ -133,16 +136,16 @@ export default function Home() {
     return (
     <div className="main-container">
 
-        <Form className="home-search">
-            <Form.Group className="mb-3" controlId="search-box">
-                <Form.Control type='text' className='search-box' onChange={searchQuiz} placeholder='Search for quizzes on any topic'/>
+        <div className="home-search">
+            <div className="search">
+                <input type='text' id='search' className='search-box' onChange={searchQuiz} placeholder='Search for quizzes on any topic' />
                 {searchbox && <ul className='searchlist'>
                     {searchArray.map((quiz) => (
                         <li className='search-item' onClick={() => {setModalData(quiz._id);setStartModal(true)}}>{quiz.Title}</li>
                     ))}
                     </ul>}
-            </Form.Group>
-        </Form>
+            </div>
+        </div>
       
       
             <Row className='home-head'>
@@ -162,8 +165,8 @@ export default function Home() {
                         <Card className="card-box" onClick={() => {setModalData(quiz._id);setStartModal(true)}}>
                             <Card.Img variant="top" src={`http://localhost:8080/uploads/${quiz._id}`} onError={(e) => e.target.src = 'quizDefault.png'}/>
                             <Card.Body className='quiz-card-body'>
-                                <Card.Text className='quiz-cat'>Category: {quiz.Category}</Card.Text>
-                                <Card.Title className='quiz-title'>{ quiz.Title }</Card.Title>
+                            <Card.Text className='quiz-cat'>Category: {quiz.Category}</Card.Text>
+                            <Card.Title className='quiz-title'>{ quiz.Title }</Card.Title>   
                             </Card.Body>
                         </Card>
                         </Col>

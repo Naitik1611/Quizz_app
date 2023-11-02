@@ -123,7 +123,7 @@ export default function Result() {
                             <Col md={{span: 12}} className='ans-card-details'>
                                 <Card.Title className='ans-title'><h4>Q.{index+1} &nbsp;&nbsp;{data.Question_text}</h4></Card.Title>
                                 <Card.Text className='ans-details'>Correct Answer: {data.Correct_answer} </Card.Text>
-                                <Card.Text className='ans-details'>Your answer: {data.Answer} {data.Answer === data.Correct_answer ? "✅" : "❌"}</Card.Text>
+                                <Card.Text className='ans-details'>Your Answer: {data.Answer} &nbsp; <img className="icon" src={data.Answer === data.Correct_answer ? "correct.png" : "wrong.png"} alt={data.Answer === data.Correct_answer ? "Correct" : "Wrong"} /></Card.Text>
                                 <Card.Text className='ans-details'>Explanation: {data.Explanation} </Card.Text>
                   
                             </Col>

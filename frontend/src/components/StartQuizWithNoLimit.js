@@ -114,7 +114,7 @@ export default function StartQuiz() {
         <div className="col-3 progress-col">
         Completed 
         <div className="progress">
-          <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}></div>
+        <div className="progress-bar" role="progressbar" style={{width: ((index)/questions.questions.length)*100+"%" }} aria-valuenow={index} aria-valuemin="0" aria-valuemax={questions.questions.length}> </div>
         </div>
         </div>
         <div className="col-3 count-col">

@@ -121,8 +121,8 @@ const removeOption = () => {
                         <input type="text" id={"option"+i} className="form-control input-box" placeholder="Enter option..." required></input>
                         </div>
 
-                        <div class="col-3 d-flex justify-content-center">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" value={i} id={i} style={{marginTop:"15px"}} required/>
+                        <div className="col-3 d-flex justify-content-center">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" value={i} id={i} style={{marginTop:"15px"}} required/>
                       </div>
                        
                     </div>

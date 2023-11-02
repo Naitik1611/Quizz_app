@@ -11,7 +11,7 @@ export default function ContactUs() {
       <div className='contact-container'>
        
         <h4 className="res-name"> Contact Us</h4>
-        <div className="row" style={{padding:"20px 0", margin:"0"}}>
+        <div className="row" style={{padding:"0", margin:"0"}}>
             <div className="col-3 score-box">
               <div className="card res-det">
               <Card.Title className='contact-name'>Shivani Eranjikal</Card.Title>
@@ -51,6 +51,7 @@ export default function ContactUs() {
 <h5>Have questions, suggestions, or feedback? We'd love to hear from you. Please feel free to reach out to us using any of the following methods:</h5>
 
 <br/>
+
 <h5 style={{fontWeight:"bold"}}>Contact Information</h5>
 Email: contact@yourwebsite.com<br/>
 Phone: +91 9090909090<br/>
@@ -66,7 +67,7 @@ Monday - Friday: 9:00 AM - 5:00 PM (Your Time Zone)
     {/*    <div className='row contact-row'>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Shivani Eranjikal</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
@@ -75,7 +76,7 @@ Monday - Friday: 9:00 AM - 5:00 PM (Your Time Zone)
             </div>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Naitik Shah</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
@@ -84,7 +85,7 @@ Monday - Friday: 9:00 AM - 5:00 PM (Your Time Zone)
             </div>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Sankaralingam</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
@@ -93,7 +94,7 @@ Monday - Friday: 9:00 AM - 5:00 PM (Your Time Zone)
             </div>
             <div className='col-3 contact-col'>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" className='contact-img'></Card.Img>
+                    <Card.Img variant="top" src="user1.png" className='contact-img'></Card.Img>
                     <Card.Body className='contact-body'>
                         <Card.Title className='contact-name'>Shubham Bhattad</Card.Title>
                         <Card.Subtitle>Software Developer</Card.Subtitle>
