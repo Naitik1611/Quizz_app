@@ -40,10 +40,6 @@ export default function Login() {
 
     };
 
-
-    // Routing
-    //navigate("/register");
- 
     return (
       <div className="login-bg">
         <div className="login-inner-container">

@@ -21,7 +21,7 @@ export default function StartQuizWithTimeLimit() {
   const [timeLeft, setTimeLeft] = useState(localStorage.getItem("timeLimit"));
 
   useEffect(() => {
-   
+   //Set countdown in case timer is required
       const countdown = setInterval(() => {
         if (timeLeft > 0) {
           setTimeLeft(prevTime => prevTime - 1);
@@ -35,12 +35,13 @@ export default function StartQuizWithTimeLimit() {
       return () => clearInterval(countdown); // Cleanup the interval on unmount or re-render
   }, [timeLeft]);
 
+   // Initializing the quiz
   const playQuiz = () => {
     console.log(index);
     
     if (index < questions.questions.length) {
 
-      return QuizBox(questions.questions[index]);
+      return QuizBox(questions.questions[index]); //Render UI if index less than length of question array
     } else {
       console.log("Score "+score)
 
@@ -50,10 +51,11 @@ export default function StartQuizWithTimeLimit() {
         }
       });
       
-      navigate("/result", {state : {id, quiz, questions, correctAnswers, score}});
+      navigate("/result", {state : {id, quiz, questions, correctAnswers, score}}); //Else navigate to Results page
     }
   };
 
+  //Function to change to next question
   const changeQuestion = () => {
     if (index < questions.questions.length) {
       console.log(questions)
@@ -62,7 +64,7 @@ export default function StartQuizWithTimeLimit() {
     }
   };
 
- 
+ //Check answer to give immediate feedback
   const checkAnswer = (ans) => {
     console.log(ans);
     if (ans !== ""){
@@ -92,11 +94,13 @@ export default function StartQuizWithTimeLimit() {
   }
   };
 
+  //Change color based on answer feedback
   const changeColor = (element, color) => {
     element.style.backgroundColor = color;
     element.style.color = "white";
   }
 
+    // The UI which is rendered
   const QuizBox = ( question ) => {
     
     return (
@@ -142,6 +146,7 @@ export default function StartQuizWithTimeLimit() {
   Q. {question.Question_text}
   </div>
 
+{/* Render UI for MCQ type question */}
       { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>
 
       <div className="card option-card" id={question.Options[i]} onClick={() => checkAnswer(question.Options[i])}>
@@ -149,6 +154,7 @@ export default function StartQuizWithTimeLimit() {
       </div>
             </span>)}
 
+ {/* Render UI for True or False type question */}
       { question.Question_type=== 2 && <>
       <div className="card option-card" id="true" onClick={() => checkAnswer("true")}>
       True
@@ -159,6 +165,7 @@ export default function StartQuizWithTimeLimit() {
       </>
       }
 
+ {/* Render UI for Fill-in-the-blank type question */}
 { question.Question_type === 3 && <>
     
       <input type="text" id={fib} value={fib} className="input-box option-card" placeholder="Enter answer here..." style={{marginTop:"10px"}} onChange={(e) => setFib(e.target.value)} required></input>

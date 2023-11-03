@@ -20,7 +20,6 @@ export default function Navbar() {
 
     return (
         <NavBar className="website-navbar">
-        
             <NavBar.Brand href="#home" className='app-detail' onClick={() => navigate('/home')} style={{color:"white"}}>
                 <img alt="Logo" src="logo.png" width="60" height="60" className="app-logo"/>{' '}
                 Quiz App
@@ -34,7 +33,6 @@ export default function Navbar() {
                 <Button variant="danger" className="btn lgt-btn" onClick={() => navigate("/")}>Logout</Button>
                 <Button variant='primary' className="btn ctc-btn" onClick={() => navigate("/contact-us")}>Contact Us</Button>
             </NavBar.Collapse>
-       
         </NavBar>
     )
 }

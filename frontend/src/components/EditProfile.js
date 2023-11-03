@@ -13,8 +13,8 @@ export default function EditProfile() {
     const [profilePic, setProfilePic] = useState('user1.png');
     const [fname, setfname] = useState('');
     const [lname, setlname] = useState('');
-    const id =  localStorage.getItem('userId');
-    const username = localStorage.getItem('username')
+    const id = localStorage.getItem('userId');
+    const username = localStorage.getItem('userName')
 
     var [firstname, lastname] = username.split(' ')
 

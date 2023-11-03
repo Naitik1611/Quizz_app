@@ -8,9 +8,9 @@ export default function Sidebar() {
  
     const navigate = useNavigate();
 
+    //Initializing to use in Create quiz page
     localStorage.setItem("questionCount", 0);
     localStorage.setItem('questionArray', JSON.stringify([]));
-
     localStorage.setItem("quizName", "");
     localStorage.setItem("quizCategory", "");
     localStorage.setItem("quizTime", "");

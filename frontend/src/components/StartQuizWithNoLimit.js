@@ -9,7 +9,6 @@ export default function StartQuiz() {
   const id = location.state.id;
   const quiz = location.state.quiz;
   const questions = location.state.questions;
-
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -17,11 +16,13 @@ export default function StartQuiz() {
 
   const [timeLeft, setTimeLeft] = useState(questions.questions[0].Time !== undefined ? questions.questions[0].Time : 0);
 
+  //Function to change to next question
   const changeQuestion = () => {
     if (index < questions.questions.length) {
       console.log(questions)
       setIndex(index + 1);
 
+      //Update countdown in case timer on each question is applicable
       if (questions && questions.questions && questions.questions[index + 1] && questions.questions[index + 1].Time !== undefined) {
         setTimeLeft(questions.questions[index + 1].Time);
       } else {
@@ -33,6 +34,7 @@ export default function StartQuiz() {
   };
 
   useEffect(() => {
+    //Set countdown in case timer is required
     if (localStorage.getItem("isTimer") === "yes") {
     const countdown = setInterval(() => {
       if (timeLeft > 0) {
@@ -47,21 +49,23 @@ export default function StartQuiz() {
   }
   }, [timeLeft]);
 
+  // Initializing the quiz
   const playQuiz = () => {
     console.log(index);
     
     if (index < questions.questions.length) {
-        return QuizBox(questions.questions[index]);
+        return QuizBox(questions.questions[index]); //Render UI if index less than length of question array
     } else {
       questions.questions.forEach((item, index) => {
         if (!item.hasOwnProperty('Answer')) {
           item['Answer'] = "NA"; // Add 'Answer' property with value null
         }
       });
-      navigate("/result", {state : {id, quiz, questions, correctAnswers, score}});
+      navigate("/result", {state : {id, quiz, questions, correctAnswers, score}}); //Else navigate to Results page
     }
   };
 
+  //Check answer to give immediate feedback
   const checkAnswer = (ans) => {
     console.log(ans);
     if (ans !== ""){
@@ -90,11 +94,13 @@ export default function StartQuiz() {
   }
   };
 
+  //Change color based on answer feedback
   const changeColor = (element, color) => {
     element.style.backgroundColor = color;
     element.style.color = "white";
   }
 
+  // The UI which is rendered
   const QuizBox = ( question) => {
    
     return (
@@ -137,9 +143,7 @@ export default function StartQuiz() {
   <div className="question-display">
   Q. &nbsp;{question.Question_text}
   </div>
-     
-    
-
+     {/* Render UI for MCQ type question */}
       { question.Question_type === 1 && Array.from({ length: question.Options.length }, (_, i) => <span key={i}>
 
       <div className="card option-card" id={question.Options[i]} onClick={() => checkAnswer(question.Options[i])}>
@@ -147,6 +151,7 @@ export default function StartQuiz() {
       </div>
             </span>)}
 
+    {/* Render UI for True or False type question */}
       { question.Question_type=== 2 && <>
       <div className="card option-card" id="true" onClick={() => checkAnswer("true")}>
       True
@@ -157,28 +162,19 @@ export default function StartQuiz() {
       </>
       }
 
-{ question.Question_type === 3 && <>
+    {/* Render UI for Fill-in-the-blank type question */}
+    { question.Question_type === 3 && <>
      
       <input type="text" id={fib} value={fib} className="input-box option-card" placeholder="Enter answer here..." style={{marginTop:"10px"}} onChange={(e) => setFib(e.target.value)} required></input>
       
       <div class="d-flex justify-content-center" style={{marginTop:"40px"}}>
       <button type="button" className="btn btn-primary" style={{width:"150px",padding:"10px"}} onClick={() => checkAnswer(fib)}> Next</button>
-</div>
-      
+</div>  
       </>
       }
-
-      </div>
-      
-      
+      </div>  
     );
   };
 
-  /*
-
-const quizBox = () => (
-    <div className="quiz-box">
-     {quiz.Title}
-      */
   return <div className="start-quiz-container">{playQuiz()}</div>;
 }
