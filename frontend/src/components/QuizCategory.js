@@ -16,6 +16,7 @@ export default function QuizCategory() {
   const [startModal, setStartModal] = useState(false);
   const [modalData, setModalData] = useState("");
   const [notAllowedModal, setNotAllowedModal] = useState(false);
+  const [searchPin, setsearchPin] = useState('');
 
   const [filterCategory, setfilterCategory] = useState("");
 
@@ -24,7 +25,11 @@ export default function QuizCategory() {
   var num = 1;
   useEffect(() => {
     if (num === 1) {
-      getQuiz();
+        if(searchPin) {
+            searchQuiz();
+        }else {
+            getQuiz();
+        }
     }
     num++;
   }, []);
@@ -33,7 +38,7 @@ export default function QuizCategory() {
   const getQuiz = async (e) => {
     try {
       if (!filterCategory) {
-        const res = await axios.get("http://localhost:8080/quiz/", {
+        const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz/", {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
           },
@@ -41,7 +46,7 @@ export default function QuizCategory() {
         setquizArray(res.data);
         console.log(res.data);
       } else {
-        const res = await axios.get("http://localhost:8080/quiz/", {
+        const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz/", {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
           },
@@ -60,7 +65,7 @@ export default function QuizCategory() {
   //Go to leaderboard
   const goToLeaderboard = async (id) => {
     try {
-        const res = await axios.get("http://localhost:8080/quiz/byId/" + id, {
+        const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz/byId/" + id, {
             headers: {
               authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
             },
@@ -78,7 +83,7 @@ export default function QuizCategory() {
   //Start Quiz
   const startQuiz = async (id) => {
     try {
-      const res = await axios.get("http://localhost:8080/quiz/byId/" + id, {
+      const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz/byId/" + id, {
         headers: {
           authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
         },
@@ -87,7 +92,7 @@ export default function QuizCategory() {
       console.log(quiz);
 
       const questionRes = await axios.get(
-        "http://localhost:8080/attempt_quiz/" + id,
+        "https://quiz-app-ieqe.onrender.com/attempt_quiz/" + id,
         {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
@@ -123,11 +128,30 @@ export default function QuizCategory() {
     }
   };
 
-  const filterQuiz = async (e) => {
-    e.preventDefault();
-    getQuiz();
-    setFilterModal(false);
-  };
+    const searchQuiz = async() => {
+        console.log(searchPin);
+        try {
+            if(searchPin !== '') {
+                const res = await axios.get('https://quiz-app-ieqe.onrender.com/quiz/byPin/'+searchPin,{
+                    headers: {
+                        'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
+                    }
+                });
+                setquizArray(res.data.quiz);
+                console.log(res.data.quiz);
+            } else {
+                getQuiz()
+            }
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const filterQuiz = async (e) => {
+        e.preventDefault();
+        getQuiz()
+        setFilterModal(false);
+    }
 
   return (
     <div className="main-container">
@@ -187,6 +211,16 @@ export default function QuizCategory() {
           </Modal>
         </Col>
       </Row>
+        <Row>
+            <div className="col-10 search-bar-col">
+                <div className="search">
+                    <input type='number' id='search' className='search-box' onInputCapture={(e) => setsearchPin(e.target.value)} placeholder='Search for quiz by pin(6 digits)' /> 
+                </div>
+            </div>
+            <div className='col-2 search-btn-col'>
+                <button className='btn btn-primary search-btn' onClick={searchQuiz}>Search</button>
+            </div>
+        </Row>
       <hr />
       <div>
         <Row xs={1} md={2} className="g-4">
@@ -205,7 +239,7 @@ export default function QuizCategory() {
                     <Col md={{ span: 5 }} className="quiz-img">
                       <Card.Img
                         variant="top"
-                        src={`http://localhost:8080/uploads/${data._id}`}
+                        src={`https://quiz-app-ieqe.onrender.com/uploads/${data._id}`}
                         onError={(e) => (e.target.src = "quizDefault.png")}
                         className="quiz-img"
                       />
@@ -223,6 +257,9 @@ export default function QuizCategory() {
                       <Card.Title className="card-title">
                         <h4>{data.Title}</h4>
                       </Card.Title>
+                      <Card.Text className='quiz-details'>
+                        Quiz Pin: {data.Quiz_pin} 
+                      </Card.Text>
                       <Card.Text className="quiz-details">
                         Category: {data.Category}{" "}
                       </Card.Text>

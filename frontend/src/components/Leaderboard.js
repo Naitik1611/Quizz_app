@@ -17,12 +17,12 @@ export default function Leaderboard() {
   var num = 1;
   useEffect((async) => {
     if (num === 1) {
-      getLeaderboard();
-console.log(quiz)
-      //To deal with go back button
-      if (localStorage.getItem("path") === "/result") {
-        setIsResult(false);
-      }
+        getLeaderboard();
+        console.log(quiz)
+        //To deal with go back button
+        if (localStorage.getItem("path") === "/result") {
+            setIsResult(false);
+        }
     }
     num++;
   }, []);
@@ -32,7 +32,7 @@ console.log(quiz)
     console.log(quiz);
     try {
       const res = await axios.get(
-        "http://localhost:8080/leaderboard/" + quizId,
+        "https://quiz-app-ieqe.onrender.com/leaderboard/" + quizId,
         {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
@@ -40,7 +40,7 @@ console.log(quiz)
         }
       );
 
-      //Remove duplicates if any
+      //Remove duplicates if any and find User
       res.data = res.data.reduce((acc, current) => {
         const x = acc.find((item) => item.user_id === current.user_id);
         if (!x) {

@@ -1,7 +1,6 @@
 import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
-import button from 'react-bootstrap/button';
 import Card from 'react-bootstrap/Card';
 
 export default function Sidebar() {

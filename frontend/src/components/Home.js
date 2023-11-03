@@ -35,7 +35,7 @@ export default function Home() {
   //Get all quiz from db
   const getQuiz = async (e) => {
     try {
-      const res = await axios.get("http://localhost:8080/quiz", {
+      const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz", {
         headers: {
           authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
         },
@@ -52,12 +52,15 @@ export default function Home() {
   //Get recommended quiz list from db
   const getRecommended = async (e) => {
     try {
-      const res = await axios.get("http://localhost:8080/recommend", {
+      console.log("getting recommended");
+      const res = await axios.get("https://quiz-app-ieqe.onrender.com/recommend", {
         headers: {
           authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
         },
       });
+      console.log("recommended: ",res.data);
       setrecommendedArray(res.data.quizzes);
+      console.log(recommendedArray)
     } catch (e) {
       alert(e.message);
     }
@@ -66,7 +69,7 @@ export default function Home() {
   //Start quiz
   const startQuiz = async (id) => {
     try {
-      const res = await axios.get("http://localhost:8080/quiz/byId/" + id, {
+      const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz/byId/" + id, {
         headers: {
           authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
         },
@@ -75,7 +78,7 @@ export default function Home() {
       console.log(quiz);
 
       const questionRes = await axios.get(
-        "http://localhost:8080/attempt_quiz/" + id,
+        "https://quiz-app-ieqe.onrender.com/attempt_quiz/" + id,
         {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
@@ -115,7 +118,7 @@ export default function Home() {
   //Search for quiz by quiz title
   const searchQuiz = async (e) => {
     e.preventDefault();
-    setsearchTxt(e.target.value);
+    setsearchTxt(e.target.value.toLowerCase());
     console.log(searchTxt.toLowerCase());
     try {
       setsearchbox(true);
@@ -184,7 +187,8 @@ export default function Home() {
               >
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:8080/uploads/${quiz._id}`}
+                  className="home-card-img"
+                  src={`https://quiz-app-ieqe.onrender.com/uploads/${quiz._id}`}
                   onError={(e) => (e.target.src = "quizDefault.png")}
                 />
                 <Card.Body className="quiz-card-body">
@@ -264,7 +268,8 @@ export default function Home() {
                 >
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:8080/uploads/${quiz._id}`}
+                    className="home-card-img"
+                    src={`https://quiz-app-ieqe.onrender.com/uploads/${quiz._id}`}
                     onError={(e) => (e.target.src = "quizDefault.png")}
                   />
                   <Card.Body className="quiz-card-body">

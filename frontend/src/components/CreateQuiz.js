@@ -164,7 +164,7 @@ export default function CreateQuiz() {
       console.log(quizDetails);
       try {
         const res = await axios.post(
-          "http://localhost:8080/quiz/create",
+          "https://quiz-app-ieqe.onrender.com/quiz/create",
           quizDetails,
           {
             headers: {
@@ -183,7 +183,7 @@ export default function CreateQuiz() {
 
           console.log(res.data.quiz._id);
           const picres = await axios.post(
-            "http://localhost:8080/quiz/upload_quiz/" + res.data.quiz._id,
+            "https://quiz-app-ieqe.onrender.com/quiz/upload_quiz/" + res.data.quiz._id,
             data,
             {
               headers: {

@@ -35,14 +35,14 @@ export default function MyQuiz() {
   const getQuiz = async (e) => {
     try {
       if (!filterCategory) {
-        const res = await axios.get("http://localhost:8080/user/myQuizzes", {
+        const res = await axios.get("https://quiz-app-ieqe.onrender.com/user/myQuizzes", {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
           },
         });
         setQuizArray(res.data);
       } else {
-        const res = await axios.get("http://localhost:8080/user/myQuizzes", {
+        const res = await axios.get("https://quiz-app-ieqe.onrender.com/user/myQuizzes", {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
           },
@@ -60,7 +60,7 @@ export default function MyQuiz() {
   const deleteQuiz = async (id) => {
     try {
       const res = await axios.delete(
-        "http://localhost:8080/quiz/delete/" + id,
+        "https://quiz-app-ieqe.onrender.com/quiz/delete/" + id,
         {
           headers: {
             authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
@@ -77,7 +77,7 @@ export default function MyQuiz() {
   //Go to Leaderboard of this quiz
   const goToLeaderboard = async (id) => {
     try {
-      const res = await axios.get("http://localhost:8080/quiz/byId/" + id, {
+      const res = await axios.get("https://quiz-app-ieqe.onrender.com/quiz/byId/" + id, {
         headers: {
           authorization: localStorage.getItem("token"), // Setting the 'Authorization' header with the token
         },
@@ -167,7 +167,7 @@ export default function MyQuiz() {
                     <Col md={{ span: 5 }} className="quiz-img">
                       <Card.Img
                         variant="top"
-                        src={`http://localhost:8080/uploads/${data._id}`}
+                        src={`https://quiz-app-ieqe.onrender.com/uploads/${data._id}`}
                         onError={(e) => (e.target.src = "quizDefault.png")}
                         className="quiz-img"
                       />
@@ -185,6 +185,9 @@ export default function MyQuiz() {
                       <Card.Title className="card-title">
                         <h4>{data.Title}</h4>
                       </Card.Title>
+                      <Card.Text className='quiz-details'>
+                        Quiz Pin: {data.Quiz_pin} 
+                      </Card.Text>
                       <Card.Text className="quiz-details">
                         Category: {data.Category}{" "}
                       </Card.Text>

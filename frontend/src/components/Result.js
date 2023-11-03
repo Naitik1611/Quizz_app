@@ -45,7 +45,7 @@ export default function Result() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/attempt_quiz/" + id,
+        "https://quiz-app-ieqe.onrender.com/attempt_quiz/" + id,
         quizAnswers,
         {
           headers: {

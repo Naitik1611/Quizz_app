@@ -2,7 +2,6 @@ import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
 import NavBar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 export default function NavbarLogin() {
@@ -13,7 +12,7 @@ export default function NavbarLogin() {
     <NavBar className="navbar-container">
             <NavBar.Brand href="#home" className='app-detail-login'>
                 <img alt="Logo" src="logo.png" width="60" height="60" className="app-logo"/>{' '}
-                Quiz App
+                QuizWiz
             </NavBar.Brand>
             <NavBar.Toggle />
             <NavBar.Collapse className="justify-content-end">

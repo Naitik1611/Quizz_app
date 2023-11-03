@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
 import NavBar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 export default function Navbar() {
@@ -11,8 +10,8 @@ export default function Navbar() {
 
     var profilePic = "user1.png"
     try {
-        if(("http://localhost:8080/uploads/"+localStorage.getItem('userId'))){
-            profilePic = "http://localhost:8080/uploads/"+localStorage.getItem('userId')
+        if(("https://quiz-app-ieqe.onrender.com/uploads/"+localStorage.getItem('userId'))){
+            profilePic = "https://quiz-app-ieqe.onrender.com/uploads/"+localStorage.getItem('userId')
         }
     } catch (error) {
         console.error(error);
@@ -22,7 +21,7 @@ export default function Navbar() {
         <NavBar className="website-navbar">
             <NavBar.Brand href="#home" className='app-detail' onClick={() => navigate('/home')} style={{color:"white"}}>
                 <img alt="Logo" src="logo.png" width="60" height="60" className="app-logo"/>{' '}
-                Quiz App
+                QuizWiz
             </NavBar.Brand>
             <NavBar.Toggle />
             <NavBar.Collapse className="justify-content-end">
