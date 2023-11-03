@@ -36,19 +36,22 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
       });
   
       await userAnswer.save();
-  
+      const user=await User.findById(userId);
+      const participated = user.scores.some((score) => quiz._id.toString() === score.Quiz_id.toString());
+      if (!participated){
       // Update the user's score
-      const user = await User.findOne({_id:userId});
-      user.scores.push({ Quiz_id: quizId, Score: score.reduce((acc, curr) => acc + curr, 0) });
-      await user.save();
-  
-      // Update the quiz's participant scores
-      const participant = {
-        user_id: userId,
-        score: score.reduce((acc, curr) => acc + curr, 0),
-      };
-      quiz.Participants.push(participant);
-      await quiz.save();
+        const user = await User.findOne({_id:userId});
+        user.scores.push({ Quiz_id: quizId, Score: score.reduce((acc, curr) => acc + curr, 0) });
+        await user.save();
+    
+        // Update the quiz's participant scores
+        const participant = {
+          user_id: userId,
+          score: score.reduce((acc, curr) => acc + curr, 0),
+        };
+        quiz.Participants.push(participant);
+        await quiz.save();
+      }
   
       res.status(201).json({ message: 'Quiz attempted successfully', score });
     } catch (error) {
@@ -67,14 +70,9 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
 
       const q = await Quiz.findById(quizId)
       
-      let participated = user.scores.forEach((score)=>q._id.toString() === score.Quiz_id.toString())
-      // console.log(q.Creat)
-      if(q.Creator_id){
-        if(participated)
-          return res.status(205).send({"message":"Already participated in this quiz"})
-        else if(q.Creator_id.toString() === userId.toString())
-          return res.status(206).send({"message":"Creator of the quiz cannot attempt quiz"})
-      }        
+      if (q.Creator_id && q.Creator_id.toString() === userId.toString()) {
+        return res.status(206).json({ message: "The creator of the quiz cannot attempt the quiz." });
+      }      
 
       //console.log(quizId);
       const quiz = await Quiz.findById(quizId).populate('Questions');
