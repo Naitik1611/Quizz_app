@@ -37,6 +37,7 @@ export default function EditProfile() {
                   'authorization': localStorage.getItem("token") // Setting the 'Authorization' header with the token
               }
             })
+            localStorage.setItem('userName',fname+' '+lname)
 
             if(profilePic) {
               const data = new FormData();
@@ -51,7 +52,6 @@ export default function EditProfile() {
               console.log(data);
               console.log(picres.data);
             }
-            localStorage.setItem('username',fname+' '+lname)
             
             navigate("/home")
             console.log(res.data);
