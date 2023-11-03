@@ -169,7 +169,7 @@ export default function MyQuiz() {
                                
                                 <Modal show={deleteModal}>
                                     <Modal.Header closeButton>
-                                    <Modal.Title>Start Quiz</Modal.Title>
+                                    <Modal.Title>Delete Quiz</Modal.Title>
                                     </Modal.Header>
                                     <Form>
                                         <Modal.Body>

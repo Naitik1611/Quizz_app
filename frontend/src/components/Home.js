@@ -159,9 +159,9 @@ export default function Home() {
 
 
             <Row xs={1} md={3} className="g-4">
-                    {quizArray.slice(0,6).map((quiz) => (
+                    {quizArray.slice(0,12).map((quiz) => (
                         <>
-                        <Col key={quiz._id}>
+                        <Col key={quiz._id} className='home-quiz-card'>
                         <Card className="card-box" onClick={() => {setModalData(quiz._id);setStartModal(true)}}>
                             <Card.Img variant="top" src={`http://localhost:8080/uploads/${quiz._id}`} onError={(e) => e.target.src = 'quizDefault.png'}/>
                             <Card.Body className='quiz-card-body'>
@@ -215,9 +215,9 @@ export default function Home() {
             </Row>
             <div className='home-items'>
                 <Row xs={1} md={3} className="g-4">
-                    {recommendedArray.slice(0,6).map((quiz) => (
+                    {recommendedArray.slice(0,12).map((quiz) => (
                         <>
-                        <Col key={quiz._id}>
+                        <Col key={quiz._id} className='home-quiz-card'>
                         <Card className="card-box" onClick={() => {setModalData(quiz._id);setStartModal(true)}}>
                             <Card.Img variant="top" src={`http://localhost:8080/uploads/${quiz._id}`} onError={(e) => e.target.src = 'quizDefault.png'} />
                             <Card.Body className='quiz-card-body'>

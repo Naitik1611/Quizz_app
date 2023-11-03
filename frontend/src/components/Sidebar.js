@@ -27,22 +27,22 @@ export default function Sidebar() {
             <button type="button" className="btn btn-primary create-btn" onClick={createQuiz}>Create Quiz</button>
         </li>
         <li className="sidebar-item" onClick={() => navigate("/home")}>
-           Dashboard
+           Dashboard 
         </li>
         <li className="sidebar-item" onClick={() => navigate("/all-quizzes")}>
-           All Quizzes
+           All Quizzes 
         </li>
         <li className="sidebar-item" onClick={() => navigate("/my-quiz")}>
-           My Quiz
+           My Quiz 
         </li>
         <li className="sidebar-item" onClick={() => navigate("/quiz-history")}>
-           Quiz History
+           Quiz History 
         </li>
         <li className="sidebar-item" onClick={() => navigate("/edit-profile")}>
-           Edit Profile
+           Edit Profile 
         </li>
-        <Card className='sidebar-image' style={{padding:"40px"}}>
-            <Card.Img className='side-img' variant="top" src="quiz.png" />
+        <Card className='sidebar-image'>
+            <Card.Img className='side-img' src="quiz.png" />
         </Card>
     </ul>
 

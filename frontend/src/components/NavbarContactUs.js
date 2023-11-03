@@ -13,7 +13,7 @@ export default function NavbarContactUs() {
     <NavBar className="website-navbar">
        
             <NavBar.Brand href="#home" className='app-detail'>
-                <img alt="Logo" src="logo.jpg" width="120" height="60" className="app-logo"/>{' '}
+                <img alt="Logo" src="logo.png" width="60" height="60" className="app-logo"/>{' '}
                 Quiz App
             </NavBar.Brand>
             <NavBar.Toggle />
