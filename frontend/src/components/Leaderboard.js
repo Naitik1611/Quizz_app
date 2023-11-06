@@ -69,49 +69,29 @@ export default function Leaderboard() {
 
         <hr />
         <div className="row quiz-header">
-          <div className="col-3">
-            Quiz Category
-            <br />
-            {quiz.Category}
+          <div className="col-3 lead-det">
+            Quiz Category: {quiz.Category}
           </div>
-          <div className="col-3">
-            Total Questions
-            <br />
-            {quiz.Questions.length}
+          <div className="col-3 lead-det lead-ques">
+            Total Questions: {quiz.Questions.length}
           </div>
-          <div className="col-3">
-            Duration
-            <br />{" "}
-            {quiz.Timer.TimerDuration
+          <div className="col-3 lead-det">
+            Duration: {quiz.Timer.TimerDuration
               ? quiz.Timer.TimerDuration / 60 + " min"
               : "No time limit"}
           </div>
-          <div className="col-3">
-            Total Score
-            <br />
-            {quiz.total_socre}
+          <div className="col-3 lead-det lead-total">
+            Total Score: {quiz.total_socre}
           </div>
         </div>
 
         <hr />
 
         <div className="ranks-board">
-          <Row
-            className="g-1"
-            style={{
-              textAlign: "center",
-              padding: "10px",
-              marginBottom: "15px",
-              marginTop: "15px",
-              fontSize: "large",
-              backgroundColor: "whitesmoke",
-            }}
-          >
-            <Col md={{ span: 1, offset: 1 }}>Rank</Col>
-            <Col md={{ span: 3, offset: 1 }}>Username</Col>
-            <Col md={{ span: 2, offset: 3 }} style={{ textAlign: "right" }}>
-              Points
-            </Col>
+          <Row className="g-1 rank-row">
+            <Col className="rank-col">Rank</Col>
+            <Col className="username-col">Username</Col>
+            <Col className="points-col">Points</Col>
           </Row>
 
           {scoreArray.map((data, idx) => (
@@ -127,14 +107,14 @@ export default function Leaderboard() {
                     : "normal",
               }}
             >
-              <Col md={{ span: 1, offset: 1 }}>{idx + 1}</Col>
-              <Col md={{ span: 3, offset: 1 }}>
+              <Col className="rank-col">{idx + 1}</Col>
+              <Col className="username-col">
                 <img alt="User" src="user1.png" width="30" height="30" />
                 &nbsp;&nbsp;{data.firstName + " " + data.lastName}
                 &nbsp;{" "}
                 {data.user_id === localStorage.getItem("userId") ? "(me)" : ""}
               </Col>
-              <Col md={{ span: 2, offset: 3 }} style={{ textAlign: "right" }}>
+              <Col className="points-col">
                 {data.score}
               </Col>
             </Row>

@@ -585,13 +585,41 @@ Footer {
 }
 
 .leaderboard-box{
-    width: 60%;
+    width: 100%;
     background-color: white;
     margin: auto;
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color:#702963;
+}
+
+.lead-det {
+    width: 100%;
+}
+
+.rank-row {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-size: large;
+    background-color: whitesmoke;
+}
+
+.rank-col {
+    width: 10%;
+    text-align: center;
+}
+
+.username-col {
+    width: 80%;
+    text-align: center;
+}
+
+.points-col {
+    width: 10%;
+    text-align: center;
 }
 
 h4{
@@ -791,11 +819,15 @@ h4{
 
 /* MQ - Media Queries */
 
-@media screen and (min-width: 400px) {
-    
-}
-
 @media screen and (min-width: 480px) {
+    
+    .username-col {
+        width: 75%;
+    }
+    
+    .points-col {
+        text-align: center;
+    }
 
     .title-col {
         width: 75%;
@@ -854,6 +886,15 @@ h4{
 }
 
 @media screen and (min-width: 600px) {
+    
+    .lead-det {
+        width: 60%;
+    }
+
+    .lead-ques, .lead-total {
+        width: 40%;
+        text-align: right;
+    }
 
     .review-btn {
         width: 50%;
@@ -916,6 +957,11 @@ h4{
 }
 
 @media screen and (min-width: 770px) {
+
+    .leaderboard-box{
+        width: 80%;
+        padding: 30px;
+    }
     
     .search-bar-col {
         width: 80%;
@@ -1058,6 +1104,11 @@ h4{
 
 @media screen and (min-width: 1000px) {
 
+    .leaderboard-box{
+        width: 70%;
+        padding: 40px;
+    }
+
     .ans-card {
         width: 100%;
         margin: auto;
@@ -1156,6 +1207,15 @@ h4{
 }
 
 @media screen and (min-width: 1200px) {
+    
+    .lead-det {
+        width: 30%;
+        text-align: center;
+    }
+
+    .lead-ques, .lead-total {
+        width: 20%;
+    }
 
     .search-box {
         font-size: 18px;
